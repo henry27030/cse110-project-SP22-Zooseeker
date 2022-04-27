@@ -2,20 +2,18 @@ package edu.ucsd.cse110.cse110group51;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class List extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list);
     }
 
-    public void OnShowListClicked(View view) {
-        Intent intent = new Intent(this, List.class);
-        startActivity(intent);
+    public void OnShowListBackToMain(View view) {
+        finish();
     }
 }
