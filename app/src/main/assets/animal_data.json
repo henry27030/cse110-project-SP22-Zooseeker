@@ -1,0 +1,6 @@
+[
+  {"animal": "shark", "opened": true, "checked": false, "order": 0},
+  {"animal": "dolphin", "opened": true, "checked": false, "order": 0},
+  {"animal": "elephant", "opened": true, "checked": true, "order": 0},
+  {"animal": "monkey", "opened": false, "checked": false, "order": 0}
+]
