@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OnShowListClicked(View view) {
-        Intent intent = new Intent(this, List.class);
-        startActivity(intent);
+        Intent intent = new Intent (this, TodoListActivity.class);
     }
 }
