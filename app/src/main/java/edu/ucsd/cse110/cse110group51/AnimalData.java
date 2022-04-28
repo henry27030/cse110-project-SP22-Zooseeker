@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
-@Entity(tableName = "todo_list_items")
+@Entity(tableName = "AnimalData")
 public class AnimalData {
 
     @NonNull
