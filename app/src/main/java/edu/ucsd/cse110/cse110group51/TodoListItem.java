@@ -26,13 +26,12 @@ public class TodoListItem {
 
     @NonNull
     public String text;
-    public boolean completed;
     public int order;
 
     // 2.Constructor matching fields above.
-    TodoListItem(String text, boolean completed, int order) {
+    TodoListItem(String text, int order) {
+    //TodoListItem(String text, boolean completed, int order) {
         this.text=text;
-        this.completed=completed;
         this.order=order;
     }
 
@@ -54,7 +53,6 @@ public class TodoListItem {
         return "TodoListItem{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-                ", completed=" + completed +
                 ", order=" + order +
                 '}';
     }

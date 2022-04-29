@@ -32,7 +32,6 @@ public class TodoListViewModel extends AndroidViewModel {
     }
 
     public void toggleCompleted(TodoListItem todoListItem) {
-        todoListItem.completed =!todoListItem.completed;
         todoListItemDao.update(todoListItem);
     }
 
@@ -43,7 +42,7 @@ public class TodoListViewModel extends AndroidViewModel {
 
     public void createTodo (String text) {
         int endOfListOrder = todoListItemDao.getOrderForAppend();
-        TodoListItem newItem = new TodoListItem(text, false, endOfListOrder);
+        TodoListItem newItem = new TodoListItem(text, endOfListOrder);
         todoListItemDao.insert(newItem);
     }
 

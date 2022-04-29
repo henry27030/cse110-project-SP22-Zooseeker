@@ -16,7 +16,6 @@ import java.util.function.Consumer;
 
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHolder> {
     private List<TodoListItem> todoItems = Collections.emptyList();
-    private Consumer<TodoListItem> onCheckBoxClicked;
     private Consumer<TodoListItem> onDeleteClicked;
     private BiConsumer<TodoListItem, String> onTextEditedHandler;
 
@@ -26,15 +25,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-    public void setOnCheckBoxClickedHandler(Consumer<TodoListItem> onCheckBoxClicked) {
-        this.onCheckBoxClicked = onCheckBoxClicked;
-    }
-
     public void setOnDeleteClickedHandler (Consumer<TodoListItem> onDeleteClicked) {
         this.onDeleteClicked = onDeleteClicked;
-    }
-    public void setOnTextEditedHandler(BiConsumer<TodoListItem, String> onTextEdited) {
-        this.onTextEditedHandler = onTextEdited;
     }
 
     @NonNull
@@ -60,7 +52,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
-        private final CheckBox checkBox;
         private final TextView text;
 
         private TodoListItem todoItem;
@@ -68,19 +59,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textView=itemView.findViewById(R.id.todo_item_text);
-            this.checkBox=itemView.findViewById(R.id.completed);
             this.text=itemView.findViewById(R.id.delete_btn);
 
-
-            this.textView.setOnFocusChangeListener((view, hasFocus) -> {
-                if (!hasFocus) {
-                    onTextEditedHandler.accept(todoItem, textView.getText().toString());
-                }
-            });
-            this.checkBox.setOnClickListener(view-> {
-                if (onCheckBoxClicked == null) return;
-                onCheckBoxClicked.accept(todoItem);
-            });
             this.text.setOnClickListener(view-> {
                 if (onDeleteClicked == null) return;
                 onDeleteClicked.accept(todoItem);
@@ -92,7 +72,6 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
         public void setTodoItem(TodoListItem todoItem) {
             this.todoItem = todoItem;
             this.textView.setText(todoItem.text);
-            this.checkBox.setChecked(todoItem.completed);
         }
 
     }
