@@ -48,30 +48,7 @@ public class TodoListActivityTest {
 
 
     }
-    @Test
-    public void testEditTodoText() {
-        String newText = "Ensure all tests pass";
-        ActivityScenario<TodoListActivity> scenario
-                = ActivityScenario.launch(TodoListActivity.class);
-        scenario.moveToState(Lifecycle.State.CREATED);
-        scenario.moveToState(Lifecycle.State.STARTED);
-        scenario.moveToState(Lifecycle.State.RESUMED);
 
-        scenario.onActivity(activity -> {
-            RecyclerView recyclerView = activity.recyclerView;
-            RecyclerView.ViewHolder firstVH = recyclerView.findViewHolderForAdapterPosition(0);
-            assertNotNull(firstVH);
-            long id = firstVH.getItemId();
-
-            EditText todoText = firstVH.itemView.findViewById(R.id.todo_item_text);
-            todoText.requestFocus();
-            todoText.setText("Ensure all tests pass");
-            todoText.clearFocus();
-
-            TodoListItem editedItem = todoListItemDao.get(id);
-            assertEquals(newText, editedItem.text);
-        });
-    }
     @Test
     public void testAddNewTodo() {
         String newText = "Ensure all tests pass";
@@ -120,27 +97,6 @@ public class TodoListActivityTest {
 
             TodoListItem editedItem = todoListItemDao.get(id);
             assertNull(editedItem);
-        });
-    }
-    @Test
-    public void testCheckingOffTodo() {
-        String newText = "Ensure all tests pass";
-        ActivityScenario<TodoListActivity> scenario
-                = ActivityScenario.launch(TodoListActivity.class);
-        scenario.moveToState(Lifecycle.State.CREATED);
-        scenario.moveToState(Lifecycle.State.STARTED);
-        scenario.moveToState(Lifecycle.State.RESUMED);
-
-        scenario.onActivity(activity -> {
-            RecyclerView recyclerView = activity.recyclerView;
-            RecyclerView.ViewHolder firstVH = recyclerView.findViewHolderForAdapterPosition(0);
-            assertNotNull(firstVH);
-            long id = firstVH.getItemId();
-
-            CheckBox todoText = firstVH.itemView.findViewById(R.id.completed);
-            todoText.setChecked(true);
-
-            assertTrue(todoText.isChecked());
         });
     }
 }
