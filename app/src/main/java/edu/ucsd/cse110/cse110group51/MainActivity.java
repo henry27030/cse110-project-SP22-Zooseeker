@@ -67,16 +67,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void onSearchClicked(View view){
-//        TextView results = this.findViewById(R.id.results);
-//        results.setText("not implemented");
-//        String text = searchAnimalText.getText().toString();
-//        if(AnimalData.getText()==text){
-//            TextView result = this.findViewById(R.id.results);
-//            result.setText(text);
-//        }
-    }
-
     public void onCategoryClicked(View view) {
 
     }
