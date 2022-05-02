@@ -76,10 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onListClicked(View view) {
-
-    }
-
     public void OnShowListClicked(View view) {
         Intent intent = new Intent (this, TodoListActivity.class);
         startActivity(intent);
