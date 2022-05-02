@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -77,5 +78,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onListClicked(View view) {
 
+    }
+
+    public void OnShowListClicked(View view) {
+        Intent intent = new Intent (this, TodoListActivity.class);
+        startActivity(intent);
     }
 }
