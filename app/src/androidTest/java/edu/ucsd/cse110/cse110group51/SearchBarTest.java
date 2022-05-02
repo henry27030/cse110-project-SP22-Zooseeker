@@ -1,6 +1,7 @@
-/*package edu.ucsd.cse110.cse110group51;
+package edu.ucsd.cse110.cse110group51;
 
 
+import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -14,12 +15,14 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
@@ -35,23 +38,13 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SearchTest {
+public class SearchBarTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void searchTest() {
-        ViewInteraction actionMenuItemView = onView(
-                allOf(withId(R.id.action_search), withContentDescription("Search"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(androidx.appcompat.R.id.action_bar),
-                                        1),
-                                0),
-                        isDisplayed()));
-        actionMenuItemView.perform(click());
-
+    public void searchBarTest() {
         ViewInteraction appCompatImageView = onView(
                 allOf(withClassName(is("androidx.appcompat.widget.AppCompatImageView")), withContentDescription("Search"),
                         childAtPosition(
@@ -72,7 +65,15 @@ public class SearchTest {
                                                 1)),
                                 0),
                         isDisplayed()));
-        searchAutoComplete.perform(replaceText("Cat"), closeSoftKeyboard());
+        searchAutoComplete.perform(replaceText("cat"), closeSoftKeyboard());
+
+        DataInteraction materialTextView = onData(anything())
+                .inAdapterView(allOf(withId(R.id.list_view),
+                        childAtPosition(
+                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                3)))
+                .atPosition(0);
+        materialTextView.perform(click());
 
         ViewInteraction textView = onView(
                 allOf(withId(android.R.id.text1), withText("Cat"),
@@ -82,7 +83,7 @@ public class SearchTest {
         textView.check(matches(withText("Cat")));
 
         ViewInteraction searchAutoComplete2 = onView(
-                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("Cat"),
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("cat"),
                         childAtPosition(
                                 allOf(withClassName(is("android.widget.LinearLayout")),
                                         childAtPosition(
@@ -93,7 +94,7 @@ public class SearchTest {
         searchAutoComplete2.perform(click());
 
         ViewInteraction searchAutoComplete3 = onView(
-                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("Cat"),
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("cat"),
                         childAtPosition(
                                 allOf(withClassName(is("android.widget.LinearLayout")),
                                         childAtPosition(
@@ -101,10 +102,10 @@ public class SearchTest {
                                                 1)),
                                 0),
                         isDisplayed()));
-        searchAutoComplete3.perform(replaceText("Do"));
+        searchAutoComplete3.perform(replaceText("do"));
 
         ViewInteraction searchAutoComplete4 = onView(
-                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("Do"),
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("do"),
                         childAtPosition(
                                 allOf(withClassName(is("android.widget.LinearLayout")),
                                         childAtPosition(
@@ -122,7 +123,7 @@ public class SearchTest {
         textView2.check(matches(withText("Dog")));
 
         ViewInteraction searchAutoComplete5 = onView(
-                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("Do"),
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("do"),
                         childAtPosition(
                                 allOf(withClassName(is("android.widget.LinearLayout")),
                                         childAtPosition(
@@ -133,7 +134,7 @@ public class SearchTest {
         searchAutoComplete5.perform(click());
 
         ViewInteraction searchAutoComplete6 = onView(
-                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("Do"),
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("do"),
                         childAtPosition(
                                 allOf(withClassName(is("android.widget.LinearLayout")),
                                         childAtPosition(
@@ -141,10 +142,10 @@ public class SearchTest {
                                                 1)),
                                 0),
                         isDisplayed()));
-        searchAutoComplete6.perform(replaceText("dolphin"));
+        searchAutoComplete6.perform(replaceText("tiger"));
 
         ViewInteraction searchAutoComplete7 = onView(
-                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("dolphin"),
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")), withText("tiger"),
                         childAtPosition(
                                 allOf(withClassName(is("android.widget.LinearLayout")),
                                         childAtPosition(
@@ -159,15 +160,7 @@ public class SearchTest {
                         withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
         listView.check(doesNotExist());
-
-        /*ViewInteraction textView2 = onView(
-                allOf(withId(android.R.id.text1), withText("Dog"),
-                        withParent(allOf(withId(R.id.list_view),
-                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
-                        isDisplayed()));
-        textView2.check(matches(withText("Dog")));*/
-
- /*   }
+    }
 
     private static Matcher<View> childAtPosition(
             final Matcher<View> parentMatcher, final int position) {
@@ -187,4 +180,4 @@ public class SearchTest {
             }
         };
     }
-}*/
+}
