@@ -37,8 +37,6 @@ public class SearchBarTest {
 
     @Test
     public void searchFilterTest() {
-        // This is an INTEGRATION test, as we're testing multiple units!
-        // This test SHOULD fail. You need to fix it as an exercise!
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
 
@@ -52,6 +50,42 @@ public class SearchBarTest {
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);             // should only have a cat
+        });
+    }
+
+    @Test
+    public void searchCompleteFilterTest() {
+
+        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
+
+        scenario.moveToState(Lifecycle.State.CREATED);
+
+        scenario.onActivity(activity -> {
+            ListView listView = activity.findViewById(R.id.list_view);
+//            MenuItem menuItem = activity.findViewById(R.id.action_search);
+            SearchView searchView = activity.findViewById(R.id.action_search);
+            searchView.setQuery("do", true);
+
+            int count = listView.getAdapter().getCount();
+            assertEquals(1, count);             // should only have a dog
+        });
+    }
+
+    @Test
+    public void searchInvalidFilterTest() {
+
+        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
+
+        scenario.moveToState(Lifecycle.State.CREATED);
+
+        scenario.onActivity(activity -> {
+            ListView listView = activity.findViewById(R.id.list_view);
+//            MenuItem menuItem = activity.findViewById(R.id.action_search);
+            SearchView searchView = activity.findViewById(R.id.action_search);
+            searchView.setQuery("tiger", true);
+
+            int count = listView.getAdapter().getCount();
+            assertEquals(0, count);             // should only have a dog
         });
     }
 }
