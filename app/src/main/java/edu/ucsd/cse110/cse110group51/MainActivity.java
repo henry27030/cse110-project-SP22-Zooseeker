@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OnShowListClicked(View view) {
+        SearchView searchView = findViewById(R.id.action_search);
+        searchView.setQuery("", true);
         Intent intent = new Intent (this, TodoListActivity.class);
         startActivity(intent);
     }
