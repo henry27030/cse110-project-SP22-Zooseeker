@@ -44,4 +44,8 @@ public class TodoListActivity extends AppCompatActivity {
         newTodoText.setText("");
         viewModel.createTodo(text);
     }
+
+    public void onBackClicked(View view) {
+        finish();
+    }
 }

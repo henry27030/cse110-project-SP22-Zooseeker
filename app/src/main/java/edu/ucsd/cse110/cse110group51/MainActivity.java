@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-//    private EditText searchAnimalText;
+    //private EditText searchAnimalText;
 //    private Button searchButton;
     private ListView listView;
 
