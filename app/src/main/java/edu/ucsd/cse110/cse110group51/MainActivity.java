@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,9 +18,15 @@ import android.widget.ListView;
 //import androidx.appcompat.widget.SearchView;
 import android.widget.SearchView;
 import android.widget.TextView;
+//
+import java.util.Map;
+
+import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+//
 
 public class MainActivity extends AppCompatActivity {
-
     //private EditText searchAnimalText;
 //    private Button searchButton;
     private ListView listView;
@@ -30,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        String start = "entrance_exit_gate";
+        String goal = "elephant_odyssey";
+        Context context = getApplication().getApplicationContext();
+        // 1. Load the graph...
+        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
+        GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
+
+        // 2. Load the information about our nodes and edges...
+        Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
+        Map<String, ZooData.EdgeInfo> eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
 //        this.searchButton = this.findViewById(R.id.search_btn);
 //        this.searchAnimalText = this.findViewById(R.id.searchbar);
         this.listView = this.findViewById(R.id.list_view);
