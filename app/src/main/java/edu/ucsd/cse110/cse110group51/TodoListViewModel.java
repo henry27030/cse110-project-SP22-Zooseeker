@@ -34,9 +34,9 @@ public class TodoListViewModel extends AndroidViewModel {
 
     public void toggleCompleted(TodoListItem todoListItem, CheckBox checkBox) {
         if(checkBox.isChecked()){
-            deleteTodo(todoListItem);
-        }else{
             createTodo(todoListItem.text);
+        }else{
+            deleteTodo(todoListItem);
         }
     }
 

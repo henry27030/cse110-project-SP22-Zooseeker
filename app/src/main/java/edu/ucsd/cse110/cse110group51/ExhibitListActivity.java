@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Arrays;
+
 public class ExhibitListActivity extends AppCompatActivity {
 
     public RecyclerView recyclerView;
@@ -34,9 +36,14 @@ public class ExhibitListActivity extends AppCompatActivity {
         ExhibitAdapter adapter = new ExhibitAdapter();
         adapter.setHasStableIds(true);
         adapter.setOnCheckBoxClickedHandler(viewModel::toggleCompleted);
+        adapter.setTodoListItems(
+                Arrays.asList(
+                        new TodoListItem("white cat", 1),
+                        new TodoListItem("black cat", 2)
+                ));
 
         // potential issue with this line, not sure if only can be used on TodoListActivity
-        viewModel.getTodoListItems().observe(this, adapter::setTodoListItems);
+//        viewModel.getTodoListItems().observe(this, adapter::setTodoListItems);
 
         recyclerView = findViewById(R.id.exhibit_list_items);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

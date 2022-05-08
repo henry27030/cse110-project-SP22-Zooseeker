@@ -21,7 +21,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
     public void setTodoListItems(List<TodoListItem> newTodoItems) {
         this.todoItems.clear();
         this.todoItems = newTodoItems;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public void setOnCheckBoxClickedHandler(BiConsumer<TodoListItem, CheckBox> onCheckBoxClicked){
@@ -46,7 +46,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return todoItems.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
