@@ -1,7 +1,9 @@
 package edu.ucsd.cse110.cse110group51;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,6 +19,7 @@ public class TodoListActivity extends AppCompatActivity {
 
     private EditText newTodoText;
     private Button addTodoButton;
+    public TodoListAdapter adapter = new TodoListAdapter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,6 @@ public class TodoListActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this)
                 .get(TodoListViewModel.class);
 
-        TodoListAdapter adapter = new TodoListAdapter();
         adapter.setHasStableIds(true);
         adapter.setOnDeleteClickedHandler(viewModel::deleteTodo);
         viewModel.getTodoListItems().observe(this, adapter::setTodoListItems);
@@ -46,6 +48,8 @@ public class TodoListActivity extends AppCompatActivity {
     }
 
     public void onBackClicked(View view) {
-        finish();
+        Intent intent = new Intent(TodoListActivity.this, MainActivity.class);
+        intent.putExtra("num", adapter.getItemCount());
+        startActivity(intent);
     }
 }

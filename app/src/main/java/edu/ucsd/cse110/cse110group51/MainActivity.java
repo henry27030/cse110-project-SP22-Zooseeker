@@ -27,16 +27,22 @@ import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 //
 
 public class MainActivity extends AppCompatActivity {
-    //private EditText searchAnimalText;
-//    private Button searchButton;
     private ListView listView;
+    private TextView List_btn;
 
     private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        int Num = intent.getIntExtra("num", 0);
+        this.List_btn =this.findViewById(R.id.list_btn);
+        List_btn.setText("List("+Num+")");
+
         String start = "entrance_exit_gate";
         String goal = "elephant_odyssey";
         Context context = getApplication().getApplicationContext();
