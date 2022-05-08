@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import android.app.Application;
 import android.content.Context;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -31,8 +32,12 @@ public class TodoListViewModel extends AndroidViewModel {
         todoListItems = todoListItemDao.getAllLive();
     }
 
-    public void toggleCompleted(TodoListItem todoListItem) {
-        todoListItemDao.update(todoListItem);
+    public void toggleCompleted(TodoListItem todoListItem, CheckBox checkBox) {
+        if(checkBox.isChecked()){
+            deleteTodo(todoListItem);
+        }else{
+            createTodo(todoListItem.text);
+        }
     }
 
     public void updateText(TodoListItem todoListItem, String newText) {

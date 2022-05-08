@@ -20,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exhibit_list_items"
         android:layout_width="399dp"
         android:layout_height="620dp"
         android:layout_marginStart="1dp"
