@@ -52,16 +52,22 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
-        private final TextView text;
+        private final TextView deleted;
+        private final CheckBox checkBox;
 
         private TodoListItem todoItem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textView=itemView.findViewById(R.id.todo_item_text);
-            this.text=itemView.findViewById(R.id.delete_btn);
+            this.deleted=itemView.findViewById(R.id.delete_btn);
+            this.checkBox=itemView.findViewById(R.id.completed);
 
-            this.text.setOnClickListener(view-> {
+            // in exhibitList, checkBox is invisible and deleted is visible
+            this.deleted.setVisibility(View.VISIBLE);
+            this.checkBox.setVisibility(View.INVISIBLE);
+
+            this.deleted.setOnClickListener(view-> {
                 if (onDeleteClicked == null) return;
                 onDeleteClicked.accept(todoItem);
             });
