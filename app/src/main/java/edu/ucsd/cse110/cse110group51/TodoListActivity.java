@@ -3,7 +3,7 @@ package edu.ucsd.cse110.cse110group51;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,7 +15,7 @@ public class TodoListActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     private TodoListViewModel viewModel;
 
-    private EditText newTodoText;
+    private TextView newTodoText;
     private Button addTodoButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

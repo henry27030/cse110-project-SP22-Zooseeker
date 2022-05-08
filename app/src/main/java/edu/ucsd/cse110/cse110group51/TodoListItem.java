@@ -27,12 +27,14 @@ public class TodoListItem {
     @NonNull
     public String text;
     public int order;
+    public boolean completed;
 
     // 2.Constructor matching fields above.
-    TodoListItem(String text, int order) {
-    //TodoListItem(String text, boolean completed, int order) {
+//    TodoListItem(String text, int order) {
+    TodoListItem(String text, boolean completed, int order) {
         this.text=text;
         this.order=order;
+        this.completed = completed;
     }
 
     // 3.Factor method for loading our JSON.
