@@ -32,13 +32,7 @@ public class TodoListViewModel extends AndroidViewModel {
     }
 
     public void toggleCompleted(TodoListItem todoListItem) {
-        // this function works only on exhibitView lists (not for exhibit planning list)
-        todoListItem.completed = !todoListItem.completed;
-        if(todoListItem.completed){
-            createTodo(todoListItem.text);
-        }else {
-            deleteTodo(todoListItem);
-        }
+        todoListItemDao.update(todoListItem);
     }
 
     public void updateText(TodoListItem todoListItem, String newText) {
@@ -48,7 +42,7 @@ public class TodoListViewModel extends AndroidViewModel {
 
     public void createTodo (String text) {
         int endOfListOrder = todoListItemDao.getOrderForAppend();
-        TodoListItem newItem = new TodoListItem(text, false, endOfListOrder);
+        TodoListItem newItem = new TodoListItem(text, endOfListOrder);
         todoListItemDao.insert(newItem);
     }
 
