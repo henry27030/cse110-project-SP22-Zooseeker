@@ -1,5 +1,7 @@
 package edu.ucsd.cse110.cse110group51;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -19,7 +21,14 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 //
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
@@ -30,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private TextView List_btn;
 
+    private ArrayList<String> exhibitList = new ArrayList<String>();
+    // 1. Load the graph...
+    Graph<String, IdentifiedWeightedEdge> g;
+    GraphPath<String, IdentifiedWeightedEdge> path;
+
+    // 2. Load the information about our nodes and edges...
+    Map<String, ZooData.VertexInfo> vInfo;
+    Map<String, ZooData.EdgeInfo> eInfo;
     private ArrayAdapter<String> arrayAdapter;
 
     @Override
@@ -43,21 +60,27 @@ public class MainActivity extends AppCompatActivity {
         this.List_btn =this.findViewById(R.id.list_btn);
         List_btn.setText("List("+Num+")");
 
-        String start = "entrance_exit_gate";
-        String goal = "elephant_odyssey";
+
         Context context = getApplication().getApplicationContext();
+
         // 1. Load the graph...
-        Graph<String, IdentifiedWeightedEdge> g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
-        GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
+        g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
+        //GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
 
         // 2. Load the information about our nodes and edges...
-        Map<String, ZooData.VertexInfo> vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
-        Map<String, ZooData.EdgeInfo> eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
-//        this.searchButton = this.findViewById(R.id.search_btn);
-//        this.searchAnimalText = this.findViewById(R.id.searchbar);
+        vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
+        eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
+
         this.listView = this.findViewById(R.id.list_view);
 
-        String[] arr = getResources().getStringArray(R.array.categories);
+        //String[] arr = getResources().getStringArray(R.array.categories);
+
+        //Place all the nodes from graph
+        ArrayList<String> arr = new ArrayList<String>();
+        Set<String> keys=vInfo.keySet();
+        for (String Nodes: keys) {
+            arr.add(Nodes);
+        }
         arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -112,6 +135,38 @@ public class MainActivity extends AppCompatActivity {
     public void OnShowListClicked(View view) {
         SearchView searchView = findViewById(R.id.action_search);
         searchView.setQuery("", true);
+        Intent intent = new Intent (this, TodoListActivity.class);
+        startActivity(intent);
+    }
+    //this method
+    public void onPlanButtonClicked(View view) {
+        /*
+        String start = "entrance_exit_gate";
+        exhibitList.add("elephant_odyssey");
+        exhibitList.add("arctic_foxes");
+        int shortestExhibit = 0;
+        float shortestLength = 0;
+        float currentLength = 0;
+        //int instructionCount = 1;
+        while (exhibitList.size()!=0) {
+            shortestExhibit = 0;
+            shortestLength = 0;
+            for (int i = 0; i < exhibitList.size(); i++) {
+                currentLength = 0;
+                path = DijkstraShortestPath.findPathBetween(g, start, exhibitList.get(i));
+                for (IdentifiedWeightedEdge e : path.getEdgeList()) {
+                    currentLength += g.getEdgeWeight(e);
+                }
+                if (shortestLength == 0 || currentLength < shortestLength) {
+                    shortestLength = currentLength;
+                    shortestExhibit = i;
+                }
+            }
+            path = DijkstraShortestPath.findPathBetween(g, start, exhibitList.get(shortestExhibit));
+            start=exhibitList.get(shortestExhibit);
+            exhibitList.remove(shortestExhibit);
+        }
+        */
         Intent intent = new Intent (this, TodoListActivity.class);
         startActivity(intent);
     }
