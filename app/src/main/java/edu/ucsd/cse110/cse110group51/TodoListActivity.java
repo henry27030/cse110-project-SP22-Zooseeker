@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+
 public class TodoListActivity extends AppCompatActivity {
     //Exposed for testing purposes later...
     public RecyclerView recyclerView;
@@ -51,5 +53,36 @@ public class TodoListActivity extends AppCompatActivity {
         Intent intent = new Intent(TodoListActivity.this, MainActivity.class);
         intent.putExtra("num", adapter.getItemCount());
         startActivity(intent);
+    }
+
+    public void onPlanCalculateClicked(View view) {
+        String start = "entrance_exit_gate";
+        MainActivity.exhibitList.add("elephant_odyssey");
+        MainActivity.exhibitList.add("arctic_foxes");
+        int shortestExhibit = 0;
+        float shortestLength = 0;
+        float currentLength = 0;
+        //int instructionCount = 1;
+        while (MainActivity.exhibitList.size()!=0) {
+            shortestExhibit = 0;
+            shortestLength = 0;
+            for (int i = 0; i < MainActivity.exhibitList.size(); i++) {
+                currentLength = 0;
+                MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, MainActivity.exhibitList.get(i));
+                for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
+                    currentLength += MainActivity.g.getEdgeWeight(e);
+                }
+                if (shortestLength == 0 || currentLength < shortestLength) {
+                    shortestLength = currentLength;
+                    shortestExhibit = i;
+                }
+            }
+            MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, MainActivity.exhibitList.get(shortestExhibit));
+            start = MainActivity.exhibitList.get(shortestExhibit);
+            MainActivity.exhibitList.remove(shortestExhibit);
+        }
+    }
+
+    public void onPlanDisplayClicked(View view) {
     }
 }

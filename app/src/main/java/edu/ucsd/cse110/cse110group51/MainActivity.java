@@ -41,13 +41,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView List_btn;
 
     public static ArrayList<String> exhibitList = new ArrayList<String>();
+    public static Map<String, ArrayList<String>> map;
+    public static ArrayList<String> Directions;
     // 1. Load the graph...
-    Graph<String, IdentifiedWeightedEdge> g;
-    GraphPath<String, IdentifiedWeightedEdge> path;
+    public static Graph<String, IdentifiedWeightedEdge> g;
+    public static GraphPath<String, IdentifiedWeightedEdge> path;
 
     // 2. Load the information about our nodes and edges...
-    Map<String, ZooData.VertexInfo> vInfo;
-    Map<String, ZooData.EdgeInfo> eInfo;
+    public static Map<String, ZooData.VertexInfo> vInfo;
+    public static Map<String, ZooData.EdgeInfo> eInfo;
     private ArrayAdapter<String> arrayAdapter;
 
     @Override
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Display onto searchbar tags as keys to value of Nodes
         ArrayList<String> arr = new ArrayList<String>();
-        Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+        map = new HashMap<String, ArrayList<String>>();
         Set<String> keys=vInfo.keySet();
         ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
         for (String Nodes: keys) {

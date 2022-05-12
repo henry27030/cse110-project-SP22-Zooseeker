@@ -39,6 +39,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/plan_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="onPlanDisplayClicked"
+        android:text="Plan Display"
+        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintEnd_toStartOf="@+id/plan_calculate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/plan_calculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="onPlanCalculateClicked"
+        android:text="Plan Calculate"
+        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
         android:id="@+id/new_todo_text"
         android:layout_width="214dp"
