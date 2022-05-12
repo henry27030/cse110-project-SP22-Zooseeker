@@ -2,7 +2,6 @@ package edu.ucsd.cse110.cse110group51;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,8 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class ExhibitListActivity extends AppCompatActivity {
 
@@ -31,12 +29,6 @@ public class ExhibitListActivity extends AppCompatActivity {
         // get position of categories
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", -1);
-        String category = MainActivity.arrayOfTagToDisplay.get(position);
-
-        // use Log.v to check if the position I clicked is the right one
-        Log.v("ExhibitListActivity", String.valueOf(position));
-        Log.v("ExhibitListActivity category", MainActivity.arrayOfTagToDisplay.get(position));
-
 
         viewModel = new ViewModelProvider(this)
                 .get(TodoListViewModel.class);
@@ -44,14 +36,11 @@ public class ExhibitListActivity extends AppCompatActivity {
         ExhibitAdapter adapter = new ExhibitAdapter();
         adapter.setHasStableIds(true);
         adapter.setOnCheckBoxClickedHandler(viewModel::toggleCompleted);
-        // adapter needs to have todolistItem list
-        List<TodoListItem> list = new ArrayList<>();
-        int i = 0;
-        for(String exhibit : MainActivity.map.get(category)){
-            i++;
-            list.add(new TodoListItem(exhibit, i));
-        }
-        adapter.setTodoListItems(list);
+        adapter.setTodoListItems(
+                Arrays.asList(
+                        new TodoListItem("white cat", 1),
+                        new TodoListItem("black cat", 2)
+                ));
 
         // potential issue with this line, not sure if only can be used on TodoListActivity
 //        viewModel.getTodoListItems().observe(this, adapter::setTodoListItems);

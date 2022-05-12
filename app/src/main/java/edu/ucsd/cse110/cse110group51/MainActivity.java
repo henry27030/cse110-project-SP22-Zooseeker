@@ -1,29 +1,39 @@
 package edu.ucsd.cse110.cse110group51;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+//import androidx.appcompat.widget.SearchView;
 import android.widget.SearchView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
-
+//
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
-//import androidx.appcompat.widget.SearchView;
-//
+import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 //
 
 public class MainActivity extends AppCompatActivity {
@@ -39,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
     Map<String, ZooData.VertexInfo> vInfo;
     Map<String, ZooData.EdgeInfo> eInfo;
     private ArrayAdapter<String> arrayAdapter;
-
-    public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-    public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
         this.listView = this.findViewById(R.id.list_view);
 
         //Display onto searchbar tags as keys to value of Nodes
+        ArrayList<String> arr = new ArrayList<String>();
+        Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
         Set<String> keys=vInfo.keySet();
+        ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
         for (String Nodes: keys) {
             for (String tag:vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
                 if (map.containsKey(tag)) {
