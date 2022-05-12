@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView List_btn;
 
     public static ArrayList<String> exhibitList = new ArrayList<String>();
-    public static Map<String, ArrayList<String>> map;
+    public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+    public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
     public static ArrayList<String> Directions;
     // 1. Load the graph...
     public static Graph<String, IdentifiedWeightedEdge> g;
@@ -78,9 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Display onto searchbar tags as keys to value of Nodes
         ArrayList<String> arr = new ArrayList<String>();
-        map = new HashMap<String, ArrayList<String>>();
         Set<String> keys=vInfo.keySet();
-        ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
         for (String Nodes: keys) {
             for (String tag:vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
                 if (map.containsKey(tag)) {
