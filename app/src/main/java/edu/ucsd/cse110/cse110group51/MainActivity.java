@@ -74,9 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.listView = this.findViewById(R.id.list_view);
 
-        //String[] arr = getResources().getStringArray(R.array.categories);
-
-        //Place all the nodes from graph
+        //Display onto searchbar tags as keys to value of Nodes
         ArrayList<String> arr = new ArrayList<String>();
         Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
         Set<String> keys=vInfo.keySet();
