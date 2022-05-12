@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 continue;
             }
             for (String tag:vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
-                if (map.containsKey(tag)) {
+                if (map.containsKey(tag) && !map.get(tag).contains(Nodes)) {
                     map.get(tag).add(Nodes);
                 }
-                else {
+                else{
                     arrayOfTagToDisplay.add(tag);
                     ArrayList<String> tagNodes = new ArrayList<String>();
                     tagNodes.add(Nodes);
