@@ -24,6 +24,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private TextView List_btn;
 
-    private ArrayList<String> exhibitList = new ArrayList<String>();
+    public static ArrayList<String> exhibitList = new ArrayList<String>();
     // 1. Load the graph...
     Graph<String, IdentifiedWeightedEdge> g;
     GraphPath<String, IdentifiedWeightedEdge> path;
@@ -77,14 +78,26 @@ public class MainActivity extends AppCompatActivity {
 
         //Place all the nodes from graph
         ArrayList<String> arr = new ArrayList<String>();
+        Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
         Set<String> keys=vInfo.keySet();
+        ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
         for (String Nodes: keys) {
-            arr.add(Nodes);
+            for (String tag:vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
+                if (map.containsKey(tag)) {
+                    map.get(tag).add(Nodes);
+                }
+                else {
+                    arrayOfTagToDisplay.add(tag);
+                    ArrayList<String> tagNodes = new ArrayList<String>();
+                    tagNodes.add(Nodes);
+                    map.put(tag, tagNodes);
+                }
+            }
         }
         arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
-                arr);
+                arrayOfTagToDisplay);
         listView.setAdapter(arrayAdapter);
 
 
