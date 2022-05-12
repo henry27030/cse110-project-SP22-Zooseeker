@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class TodoListActivity extends AppCompatActivity {
     //Exposed for testing purposes later...
     public RecyclerView recyclerView;
@@ -56,6 +59,7 @@ public class TodoListActivity extends AppCompatActivity {
     }
 
     public void onPlanCalculateClicked(View view) {
+        ArrayList<String> Directions = new ArrayList<String>();
         String start = "entrance_exit_gate";
         MainActivity.exhibitList.add("elephant_odyssey");
         MainActivity.exhibitList.add("arctic_foxes");
@@ -78,9 +82,26 @@ public class TodoListActivity extends AppCompatActivity {
                 }
             }
             MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, MainActivity.exhibitList.get(shortestExhibit));
+            //
+            for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
+                String strToInsert = "Walk ";
+                        /*
+                        +
+                        MainActivity.g.getEdgeWeight(e) +
+                        " Of meters along " +
+                        MainActivity.eInfo.get(e.getId()).street +
+                        " from " +
+                        MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name +
+                        " to " +
+                        MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
+                MainActivity.Directions.add(strToInsert);
+                */
+            }
+            //
             start = MainActivity.exhibitList.get(shortestExhibit);
             MainActivity.exhibitList.remove(shortestExhibit);
         }
+        MainActivity.Directions = Directions;
     }
 
     public void onPlanDisplayClicked(View view) {
