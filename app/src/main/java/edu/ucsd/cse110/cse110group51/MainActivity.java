@@ -3,6 +3,7 @@ package edu.ucsd.cse110.cse110group51;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,12 +14,14 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     public static Map<String, ZooData.EdgeInfo> eInfo;
     private ArrayAdapter<String> arrayAdapter;
 
+    // ViewModel
+    public static TodoListViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
         this.List_btn =this.findViewById(R.id.list_btn);
         List_btn.setText("List("+Num+")");
 
+        // initialize viewModel and exhibitlist
+        viewModel = new ViewModelProvider(this)
+                .get(TodoListViewModel.class);
+        List<TodoListItem> list = viewModel.getCurrentItems();
+        Log.v("TodolistItemsSize", String.valueOf(list.size()));
+        for(TodoListItem item : list){
+            if(!MainActivity.exhibitList.contains(item.text)){
+                MainActivity.exhibitList.add(item.text);
+            }
+//            Log.v("GetTodoListItem:", String.join(",", item.text));
+        }
 
         Context context = getApplication().getApplicationContext();
 

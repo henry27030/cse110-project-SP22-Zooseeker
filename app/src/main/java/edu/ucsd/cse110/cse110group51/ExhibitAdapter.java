@@ -1,6 +1,5 @@
 package edu.ucsd.cse110.cse110group51;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +65,18 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
             this.checkBox.setVisibility(View.VISIBLE);
             this.deleted.setVisibility(View.INVISIBLE);
 
+            // decide if the viewHolder is checked or unchecked
+            String exhibitName = String.valueOf(textView.getText());
+//            Log.v("ViewHolder", exhibitName);
+            if(MainActivity.exhibitList.contains(exhibitName) &&
+                    this.checkBox.getVisibility() == View.VISIBLE){
+                 this.checkBox.setChecked(true);
+
+            }else if(!MainActivity.exhibitList.contains(exhibitName) &&
+                    this.checkBox.getVisibility() == View.VISIBLE){
+                this.checkBox.setChecked(false);
+            }
+
             this.checkBox.setOnClickListener(itemView -> {
                 if(onCheckBoxClicked == null){
                     return;
@@ -80,6 +91,9 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
         public void setTodoItem(TodoListItem todoItem) {
             this.todoItem = todoItem;
             this.textView.setText(todoItem.text);
+            if(MainActivity.exhibitList.contains(todoItem.text)){
+                this.checkBox.setChecked(true);
+            }
         }
     }
 }
