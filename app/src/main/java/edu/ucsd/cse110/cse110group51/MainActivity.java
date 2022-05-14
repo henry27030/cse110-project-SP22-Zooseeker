@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> exhibitList = new ArrayList<String>();
     public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
     public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
-    public static ArrayList<String> Directions;
+    public static ArrayList<String> Directions = new ArrayList<String>();
     // 1. Load the graph...
     public static Graph<String, IdentifiedWeightedEdge> g;
     public static GraphPath<String, IdentifiedWeightedEdge> path;
@@ -51,14 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
         int Num = intent.getIntExtra("num", 0);
-        this.List_btn =this.findViewById(R.id.list_btn);
-        List_btn.setText("List("+Num+")");
+        //this.List_btn =this.findViewById(R.id.list_btn);
+        //List_btn.setText("List("+Num+")");
 
         // initialize viewModel and exhibitlist
         viewModel = new ViewModelProvider(this)
@@ -153,42 +152,10 @@ public class MainActivity extends AppCompatActivity {
     public void onMemberClicked(View view) {
 
     }
-
-    public void OnShowListClicked(View view) {
-        SearchView searchView = findViewById(R.id.action_search);
-        searchView.setQuery("", true);
-        Intent intent = new Intent (this, TodoListActivity.class);
-        startActivity(intent);
-    }
     //this method
     public void onPlanButtonClicked(View view) {
-        /*
-        String start = "entrance_exit_gate";
-        exhibitList.add("elephant_odyssey");
-        exhibitList.add("arctic_foxes");
-        int shortestExhibit = 0;
-        float shortestLength = 0;
-        float currentLength = 0;
-        //int instructionCount = 1;
-        while (exhibitList.size()!=0) {
-            shortestExhibit = 0;
-            shortestLength = 0;
-            for (int i = 0; i < exhibitList.size(); i++) {
-                currentLength = 0;
-                path = DijkstraShortestPath.findPathBetween(g, start, exhibitList.get(i));
-                for (IdentifiedWeightedEdge e : path.getEdgeList()) {
-                    currentLength += g.getEdgeWeight(e);
-                }
-                if (shortestLength == 0 || currentLength < shortestLength) {
-                    shortestLength = currentLength;
-                    shortestExhibit = i;
-                }
-            }
-            path = DijkstraShortestPath.findPathBetween(g, start, exhibitList.get(shortestExhibit));
-            start=exhibitList.get(shortestExhibit);
-            exhibitList.remove(shortestExhibit);
-        }
-        */
+        SearchView searchView = findViewById(R.id.action_search);
+        searchView.setQuery("", true);
         Intent intent = new Intent (this, TodoListActivity.class);
         startActivity(intent);
     }

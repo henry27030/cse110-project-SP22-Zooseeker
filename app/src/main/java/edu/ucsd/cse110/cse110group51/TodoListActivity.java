@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 public class TodoListActivity extends AppCompatActivity {
@@ -57,19 +58,22 @@ public class TodoListActivity extends AppCompatActivity {
 
     public void onPlanCalculateClicked(View view) {
         ArrayList<String> Directions = new ArrayList<String>();
+        //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
+        ArrayList<String> exhibitListInFunc = new ArrayList<String>();
+        for (String exhibit:MainActivity.exhibitList) {
+            exhibitListInFunc.add(exhibit);
+        }
         String start = "entrance_exit_gate";
-        MainActivity.exhibitList.add("elephant_odyssey");
-        MainActivity.exhibitList.add("arctic_foxes");
         int shortestExhibit = 0;
         float shortestLength = 0;
         float currentLength = 0;
         //int instructionCount = 1;
-        while (MainActivity.exhibitList.size()!=0) {
+        while (exhibitListInFunc.size()!=0) {
             shortestExhibit = 0;
             shortestLength = 0;
-            for (int i = 0; i < MainActivity.exhibitList.size(); i++) {
+            for (int i = 0; i < exhibitListInFunc.size(); i++) {
                 currentLength = 0;
-                MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, MainActivity.exhibitList.get(i));
+                MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, exhibitListInFunc.get(i));
                 for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
                     currentLength += MainActivity.g.getEdgeWeight(e);
                 }
@@ -78,11 +82,11 @@ public class TodoListActivity extends AppCompatActivity {
                     shortestExhibit = i;
                 }
             }
-            MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, MainActivity.exhibitList.get(shortestExhibit));
-            //
+            MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, exhibitListInFunc.get(shortestExhibit));
+
+            //add a string of directions to Directions String array
             for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
-                String strToInsert = "Walk ";
-                        /*
+                String strToInsert = "Walk "
                         +
                         MainActivity.g.getEdgeWeight(e) +
                         " Of meters along " +
@@ -91,16 +95,17 @@ public class TodoListActivity extends AppCompatActivity {
                         MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name +
                         " to " +
                         MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
-                MainActivity.Directions.add(strToInsert);
-                */
+                Directions.add(strToInsert);
             }
-            //
-            start = MainActivity.exhibitList.get(shortestExhibit);
-            MainActivity.exhibitList.remove(shortestExhibit);
+            start = exhibitListInFunc.get(shortestExhibit);
+            exhibitListInFunc.remove(shortestExhibit);
         }
+        // set Directions in MainActivity to Directions
         MainActivity.Directions = Directions;
     }
 
     public void onPlanDisplayClicked(View view) {
+        Intent intent = new Intent (this, PlanActivity.class);
+        startActivity(intent);
     }
 }
