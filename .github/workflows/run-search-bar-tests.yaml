@@ -15,7 +15,7 @@ jobs:
 
       # Execute unit tests
       - name: SearchBar CI Test
-        run: ./SearchBarTest
+        run: ./gradlew SearchBarTest
 
       # Report the results
       - name: Saerch Test Report
