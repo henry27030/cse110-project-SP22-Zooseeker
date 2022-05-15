@@ -36,19 +36,26 @@ public class PlanTest {
     public ActivityScenarioRule<PlanActivity> scenarioRule = new ActivityScenarioRule<>(PlanActivity.class);
 
     @Test
-    public void searchFilterTest() {
+    public void PlanInitializationTest() {
         ActivityScenario<PlanActivity> scenario = scenarioRule.getScenario();
 
         scenario.moveToState(Lifecycle.State.CREATED);
 
         scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-//            MenuItem menuItem = activity.findViewById(R.id.action_search);
-            SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("cat", true);
+            ListView listView = activity.findViewById(R.id.directions_view);
+            assertEquals(listView.getAdapter().getCount(), 0);
+        });
+    }
 
-            int count = listView.getAdapter().getCount();
-            assertEquals(1, count);             // should only have a cat
+    @Test
+    public void PlanToArcticFoxesTest() {
+        ActivityScenario<PlanActivity> scenario = scenarioRule.getScenario();
+
+        scenario.moveToState(Lifecycle.State.CREATED);
+
+        scenario.onActivity(activity -> {
+            ListView listView = activity.findViewById(R.id.directions_view);
+            assertEquals(listView.getAdapter().getCount(), 0);
         });
     }
 }
