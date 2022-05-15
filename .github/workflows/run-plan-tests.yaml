@@ -15,7 +15,7 @@ jobs:
 
       # Execute unit tests
       - name: Plan CI Test
-        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest
+        run: ./edu/ucsd/cse110/cse110group51/PlanTest
 
       # Report the results
       - name: Saerch Test Report
