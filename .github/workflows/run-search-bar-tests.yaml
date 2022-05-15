@@ -15,7 +15,7 @@ jobs:
 
       # Execute unit tests
       - name: SearchBar CI Test
-        run: ./test/java/edu/ucsd/cse110/cse110group51 SearchBarTest
+        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/SearchBarTest
 
       # Report the results
       - name: Saerch Test Report
