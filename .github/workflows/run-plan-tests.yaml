@@ -13,14 +13,14 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
 
-      #make testfile excutable
-      -name: Make PlanTest excutable
-       run: chmod +x ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
+#      #make testfile excutable
+#      -name: Make PlanTest excutable
+#       run: chmod +x ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
 
       # Execute unit tests
       - name: Plan CI Test
         #--tests "edu.ucsd.cse110.cse110group51.PlanTest.PlanInitializationTest"
-        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
+        run: chmod +x ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java; ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
 
       # Report the results
       - name: Saerch Test Report
