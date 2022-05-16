@@ -20,7 +20,8 @@ jobs:
       # Execute unit tests
       - name: Plan CI Test
         #--tests "edu.ucsd.cse110.cse110group51.PlanTest.PlanInitializationTest"
-        run: chmod +x ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java; ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
+#        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
+        run: java -cp java ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
 
       # Report the results
       - name: Saerch Test Report
