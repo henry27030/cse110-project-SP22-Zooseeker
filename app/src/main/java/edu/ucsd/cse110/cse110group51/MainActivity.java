@@ -95,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
                     map.get(tag).add(Nodes);
                 }
                 else{
-                    arrayOfTagToDisplay.add(tag);
+                    if(!arrayOfTagToDisplay.contains(tag)){
+                        arrayOfTagToDisplay.add(tag);
+                    }
                     ArrayList<String> tagNodes = new ArrayList<String>();
                     tagNodes.add(Nodes);
                     map.put(tag, tagNodes);
@@ -113,7 +115,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Intent intent = new Intent(MainActivity.this, ExhibitListActivity.class);
-                intent.putExtra("position", position);
+//                intent.putExtra("position", position);
+                intent.putExtra("category", arrayAdapter.getItem(position));
+//                Log.v("The category name:", arrayAdapter.getItem(position));
                 startActivity(intent);
             }
         });
