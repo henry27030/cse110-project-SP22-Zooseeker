@@ -29,8 +29,10 @@ public class ExhibitListActivity extends AppCompatActivity {
 
         // get position of categories
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", -1);
-        String category = MainActivity.arrayOfTagToDisplay.get(position);
+//        int position = intent.getIntExtra("position", -1);
+//        String category = MainActivity.arrayOfTagToDisplay.get(position);
+
+        String category = intent.getStringExtra("category");
 
         // use Log.v to check if the position I clicked is the right one
 //        Log.v("ExhibitListActivity", String.valueOf(position));
