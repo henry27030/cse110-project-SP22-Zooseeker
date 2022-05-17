@@ -1,29 +1,26 @@
-name: Run Plan Tests
-on: [push]
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  test:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-
+      - uses: actions/checkout@v3
       - name: set up JDK 11
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
           java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
 
-#      #make testfile excutable
-#      -name: Make PlanTest excutable
-#       run: chmod +x ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
-
-      # Execute unit tests
-      - name: Plan CI Test
-        #--tests "edu.ucsd.cse110.cse110group51.PlanTest.PlanInitializationTest"
-#        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
-        run: javac app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
-
-      # Report the results
-      - name: Saerch Test Report
-        uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
