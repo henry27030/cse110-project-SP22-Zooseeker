@@ -1,0 +1,29 @@
+name: Run Plan Tests
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+#      #make testfile excutable
+#      -name: Make PlanTest excutable
+#       run: chmod +x ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
+
+      # Execute unit tests
+      - name: Plan CI Test
+        #--tests "edu.ucsd.cse110.cse110group51.PlanTest.PlanInitializationTest"
+#        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
+        run: java -cp java ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java PlanTest
+
+      # Report the results
+      - name: Saerch Test Report
+        uses: asadmansr/android-test-report-action@v1.2.0
+        if: ${{ always() }} # IMPORTANT: run Android Test Report regardless

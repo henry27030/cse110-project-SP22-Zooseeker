@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Animal Zoo Navigation</string>
+
+    <string-array name="categories">
+        <item>Cat</item>
+        <item>Dog</item>
+        <item>Bear</item>
+    </string-array>
+</resources>

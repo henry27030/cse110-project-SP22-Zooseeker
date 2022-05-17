@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TodoListActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/todo_items"
+        android:layout_width="403dp"
+        android:layout_height="570dp"
+        android:layout_marginTop="8dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099"
+        tools:layout_editor_absoluteX="4dp" />
+
+    <Button
+        android:id="@+id/add_todo_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954"
+        tools:layout_editor_absoluteX="307dp"
+        android:visibility="gone"    />
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="28dp"
+        android:onClick="onBackClicked"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/plan_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="onPlanDisplayClicked"
+        android:text="Plan Display"
+        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintEnd_toStartOf="@+id/plan_calculate"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/plan_calculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="onPlanCalculateClicked"
+        android:text="Plan Calculate"
+        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/new_todo_text"
+        android:layout_width="214dp"
+        android:layout_height="39dp"
+        android:hint="Enter a todo here ..."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/add_todo_btn"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/back_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.952"
+        android:visibility="gone"  />
+</androidx.constraintlayout.widget.ConstraintLayout>
