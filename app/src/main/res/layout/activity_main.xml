@@ -10,38 +10,40 @@
         android:id="@+id/category_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:onClick="onCategoryClicked"
         android:text="Categories"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/member_btn"
+        app:layout_constraintTop_toBottomOf="@+id/list_view" />
 
     <Button
         android:id="@+id/member_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="119dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="onMemberClicked"
         android:text="Members"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/list_btn"
-        android:layout_width="74dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:onClick="OnShowListClicked"
-        android:text="List(0)"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/category_btn"
-        app:layout_constraintStart_toEndOf="@+id/member_btn" />
+        app:layout_constraintStart_toEndOf="@+id/plan_btn" />
+
+    <Button
+        android:id="@+id/plan_btn"
+        android:layout_width="87dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="4dp"
+        android:onClick="onPlanButtonClicked"
+        android:text="Plan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/member_btn"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ListView
         android:id="@+id/list_view"

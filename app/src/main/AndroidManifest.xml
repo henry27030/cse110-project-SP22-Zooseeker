@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE110Group51">
         <activity
+            android:name=".PlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExhibitListActivity"
+            android:exported="false" />
+        <activity
             android:name=".TodoListActivity"
             android:exported="false" />
         <activity
