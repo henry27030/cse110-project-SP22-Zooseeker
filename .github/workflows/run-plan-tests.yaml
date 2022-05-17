@@ -21,7 +21,7 @@ jobs:
       - name: Plan CI Test
         #--tests "edu.ucsd.cse110.cse110group51.PlanTest.PlanInitializationTest"
 #        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
-        run: java -cp java ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java PlanInitializationTest
+        run: java -cp java ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java/PlanInitializationTest
 
       # Report the results
       - name: Saerch Test Report

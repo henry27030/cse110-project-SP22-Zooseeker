@@ -44,7 +44,7 @@ public class SearchBarTest {
 
         scenario.onActivity(activity -> {
             ListView listView = activity.findViewById(R.id.list_view);
-//            MenuItem menuItem = activity.findViewById(R.id.action_search);
+//          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
             searchView.setQuery("cat", true);
 
