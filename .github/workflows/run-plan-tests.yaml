@@ -1,29 +1,35 @@
-name: Run Plan Tests
-on: [push]
+name: Java
+
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
+  build:
 
-      - name: set up JDK 11
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Set up JDK 1.11
         uses: actions/setup-java@v2
         with:
-          distribution: 'zulu'
           java-version: '11'
+          distribution: 'adopt'
 
-#      #make testfile excutable
-#      -name: Make PlanTest excutable
-#       run: chmod +x ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
+      - name: Build
+        run: mvn --batch-mode -DskipTests package
 
-      # Execute unit tests
-      - name: Plan CI Test
-        #--tests "edu.ucsd.cse110.cse110group51.PlanTest.PlanInitializationTest"
-#        run: ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java
-        run: java -cp java ./app/src/test/java/edu/ucsd/cse110/cse110group51/PlanTest.java/PlanInitializationTest
+      - name: Test
+        run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
 
-      # Report the results
-      - name: Saerch Test Report
-        uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
+      - name: Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Maven Tests
+          path: target/surefire-reports/*.xml
+          reporter: java-junit
+          fail-on-error: true
