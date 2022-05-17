@@ -70,25 +70,6 @@ public class SearchBarTest {
         });
     }
 
-    /*@Test
-    public void searchCompleteFilterTest() {
-
-        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
-
-        scenario.moveToState(Lifecycle.State.CREATED);
-
-        scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-//            MenuItem menuItem = activity.findViewById(R.id.action_search);
-            SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("lions", true);
-
-            int count = listView.getAdapter().getCount();
-            assertEquals(1, count);             // should only have a dog
-        });
-    }*/
-
-    @Test
     public void searchInvalidFilterTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
@@ -97,12 +78,12 @@ public class SearchBarTest {
 
         scenario.onActivity(activity -> {
             ListView listView = activity.findViewById(R.id.list_view);
-//            MenuItem menuItem = activity.findViewById(R.id.action_search);
+//          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("tiger", true);
+            searchView.setQuery("goose", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(0, count);             // should only have a dog
+            assertEquals(0, count);             // should only have a cat
         });
     }
 }
