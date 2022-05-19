@@ -7,11 +7,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class PlanActivity extends AppCompatActivity {
     private ListView directionsView;
     private ArrayAdapter<String> arrayAdapter;
+    private String destination;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        destination = getIntent().getStringExtra("Key");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
         this.directionsView = this.findViewById(R.id.directions_view);
@@ -24,5 +28,25 @@ public class PlanActivity extends AppCompatActivity {
 
     public void PlanBackButton(View view) {
         finish();
+    }
+
+    public void PlanNextButton(View view) {
+        /*
+        MainActivity.Directions.add(MainActivity.exhibitList.get(0));
+        MainActivity.Directions.add(destination);
+
+         */
+
+        ArrayList<String> input = new ArrayList<String>();
+        for (String string :MainActivity.exhibitList) {
+            if (!string.equals(destination)){
+                input.add(string);
+            }
+        }
+        PlanCalculate planCalculate = new PlanCalculate(destination, input);
+        planCalculate.extracted();
+
+
+        arrayAdapter.notifyDataSetChanged();
     }
 }

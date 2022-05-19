@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private TextView List_btn;
 
+    public static String start = "entrance_exit_gate";
     public static ArrayList<String> exhibitList = new ArrayList<String>();
     public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
     public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
