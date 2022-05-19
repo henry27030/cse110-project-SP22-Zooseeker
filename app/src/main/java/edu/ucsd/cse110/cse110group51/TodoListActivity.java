@@ -86,16 +86,30 @@ public class TodoListActivity extends AppCompatActivity {
 
             //add a string of directions to Directions String array
             for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
-                String strToInsert = "Walk "
-                        +
-                        MainActivity.g.getEdgeWeight(e) +
-                        " Of meters along " +
-                        MainActivity.eInfo.get(e.getId()).street +
-                        " from " +
-                        MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name +
-                        " to " +
-                        MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
-                Directions.add(strToInsert);
+                if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
+                    String strToInsert = "Walk "
+                            +
+                            MainActivity.g.getEdgeWeight(e) +
+                            " Of meters along " +
+                            MainActivity.eInfo.get(e.getId()).street +
+                            " from " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name +
+                            " to " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
+                    Directions.add(strToInsert);
+                }
+                else {
+                    String strToInsert = "Walk "
+                            +
+                            MainActivity.g.getEdgeWeight(e) +
+                            " Of meters along " +
+                            MainActivity.eInfo.get(e.getId()).street +
+                            " from " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name +
+                            " to " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
+                    Directions.add(strToInsert);
+                }
             }
             start = exhibitListInFunc.get(shortestExhibit);
             exhibitListInFunc.remove(shortestExhibit);
