@@ -97,6 +97,7 @@ public class TodoListActivity extends AppCompatActivity {
                             " to " +
                             MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
                     Directions.add(strToInsert);
+                    start=MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id;
                 }
                 else {
                     String strToInsert = "Walk "
@@ -109,6 +110,7 @@ public class TodoListActivity extends AppCompatActivity {
                             " to " +
                             MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
                     Directions.add(strToInsert);
+                    start=MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
                 }
             }
             start = exhibitListInFunc.get(shortestExhibit);
