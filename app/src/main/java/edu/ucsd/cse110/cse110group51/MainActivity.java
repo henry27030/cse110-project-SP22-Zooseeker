@@ -87,7 +87,13 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> arr = new ArrayList<String>();
         Set<String> keys=vInfo.keySet();
         for (String Nodes: keys) {
+            /*
             if(Nodes.equals("entrance_exit_gate") || Nodes.equals("entrance_plaza")){
+                continue;
+            }
+
+             */
+            if (!vInfo.get(Nodes).kind.equals(vInfo.get(Nodes).kind.EXHIBIT)) {
                 continue;
             }
             for (String tag:vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
