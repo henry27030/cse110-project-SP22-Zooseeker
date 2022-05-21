@@ -3,19 +3,17 @@ package edu.ucsd.cse110.cse110group51;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlanCalculate {
-    String start;
     String destination;
-    ArrayList<String> exhibits;
-    public PlanCalculate(String start, ArrayList<String> exhibits) {
-        this.start=start;
-        this.exhibits=exhibits;
+    public PlanCalculate() {
     }
+
     public String getDestination() {
         return destination;
     }
-    public void extracted() {
+    public List<String> extracted(String start, ArrayList<String> exhibits) {
         ArrayList<String> Directions = new ArrayList<String>();
         //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
         ArrayList<String> exhibitListInFunc = new ArrayList<String>();
@@ -54,6 +52,7 @@ public class PlanCalculate {
                         " to " +
                         MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
                 Directions.add(strToInsert);
+                start=MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id;
             } else {
                 String strToInsert = "Walk "
                         +
@@ -65,9 +64,12 @@ public class PlanCalculate {
                         " to " +
                         MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
                 Directions.add(strToInsert);
+                start=MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
             }
         }
         // set Directions in MainActivity to Directions
-        MainActivity.Directions = Directions;
+        //MainActivity.Directions = Directions;
+        return Directions;
     }
+    //public List<String> DirectDestination (String destination)
 }
