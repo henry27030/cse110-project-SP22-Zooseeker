@@ -53,11 +53,13 @@ public class TodoListActivity extends AppCompatActivity {
         intent.putExtra("num", adapter.getItemCount());
         startActivity(intent);
     }
-
+/*
     public void onPlanCalculateClicked(View view) {
         PlanCalculate planCalculate = new PlanCalculate();
         planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
     }
+
+ */
 /*
     private void extracted() {
         //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
@@ -69,10 +71,10 @@ public class TodoListActivity extends AppCompatActivity {
     }*/
 
     public void onPlanDisplayClicked(View view) {
-        PlanCalculate planCalculate = new PlanCalculate();
-        planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
+        //PlanCalculate planCalculate = new PlanCalculate();
+        //planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
         Intent intent = new Intent (this, PlanActivity.class);
-        intent.putExtra("Key", planCalculate.getDestination());
+        //intent.putExtra("Key", planCalculate.getDestination());
         startActivity(intent);
     }
 }
