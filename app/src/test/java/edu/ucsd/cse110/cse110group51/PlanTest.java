@@ -29,7 +29,7 @@ public class PlanTest {
 
 
     @Test
-    public void NextSuccessful() {
+    public void PlanSuccessful() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
         scenario.moveToState(Lifecycle.State.CREATED);
