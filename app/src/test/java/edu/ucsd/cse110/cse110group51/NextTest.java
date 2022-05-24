@@ -37,18 +37,18 @@ public class NextTest {
         scenario.onActivity(activity -> {
             ListView listView = activity.findViewById(R.id.directions_view);
             int s = PlanActivity.BIND_AUTO_CREATE;
-            Supplier<Class<NextActivity>> classSupplier = () -> NextActivity.class;
+            /*Supplier<Class<NextActivity>> classSupplier = () -> NextActivity.class;
             {
-            }
+            }*/
             ListView directionsView = activity.findViewById(R.id.list_view);
 
             int x = directionsView.getAdapter().getCount();
 
             //ListView listView1 = activity.findViewById(R.id.list_view);
-            Supplier<Class<PlanActivity>> classSupplier2 = () -> PlanActivity.class;
+            /*Supplier<Class<PlanActivity>> classSupplier2 = () -> PlanActivity.class;
             {
                 int w = PlanActivity.RECEIVER_VISIBLE_TO_INSTANT_APPS;
-            }
+            }*/
 
             //TextView textView = activity.findViewById(R.id.next_next_btn);
             //button.performClick();
