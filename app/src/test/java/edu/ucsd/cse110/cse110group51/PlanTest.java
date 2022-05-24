@@ -14,47 +14,39 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.google.common.base.Supplier;
 
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.lang.reflect.Field;
 
 @RunWith(AndroidJUnit4.class)
 public class PlanTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
+/*
+    @After
+    public void finishComponentTesting() {
+        // sInstance is the static variable name which holds the singleton instance
+        resetSingleton(MainActivity.class, "sInstance");
+    }
 
+    private void resetSingleton(Class clazz, String fieldName) {
+        Field instance;
+        try {
+            instance = clazz.getDeclaredField(fieldName);
+            instance.setAccessible(true);
+            instance.set(null, null);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+*/
     @Test
     public void PlanSuccessful() {
 
-        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
-        scenario.moveToState(Lifecycle.State.CREATED);
-        //ActivityScenario<NextActivity> scenario2 = scenarioRule2.getScenario();
 
-
-        scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.directions_view);
-            int s = PlanActivity.BIND_AUTO_CREATE;
-            Supplier<Class<PlanActivity>> classSupplier = () -> PlanActivity.class;
-            {
-            }
-            ListView directionsView = activity.findViewById(R.id.list_view);
-
-            int x = directionsView.getAdapter().getCount();
-
-            //ListView listView1 = activity.findViewById(R.id.list_view);
-            Supplier<Class<PlanActivity>> classSupplier2 = () -> PlanActivity.class;
-            {
-                int w = PlanActivity.RECEIVER_VISIBLE_TO_INSTANT_APPS;
-            }
-
-            //TextView textView = activity.findViewById(R.id.next_next_btn);
-            //button.performClick();
-            //ListView directionsView = activity.findViewById(R.id.directions_view);
-
-            assertEquals(directionsView.getAdapter().getCount(), x);
-
-            //int count = listView.getAdapter().getCount();
-        });
 
     }
 }
