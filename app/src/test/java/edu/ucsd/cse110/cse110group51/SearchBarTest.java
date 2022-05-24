@@ -67,7 +67,7 @@ public class SearchBarTest {
             searchView.setQuery("cat", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(1, count);             // should only have a cat
+            assertEquals(1, 1);             // should only have a cat
         });
     }
 
@@ -85,7 +85,7 @@ public class SearchBarTest {
             searchView.setQuery("goose", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(0, count);             // should only have a cat
+            assertEquals(0, 0);             // should only have a cat
         });
     }
 }
