@@ -12,19 +12,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanActivity extends AppCompatActivity {
+public class NextActivity extends AppCompatActivity {
     private ListView directionsView;
     private ArrayAdapter<String> arrayAdapter;
     private String destination;
+    private ArrayList<String> stringArrList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PlanCalculate planCalculate = new PlanCalculate();
-        List<String> Display = planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
-        //destination = getIntent().getStringExtra("Key");
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        stringArrList = (ArrayList<String>) args.getSerializable("ArrayList");
+        List<String> Display = planCalculate.extracted(MainActivity.start, stringArrList);
         destination = planCalculate.getDestination();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plan);
-        this.directionsView = this.findViewById(R.id.directions_view);
+        setContentView(R.layout.activity_next);
+
+        this.directionsView = this.findViewById(R.id.next_directions_view);
         arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -32,21 +36,13 @@ public class PlanActivity extends AppCompatActivity {
         directionsView.setAdapter(arrayAdapter);
     }
 
-    public void PlanBackButton(View view) {
-        finish();
-    }
-
-    public void PlanNextButton(View view) {
-
+    public void NextNextButton(View view) {
         ArrayList<String> input = new ArrayList<String>();
-        for (String string :MainActivity.exhibitList) {
+        for (String string :stringArrList) {
             if (!string.equals(destination)){
                 input.add(string);
             }
         }
-        //PlanCalculate planCalculate = new PlanCalculate();
-        //planCalculate.extracted(MainActivity.start, input);
-
         if (!input.isEmpty()) {
             Intent intent = new Intent(this, NextActivity.class);
             //intent.putExtra("Key", planCalculate.getDestination());
@@ -55,20 +51,29 @@ public class PlanActivity extends AppCompatActivity {
             intent.putExtra("BUNDLE", args);
             startActivity(intent);
         }
+    }
+
+    public void NextSkipButton(View view) {
         /*
-        MainActivity.Directions.add(MainActivity.exhibitList.get(0));
-        MainActivity.Directions.add(destination);
+        ArrayList<String> input = new ArrayList<String>();
+        for (String string: MainActivity.exhibitList) {
+            if (!string.equals(destination)){
+                input.add(string);
+            }
+        }
+        MainActivity.exhibitList=input;
 
          */
-/*
-
-        PlanCalculate planCalculate = new PlanCalculate();
-        planCalculate.extracted(destination, input);
-
-
-        arrayAdapter.notifyDataSetChanged();
-
- */
-
+        MainActivity.exhibitList.remove(destination);
+        for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
+            if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
+                MainActivity.viewModel.deleteTodo(MainActivity.viewModel.getCurrentItems().get(i));
+                break;
+            }
+        }
+        finish();
+    }
+    public void NextBackButton(View view) {
+        finish();
     }
 }

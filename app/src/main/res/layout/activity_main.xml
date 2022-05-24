@@ -58,7 +58,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        android:id="@+id/ShowList"
+    <Button
+        android:id="@+id/next_next_btn"
+        android:layout_width="11dp"
+        android:layout_height="34dp"
+        android:text="Button"
+        android:visibility="gone"
+        tools:layout_editor_absoluteY="681dp" />
+
+    android:id="@+id/ShowList"
         android:layout_width="216dp"
         android:layout_height="48dp"
         android:text="Show List"

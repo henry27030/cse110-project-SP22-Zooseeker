@@ -28,40 +28,30 @@
         app:layout_constraintVertical_bias="0.954"
         tools:layout_editor_absoluteX="307dp"
         android:visibility="gone"    />
+
     <Button
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginTop="10dp"
         android:onClick="onBackClicked"
         android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todo_items" />
 
     <Button
         android:id="@+id/plan_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="134dp"
         android:onClick="onPlanDisplayClicked"
         android:text="Plan Display"
-        app:layout_constraintBottom_toTopOf="@+id/back_btn"
-        app:layout_constraintEnd_toStartOf="@+id/plan_calculate"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/plan_calculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginBottom="12dp"
-        android:onClick="onPlanCalculateClicked"
-        android:text="Plan Calculate"
-        app:layout_constraintBottom_toTopOf="@+id/back_btn"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_btn"
+        app:layout_constraintTop_toBottomOf="@+id/todo_items" />
 
     <EditText
         android:id="@+id/new_todo_text"

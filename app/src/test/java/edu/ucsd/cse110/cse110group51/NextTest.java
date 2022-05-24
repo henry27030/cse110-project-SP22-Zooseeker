@@ -26,45 +26,37 @@
 //
 //
 //@RunWith(AndroidJUnit4.class)
-//public class PlanTest {
+//public class NextTest {
 //    @Rule
-//    public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
+//    public ActivityScenarioRule<PlanActivity> scenarioRule = new ActivityScenarioRule<>(PlanActivity.class);
 //
 //    @Test
-//    public void PlanInitializationTest() {
-//        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
+//    public void NextSuccessfulTest() {
+//        ActivityScenario<PlanActivity> scenario = scenarioRule.getScenario();
 //
 //        scenario.moveToState(Lifecycle.State.CREATED);
 //
-//
 //        scenario.onActivity(activity -> {
-//            ListView listView = activity.findViewById(R.id.list_view);
-//            int x = listView.getAdapter().getCount();
-//            assertEquals(listView.getAdapter().getCount(), x);
+//            ListView listView = activity.findViewById(R.id.directions_view);
+//            assertEquals(listView.getAdapter().getCount(), 0);
 //        });
 //    }
 //
 //    @Test
-//    public void SinglePlanTest() {
+//    public void NextUnSuccessfulTest() {
 //        //Graph<String, IdentifiedWeightedEdge> g;
 //        AtomicReference<GraphPath<String, IdentifiedWeightedEdge>> path = null;
-//        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
+//        ActivityScenario<PlanActivity> scenario = scenarioRule.getScenario();
 //
 //        scenario.moveToState(Lifecycle.State.CREATED);
 //
 //        scenario.onActivity(activity -> {
 //            //Context context = getApplication().getApplicationContext();
 //
-//            // 1. Load the graph...
-//            //g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
-//            //GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
 //
-//            // 2. Load the information about our nodes and edges...
-//            //vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
-//            //eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
 //            ArrayAdapter<String> arrayAdapter = null;
 //            int count = 0;
-//            ListView directionsView = activity.findViewById(R.id.list_view);
+//            ListView directionsView = activity.findViewById(R.id.directions_view);
 //            //directionsView.getAdapter();
 //            MainActivity.exhibitList.add("lions");
 //            ArrayList<String> Directions = new ArrayList<String>();

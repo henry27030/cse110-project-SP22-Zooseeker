@@ -28,6 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runner.manipulation.Ordering;
 
+
 import java.io.IOException;
 
 @RunWith(AndroidJUnit4.class)
@@ -46,10 +47,10 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("cat", true);
+            searchView.setQuery("lions", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(1, count);             // should only have a cat
+            assertEquals(1, count);
         });
     }
 
@@ -63,10 +64,10 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("cat", true);
+            searchView.setQuery("lions", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(1, count);             // should only have a cat
+            assertEquals(1, count);
         });
     }
 
@@ -83,7 +84,7 @@ public class SearchBarTest {
             searchView.setQuery("goose", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(0, count);             // should only have a cat
+            assertEquals(0, count);
         });
     }
 }
