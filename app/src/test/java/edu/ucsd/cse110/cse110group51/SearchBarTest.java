@@ -1,4 +1,4 @@
-/*package edu.ucsd.cse110.cse110group51;
+package edu.ucsd.cse110.cse110group51;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,8 +26,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runner.manipulation.Ordering;*/
-/*
+import org.junit.runner.manipulation.Ordering;
+
 
 import java.io.IOException;
 
@@ -64,7 +64,7 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("cat", true);
+            searchView.setQuery("lions", true);
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);             // should only have a cat
@@ -87,5 +87,5 @@ public class SearchBarTest {
             assertEquals(0, count);             // should only have a cat
         });
     }
-}*/
+}
 
