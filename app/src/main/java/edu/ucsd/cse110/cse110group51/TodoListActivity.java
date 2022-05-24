@@ -53,22 +53,6 @@ public class TodoListActivity extends AppCompatActivity {
         intent.putExtra("num", adapter.getItemCount());
         startActivity(intent);
     }
-/*
-    public void onPlanCalculateClicked(View view) {
-        PlanCalculate planCalculate = new PlanCalculate();
-        planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
-    }
-
- */
-/*
-    private void extracted() {
-        //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
-        //int instructionCount = 1;
-
-        //add a string of directions to Directions String array
-        // set Directions in MainActivity to Directions
-        planCalculate.extracted();
-    }*/
 
     public void onPlanDisplayClicked(View view) {
         //PlanCalculate planCalculate = new PlanCalculate();
