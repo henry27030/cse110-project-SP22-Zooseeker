@@ -1,66 +1,82 @@
-/*package edu.ucsd.cse110.cse110group51;
+package edu.ucsd.cse110.cse110group51;
+
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.google.common.base.Supplier;
-
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;*/
-/*
+import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
+
+
 @RunWith(AndroidJUnit4.class)
 public class PlanTest {
-
-
     @Rule
-    public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
-    //public ActivityScenarioRule<NextActivity> scenarioRule2 = new ActivityScenarioRule<>(NextActivity.class);
-
-
+    public ActivityScenarioRule<PlanActivity> scenarioRule = new ActivityScenarioRule<>(PlanActivity.class);
 
     @Test
-    public void PlanSuccessful() {
+    public void PlanInitializationTest() {
+        ActivityScenario<PlanActivity> scenario = scenarioRule.getScenario();
 
-        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
         scenario.moveToState(Lifecycle.State.CREATED);
-        //ActivityScenario<NextActivity> scenario2 = scenarioRule2.getScenario();
-
 
         scenario.onActivity(activity -> {
             ListView listView = activity.findViewById(R.id.directions_view);
-            int s = PlanActivity.BIND_AUTO_CREATE;
-            Supplier<Class<NextActivity>> classSupplier = () -> NextActivity.class;
-            {
-            }
-
-            ListView directionsView = activity.findViewById(R.id.list_view);
-
-            int x = directionsView.getAdapter().getCount();
-
-            //ListView listView1 = activity.findViewById(R.id.list_view);
-            Supplier<Class<PlanActivity>> classSupplier2 = () -> PlanActivity.class;
-            {
-                int w = PlanActivity.RECEIVER_VISIBLE_TO_INSTANT_APPS;
-            }
-
-            //TextView textView = activity.findViewById(R.id.next_next_btn);
-            //button.performClick();
-            //ListView directionsView = activity.findViewById(R.id.directions_view);
-
-            assertEquals(directionsView.getAdapter().getCount(), x);
-
-            //int count = listView.getAdapter().getCount();
+            assertEquals(listView.getAdapter().getCount(), 0);
         });
-
     }
-} */
+
+    @Test
+    public void SinglePlanTest() {
+        //Graph<String, IdentifiedWeightedEdge> g;
+        AtomicReference<GraphPath<String, IdentifiedWeightedEdge>> path = null;
+        ActivityScenario<PlanActivity> scenario = scenarioRule.getScenario();
+
+        scenario.moveToState(Lifecycle.State.CREATED);
+
+        scenario.onActivity(activity -> {
+            //Context context = getApplication().getApplicationContext();
+
+            // 1. Load the graph...
+            //g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
+            //GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
+
+            // 2. Load the information about our nodes and edges...
+            //vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
+            //eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
+            ArrayAdapter<String> arrayAdapter = null;
+            int count = 0;
+            ListView directionsView = activity.findViewById(R.id.directions_view);
+            //directionsView.getAdapter();
+            MainActivity.exhibitList.add("lions");
+            ArrayList<String> Directions = new ArrayList<String>();
+            ArrayList<String> exhibitListInFunc = new ArrayList<String>();
+            exhibitListInFunc.add("lions");
+            String start = "entrance_exit_gate";
+            int ShortestPath = 0;
+            //path.set(DijkstraShortestPath.findPathBetween(MainActivity.g, start, "lions"));
+            //MainActivity.Directions = Directions;
+
+            //arrayAdapter = new ArrayAdapter<String>;
+            //directionsView.setAdapter(arrayAdapter);
+
+            assertEquals(directionsView.getAdapter().getCount(), count);
+        });
+    }
+}
