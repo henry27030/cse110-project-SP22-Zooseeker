@@ -2,7 +2,6 @@ package edu.ucsd.cse110.cse110group51;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SearchView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -38,41 +37,15 @@ public class PlanTest {
         scenario.moveToState(Lifecycle.State.CREATED);
 
         scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-//          MenuItem menuItem = activity.findViewById(R.id.action_search);
-            SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("cat", true);
-
-            int count = listView.getAdapter().getCount();
-            assertEquals(1, 1);             // should only have a cat
-        });
-        /*ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
-
-        scenario.moveToState(Lifecycle.State.CREATED);
-
-        scenario.onActivity(activity -> {
             //ListView listView = activity.findViewById(R.id.directions_view);
             //assertEquals(listView.getAdapter().getCount(), 0);
             assertEquals(0,0);
-        });*/
+        });
     }
 
     @Test
     public void SinglePlanTest() {
-        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
-
-        scenario.moveToState(Lifecycle.State.CREATED);
-
-        scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-//          MenuItem menuItem = activity.findViewById(R.id.action_search);
-            SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("cat", true);
-
-            int count = listView.getAdapter().getCount();
-            assertEquals(1, 1);             // should only have a cat
-        });
-        /*//Graph<String, IdentifiedWeightedEdge> g;
+        //Graph<String, IdentifiedWeightedEdge> g;
         //AtomicReference<GraphPath<String, IdentifiedWeightedEdge>> path = null;
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
 
@@ -105,6 +78,6 @@ public class PlanTest {
             //directionsView.setAdapter(arrayAdapter);
 
             assertEquals(0, count);
-        });*/
+        });
     }
 }

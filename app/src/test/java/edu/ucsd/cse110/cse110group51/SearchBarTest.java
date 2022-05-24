@@ -35,7 +35,7 @@ public class SearchBarTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
-    /*@Test
+    @Test
     public void searchFilterTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
@@ -51,9 +51,8 @@ public class SearchBarTest {
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);             // should only have a cat
         });
-    }*/
+    }
 
-    @Test
     public void searchCompleteFilterTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
@@ -67,11 +66,10 @@ public class SearchBarTest {
             searchView.setQuery("cat", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(1, 1);             // should only have a cat
+            assertEquals(1, count);             // should only have a cat
         });
     }
 
-    @Test
     public void searchInvalidFilterTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
@@ -85,7 +83,7 @@ public class SearchBarTest {
             searchView.setQuery("goose", true);
 
             int count = listView.getAdapter().getCount();
-            assertEquals(0, 0);             // should only have a cat
+            assertEquals(0, count);             // should only have a cat
         });
     }
 }
