@@ -7,5 +7,10 @@
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|withText" />
-
+    <item
+        android:id="@+id/VoiceBtn"
+        android:icon="@drawable/ic_baseline_mic_24"
+        android:title="voice"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|withText" />
 </menu>
