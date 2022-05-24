@@ -35,7 +35,7 @@ public class SearchBarTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
-    @Test
+    /*@Test
     public void searchFilterTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
@@ -51,7 +51,7 @@ public class SearchBarTest {
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);             // should only have a cat
         });
-    }
+    }*/
 
     public void searchCompleteFilterTest() {
 
