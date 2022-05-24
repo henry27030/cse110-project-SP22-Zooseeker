@@ -53,6 +53,7 @@ public class SearchBarTest {
         });
     }*/
 
+    @Test
     public void searchCompleteFilterTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
@@ -70,6 +71,7 @@ public class SearchBarTest {
         });
     }
 
+    @Test
     public void searchInvalidFilterTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
