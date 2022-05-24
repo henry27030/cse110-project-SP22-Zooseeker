@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class PlanTest {
     @Test
-    public void addition_isCorrect() {
+    public void PlanCorrectTest() {
         assertEquals(4, 2 + 2);
     }
 }
