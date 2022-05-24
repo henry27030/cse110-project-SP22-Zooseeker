@@ -64,7 +64,7 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("lio", true);
+            searchView.setQuery("lions", true);
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);             // should only have a cat
@@ -81,7 +81,7 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("gooses", true);
+            searchView.setQuery("goose", true);
 
             int count = listView.getAdapter().getCount();
             assertEquals(0, count);             // should only have a cat
