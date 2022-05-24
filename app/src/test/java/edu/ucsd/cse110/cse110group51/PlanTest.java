@@ -45,8 +45,7 @@ public class PlanTest {
 */
     @Test
     public void PlanSuccessful() {
-
-
+        assertEquals(0,0);
 
     }
 }
