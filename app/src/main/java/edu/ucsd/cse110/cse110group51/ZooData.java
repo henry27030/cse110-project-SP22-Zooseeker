@@ -19,21 +19,27 @@ import com.google.gson.reflect.TypeToken;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.nio.json.JSONImporter;
+import com.google.android.gms.maps.model.LatLng;
+//
 
 public class ZooData {
     public static class VertexInfo {
         public static enum Kind {
             // The SerializedName annotation tells GSON how to convert
-            // from the strings in our JSON to this Enum.
+            // from the strings in
+            // our JSON to this Enum.
             @SerializedName("gate") GATE,
             @SerializedName("exhibit") EXHIBIT, 
-            @SerializedName("intersection") INTERSECTION
+            @SerializedName("intersection") INTERSECTION,
+            @SerializedName("exhibit_group") GROUP,
         }
 
         public String id;
         public Kind kind;
         public String name;
         public List<String> tags;
+        //public LatLng coords;//
+        public String parent_id;
     }
 
     public static class EdgeInfo {
