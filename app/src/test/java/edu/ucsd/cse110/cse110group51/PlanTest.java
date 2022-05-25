@@ -1,17 +1,10 @@
 package edu.ucsd.cse110.cse110group51;
 
+import static org.junit.Assert.assertEquals;
+
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import org.jgrapht.GraphPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
@@ -19,6 +12,7 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.jgrapht.GraphPath;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -57,7 +51,8 @@ public class PlanTest {
 
         scenario.onActivity(activity -> {
             ListView listView = activity.findViewById(R.id.directions_view);
-            assertNull(listView);
+//            assertNull(listView);
+            assertEquals(listView.getAdapter().getCount(), 0);
         });
     }
 
