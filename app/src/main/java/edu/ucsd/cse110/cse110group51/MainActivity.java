@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 
@@ -81,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 2. Load the information about our nodes and edges...
         //vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
-        vInfo = ZooData.loadVertexInfoJSON(context, "zoo_node_info.json");
+        vInfo = ZooData.loadVertexInfoJSON(context, "exhibit_info.json");
         //eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
-        eInfo = ZooData.loadEdgeInfoJSON(context, "zoo_edge_info.json");
+        eInfo = ZooData.loadEdgeInfoJSON(context, "trail_info.json");
 
         this.listView = this.findViewById(R.id.list_view);
 
@@ -91,12 +93,15 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> arr = new ArrayList<String>();
         Set<String> keys=vInfo.keySet();
         for (String Nodes: keys) {
-            /*
-            if(Nodes.equals("entrance_exit_gate") || Nodes.equals("entrance_plaza")){
-                continue;
+            // initializing LatLng coords for each node
+            if (vInfo.get(Nodes).coords == null) {
+                if (vInfo.get(Nodes).lat == 0 && vInfo.get(Nodes).lng == 0) {
+                    vInfo.get(Nodes).lat = vInfo.get(vInfo.get(Nodes).group_id).lat;
+                    vInfo.get(Nodes).lng = vInfo.get(vInfo.get(Nodes).group_id).lng;
+                }
+                vInfo.get(Nodes).coords = new LatLng(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
             }
 
-             */
             if (!vInfo.get(Nodes).kind.equals(vInfo.get(Nodes).kind.EXHIBIT)) {
                 continue;
             }

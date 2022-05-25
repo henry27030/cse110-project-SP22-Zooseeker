@@ -37,8 +37,8 @@ public class PlanCalculate {
             String input = exhibitListInFunc.get(i);
 
             // in the special case that an exhibit is within a group
-            if (MainActivity.vInfo.get(input).parent_id!=null) {
-                input=MainActivity.vInfo.get(MainActivity.vInfo.get(input).parent_id).id;
+            if (MainActivity.vInfo.get(input).group_id !=null) {
+                input=MainActivity.vInfo.get(MainActivity.vInfo.get(input).group_id).id;
             }
 
             // find the shortest path between start and input, which is either an exhibit or a group of exhibits
@@ -54,8 +54,8 @@ public class PlanCalculate {
 
         // save the shortest distance exhibit from start in shortestInput
         String shortestInput = exhibitListInFunc.get(shortestExhibit);
-        if (MainActivity.vInfo.get(shortestInput).parent_id!=null) {
-            shortestInput=MainActivity.vInfo.get(MainActivity.vInfo.get(shortestInput).parent_id).id;
+        if (MainActivity.vInfo.get(shortestInput).group_id !=null) {
+            shortestInput=MainActivity.vInfo.get(MainActivity.vInfo.get(shortestInput).group_id).id;
         }
 
         // save the path description again
@@ -66,7 +66,6 @@ public class PlanCalculate {
 
         //add a string of directions to Directions String array
         for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
-
             if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
                 String strToInsert = "Walk "
                         +
@@ -78,9 +77,9 @@ public class PlanCalculate {
                         " to " +
                         MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
 
-                if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).parent_id!=null) {
+                if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id !=null) {
 
-                    if (MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).parent_id)) {
+                    if (MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
                         strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
                     }
                 }
@@ -96,9 +95,9 @@ public class PlanCalculate {
                         MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name +
                         " to " +
                         MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
-                if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).parent_id!=null) {
+                if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id !=null) {
 
-                    if (MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).parent_id)) {
+                    if (MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
                         strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
                     }
                 }
