@@ -10,9 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TodoListActivity extends AppCompatActivity {
     //Exposed for testing purposes later...
     public RecyclerView recyclerView;
@@ -57,8 +54,11 @@ public class TodoListActivity extends AppCompatActivity {
     public void onPlanDisplayClicked(View view) {
         //PlanCalculate planCalculate = new PlanCalculate();
         //planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
-        Intent intent = new Intent (this, PlanActivity.class);
-        //intent.putExtra("Key", planCalculate.getDestination());
-        startActivity(intent);
+
+        if(!MainActivity.exhibitList.isEmpty()) {
+            Intent intent = new Intent(this, PlanActivity.class);
+            //intent.putExtra("Key", planCalculate.getDestination());
+            startActivity(intent);
+        }
     }
 }
