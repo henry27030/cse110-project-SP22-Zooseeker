@@ -40,33 +40,15 @@ public class PlanTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
-    private TodoListItemDao dao;
-    private TodoDatabase db;
-
-    @Before
-    public void createDb() {
-        Context context = ApplicationProvider.getApplicationContext();
-        db = Room.inMemoryDatabaseBuilder(context, TodoDatabase.class)
-                .allowMainThreadQueries()
-                .build();
-        dao = db.todoListItemDao();
-    }
-    @After
-    public void closeDb() throws IOException {
-        db.close();
-    }
 
     @Test
     public void PlanInitializationTest() {
 
-        TodoListItem item1 = new TodoListItem( "Pizza time", 0);
-        TodoListItem item2 = new TodoListItem( "Photos of Spider-Man", 1);
+    }
 
-        long id1 = dao.insert(item1);
-        long id2 = dao.insert(item2);
+    @Test
+    public void SinglePlanTest() {
 
-        // check that these have all been inserted with unique IDs.
-        assertNotEquals(id1, id2);
     }
 
 }
