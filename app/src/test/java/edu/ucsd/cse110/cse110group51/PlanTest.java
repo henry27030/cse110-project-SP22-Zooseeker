@@ -59,37 +59,14 @@ public class PlanTest {
     @Test
     public void PlanInitializationTest() {
 
-        MainActivity.exhibitList.add("lions");
-        ArrayList<String> Directions = new ArrayList<String>();
-        ArrayList<String> exhibitListInFunc = new ArrayList<String>();
-        exhibitListInFunc.add("lions");
-        String start = "entrance_exit_gate";
+        TodoListItem item1 = new TodoListItem( "Pizza time", 0);
+        TodoListItem item2 = new TodoListItem( "Photos of Spider-Man", 1);
+
+        long id1 = dao.insert(item1);
+        long id2 = dao.insert(item2);
+
+        // check that these have all been inserted with unique IDs.
+        assertNotEquals(id1, id2);
     }
-
-    /*public void SinglePlanTest() {
-
-        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
-
-        scenario.moveToState(Lifecycle.State.CREATED);
-
-        scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-            int x = listView.getAdapter().getCount();
-            AtomicReference<GraphPath<String, IdentifiedWeightedEdge>> path = null;
-            ArrayAdapter<String> arrayAdapter = null;
-
-            MainActivity.exhibitList.add("lions");
-            ArrayList<String> Directions = new ArrayList<String>();
-            ArrayList<String> exhibitListInFunc = new ArrayList<String>();
-            exhibitListInFunc.add("lions");
-            String start = "entrance_exit_gate";
-            int ShortestPath = 0;
-            //path.set(DijkstraShortestPath.findPathBetween(MainActivity.g, start, "lions"));
-//            //MainActivity.Directions = Directions;
-            int count = listView.getAdapter().getCount();
-            assertEquals(0, count);
-        });
-    }*/
-
 
 }
