@@ -59,19 +59,14 @@ public class PlanTest {
     @Test
     public void PlanInitializationTest() {
 
-        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
-
-        scenario.moveToState(Lifecycle.State.CREATED);
-
-        scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-
-            int count = listView.getAdapter().getCount();
-            assertEquals(listView.getAdapter().getCount(), count);
-        });
+        MainActivity.exhibitList.add("lions");
+        ArrayList<String> Directions = new ArrayList<String>();
+        ArrayList<String> exhibitListInFunc = new ArrayList<String>();
+        exhibitListInFunc.add("lions");
+        String start = "entrance_exit_gate";
     }
 
-    public void SinglePlanTest() {
+    /*public void SinglePlanTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
 
@@ -94,7 +89,7 @@ public class PlanTest {
             int count = listView.getAdapter().getCount();
             assertEquals(0, count);
         });
-    }
+    }*/
 
 
 }
