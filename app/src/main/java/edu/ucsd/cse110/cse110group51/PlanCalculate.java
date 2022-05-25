@@ -15,6 +15,10 @@ public class PlanCalculate {
     }
     public List<String> extracted(String start, ArrayList<String> exhibits) {
         ArrayList<String> Directions = new ArrayList<String>();
+        if(exhibits.size() == 0){
+            // if there is no exhibits, return list with 0 elements
+            return Directions;
+        }
         //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
         ArrayList<String> exhibitListInFunc = new ArrayList<String>();
         for (String exhibit : exhibits) {
