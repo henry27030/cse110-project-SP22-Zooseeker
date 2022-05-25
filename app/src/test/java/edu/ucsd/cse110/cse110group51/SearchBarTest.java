@@ -36,6 +36,22 @@ public class SearchBarTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
+    private TodoListItemDao dao;
+    private TodoDatabase db;
+
+    @Before
+    public void createDb() {
+        Context context = ApplicationProvider.getApplicationContext();
+        db = Room.inMemoryDatabaseBuilder(context, TodoDatabase.class)
+                .allowMainThreadQueries()
+                .build();
+        dao = db.todoListItemDao();
+    }
+    @After
+    public void closeDb() throws IOException {
+        db.close();
+    }
+
     @Test
     public void searchFilterTest() {
 
