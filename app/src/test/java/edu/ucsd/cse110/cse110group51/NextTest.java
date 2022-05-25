@@ -29,7 +29,7 @@ public class NextTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
     //public ActivityScenarioRule<NextActivity> scenarioRule2 = new ActivityScenarioRule<>(NextActivity.class);
-
+    //
     private TodoDatabase db;
 
     @Before
