@@ -57,7 +57,7 @@ public class PlanTest {
 
         scenario.onActivity(activity -> {
             ListView listView = activity.findViewById(R.id.directions_view);
-            assertEquals(listView.getAdapter().getCount(), 0);
+            assertNull(listView);
         });
     }
 
