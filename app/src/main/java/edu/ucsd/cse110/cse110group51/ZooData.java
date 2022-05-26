@@ -41,7 +41,8 @@ public class ZooData {
         public String group_id;
         public double lat;
         public double lng;
-        public LatLng coords;
+        //public LatLng coords;
+        public Coord coords;
     }
 
     public static class EdgeInfo {

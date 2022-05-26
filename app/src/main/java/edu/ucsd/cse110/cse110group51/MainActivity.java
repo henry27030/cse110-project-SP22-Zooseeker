@@ -95,11 +95,14 @@ public class MainActivity extends AppCompatActivity {
         for (String Nodes: keys) {
             // initializing LatLng coords for each node
             if (vInfo.get(Nodes).coords == null) {
+
                 if (vInfo.get(Nodes).lat == 0 && vInfo.get(Nodes).lng == 0) {
                     vInfo.get(Nodes).lat = vInfo.get(vInfo.get(Nodes).group_id).lat;
                     vInfo.get(Nodes).lng = vInfo.get(vInfo.get(Nodes).group_id).lng;
                 }
-                vInfo.get(Nodes).coords = new LatLng(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
+
+                //vInfo.get(Nodes).coords = new LatLng(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
+                vInfo.get(Nodes).coords.of(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
             }
 
             if (!vInfo.get(Nodes).kind.equals(vInfo.get(Nodes).kind.EXHIBIT)) {

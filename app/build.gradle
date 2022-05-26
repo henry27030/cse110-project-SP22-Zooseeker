@@ -46,7 +46,14 @@ dependencies {
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "org.jgrapht:jgrapht-core:$jgrapht_version"
     implementation "org.jgrapht:jgrapht-io:$jgrapht_version"
+    //
     implementation 'com.google.android.gms:play-services-maps:18.0.2'//ADDED
+    implementation 'com.google.android.material:material:1.6.0' //ADDED
+    def guava_version = "31.1-android"
+
+    // Guava: extended standard library for Java by Google.
+    //   - Streams: extra utilities for working with streams.
+    implementation "com.google.guava:guava:$guava_version"
     //
 
     implementation "com.google.code.gson:gson:$gson_version"
