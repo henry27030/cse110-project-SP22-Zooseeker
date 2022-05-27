@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     // save (String edge, (slope, b)) for each edge
     public static Map<String , Pair<Double, Double>> edgeSlopeBInfo;
 
+    //UserNode for testing
+    //public static Coord UserCoord;
+
     //public static ArrayList<String> Directions = new ArrayList<String>();
     // 1. Load the graph...
     public static Graph<String, IdentifiedWeightedEdge> g;
@@ -59,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //testing
+        //UserCoord = new Coord(vInfo.get("flamingo").lat, vInfo.get("flamingo").lng);
+        //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
