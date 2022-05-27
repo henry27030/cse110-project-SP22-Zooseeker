@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> exhibitList = new ArrayList<String>();
     public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
     public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
-    public static ArrayList<String> Directions = new ArrayList<String>();
+    //public static ArrayList<String> Directions = new ArrayList<String>();
     // 1. Load the graph...
     public static Graph<String, IdentifiedWeightedEdge> g;
     public static GraphPath<String, IdentifiedWeightedEdge> path;
@@ -139,6 +139,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+/*
+        ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
+        userInfo.id = "User";
+        userInfo.name = "User";
+        userInfo.kind = ZooData.VertexInfo.Kind.EXHIBIT;
+        vInfo.put("User", userInfo);
+
+        ZooData.EdgeInfo userInfo2 = new ZooData.EdgeInfo();
+        userInfo2.id = "User";
+        userInfo2.street="test street";
+        eInfo.put("User", userInfo2);
+        g.addVertex("User");
+
+        IdentifiedWeightedEdge tester;
+        IdentifiedWeightedEdge newEdge1 = new IdentifiedWeightedEdge();
+        IdentifiedWeightedEdge newEdge2 = new IdentifiedWeightedEdge();
+
+        tester=g.removeEdge("flamingo", "capuchin");
+        newEdge1= (IdentifiedWeightedEdge) tester.clone();
+        newEdge2= (IdentifiedWeightedEdge) tester.clone();
+        g.addEdge("flamingo", "User", newEdge1);
+        g.addEdge("User", "capuchin", newEdge2);
+        g.setEdgeWeight("flamingo", "User", 100);
+        g.setEdgeWeight("User", "capuchin", 100);
+
+ */
+
     }
 
 

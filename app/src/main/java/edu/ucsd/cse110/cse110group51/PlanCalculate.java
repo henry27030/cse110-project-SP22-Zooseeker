@@ -40,7 +40,8 @@ public class PlanCalculate {
             if (MainActivity.vInfo.get(input).group_id !=null) {
                 input=MainActivity.vInfo.get(MainActivity.vInfo.get(input).group_id).id;
             }
-
+            // add UserNode into vInfo
+            // add two edges with weights in the MainActivity.g
             // find the shortest path between start and input, which is either an exhibit or a group of exhibits
             MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, input);
             for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
