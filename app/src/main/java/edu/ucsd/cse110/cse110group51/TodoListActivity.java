@@ -49,9 +49,13 @@ public class TodoListActivity extends AppCompatActivity {
     }
 
     public void onBackClicked(View view) {
+        /*
         Intent intent = new Intent(TodoListActivity.this, MainActivity.class);
         intent.putExtra("num", adapter.getItemCount());
         startActivity(intent);
+
+         */
+        finish();
     }
 
     public void onPlanDisplayClicked(View view) {

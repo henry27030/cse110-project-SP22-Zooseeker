@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import org.jgrapht.alg.util.Pair;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> exhibitList = new ArrayList<String>();
     public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
     public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
+
+    // save (String edge, (slope, b)) for each edge
+    public static Map<String , Pair<Double, Double>> edgeSlopeBInfo;
+
     //public static ArrayList<String> Directions = new ArrayList<String>();
     // 1. Load the graph...
     public static Graph<String, IdentifiedWeightedEdge> g;
@@ -86,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
         vInfo = ZooData.loadVertexInfoJSON(context, "exhibit_info.json");
         //eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
         eInfo = ZooData.loadEdgeInfoJSON(context, "trail_info.json");
-
+        edgeSlopeBInfo = new HashMap<String , Pair<Double, Double>>();
         this.listView = this.findViewById(R.id.list_view);
 
         //Display onto searchbar tags as keys to value of Nodes
-        ArrayList<String> arr = new ArrayList<String>();
+        //ArrayList<String> arr = new ArrayList<String>();
         Set<String> keys=vInfo.keySet();
         for (String Nodes: keys) {
             // initializing LatLng coords for each node
@@ -119,6 +124,23 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<String> tagNodes = new ArrayList<String>();
                     tagNodes.add(Nodes);
                     map.put(tag, tagNodes);
+                }
+            }
+        }
+        Set<String> EdgeKeys = eInfo.keySet();
+        for (String Edge: EdgeKeys) {
+            Set<IdentifiedWeightedEdge> edgeList;
+            IdentifiedWeightedEdge edgeToIdentify;
+            String Source;
+            String Target;
+            edgeList = g.edgeSet();
+            for (IdentifiedWeightedEdge Edges: edgeList) {
+                //if (Edges.getId().equals(eInfo.get(Edge).id)) {
+                if (Edges.getId().equals(Edge)) {
+                    edgeToIdentify = Edges;
+                    Source = g.getEdgeSource(edgeToIdentify);
+                    Target = g.getEdgeTarget(edgeToIdentify);
+                    edgeSlopeBInfo.put(Edge, SlopeMath.returnSlopeB(Source, Target));
                 }
             }
         }

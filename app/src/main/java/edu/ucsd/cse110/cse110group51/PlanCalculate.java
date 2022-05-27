@@ -1,9 +1,11 @@
 package edu.ucsd.cse110.cse110group51;
 
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.alg.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class PlanCalculate {
     String destination;
@@ -106,6 +108,25 @@ public class PlanCalculate {
                 start=MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
             }
         }
+/* testing purposes
+//exactly 26 "TESTTEST" which means that exactly 26 edges as required with the correct pair
+        if (MainActivity.edgeSlopeBInfo.size()==26) {
+            Set<String> EdgeKeys = MainActivity.eInfo.keySet();
+            double a = 5;
+            double b = 5;
+            Pair<Double, Double> returnValue = new Pair<Double, Double> (a,b);
+            for (String Edge: EdgeKeys) {
+                if (MainActivity.edgeSlopeBInfo.get(Edge).equals(returnValue)) {
+                    Directions.add("TESTTEST");
+                }
+            }
+        }
+
+ */
+
+
+
+
         return Directions;
     }
 }
