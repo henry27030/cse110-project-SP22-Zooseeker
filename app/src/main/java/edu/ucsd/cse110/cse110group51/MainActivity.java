@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
     public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
 
+    // boolean for determining brief/descriptive directions
+    public static boolean briefDirections;
     // save (String edge, (slope, b)) for each edge
     public static Map<String , Pair<Double, Double>> edgeSlopeBInfo;
 
@@ -69,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
         //int Num = intent.getIntExtra("num", 0);
         //this.List_btn =this.findViewById(R.id.list_btn);
         //List_btn.setText("List("+Num+")");
+        briefDirections = false; //initialize it to false
 
-        // initialize viewModel and exhibitlist
+
+        //initialize viewModel and exhibitlist
         viewModel = new ViewModelProvider(this)
                 .get(TodoListViewModel.class);
         List<TodoListItem> list = viewModel.getCurrentItems();

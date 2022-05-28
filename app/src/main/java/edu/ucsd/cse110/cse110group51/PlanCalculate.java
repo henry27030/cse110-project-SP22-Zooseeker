@@ -11,6 +11,11 @@ public class PlanCalculate {
     IdentifiedWeightedEdge identifiedEdge;
     IdentifiedWeightedEdge newEdge1;
     IdentifiedWeightedEdge newEdge2;
+    //
+    String currentStreet = null;
+    String source = null;
+    String target = null;
+    double distanceVal = 0;
 
     public PlanCalculate() {
     }
@@ -114,43 +119,108 @@ public class PlanCalculate {
 
         //add a string of directions to Directions String array
         for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
-            if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
-                String strToInsert = "Walk "
-                        +
-                        MainActivity.g.getEdgeWeight(e) +
-                        " Of meters along " +
-                        MainActivity.eInfo.get(e.getId()).street +
-                        " from " +
-                        MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name +
-                        " to " +
-                        MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
+            if (!MainActivity.briefDirections) {
+                if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
+                    String strToInsert = "Walk "
+                            +
+                            MainActivity.g.getEdgeWeight(e) +
+                            " ft along " +
+                            MainActivity.eInfo.get(e.getId()).street +
+                            " from " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name +
+                            " to " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
 
-                if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id !=null) {
+                    if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
 
-                    if (MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
-                        strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
+                        if (MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
+                            strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
+                        }
+                    }
+                    Directions.add(strToInsert);
+                    start = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id;
+                } else {
+                    String strToInsert = "Walk "
+                            +
+                            MainActivity.g.getEdgeWeight(e) +
+                            " ft along " +
+                            MainActivity.eInfo.get(e.getId()).street +
+                            " from " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name +
+                            " to " +
+                            MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
+                    if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
+
+                        if (MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
+                            strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
+                        }
+                    }
+                    Directions.add(strToInsert);
+                    start = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
+                }
+            }
+            else if (MainActivity.briefDirections) {
+                if (currentStreet==null) {
+                    currentStreet = MainActivity.eInfo.get(e.getId()).street;
+                    distanceVal+=MainActivity.g.getEdgeWeight(e);
+                    if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
+                        source = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
+                        target = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
+                        start = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id;
+                    }
+                    else {
+                        source = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
+                        target = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
+                        start = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
                     }
                 }
-                Directions.add(strToInsert);
-                start=MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id;
-            } else {
-                String strToInsert = "Walk "
-                        +
-                        MainActivity.g.getEdgeWeight(e) +
-                        " Of meters along " +
-                        MainActivity.eInfo.get(e.getId()).street +
-                        " from " +
-                        MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name +
-                        " to " +
-                        MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
-                if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id !=null) {
-
-                    if (MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
-                        strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
+                else if (currentStreet.equals(MainActivity.eInfo.get(e.getId()).street)) {
+                    distanceVal+=MainActivity.g.getEdgeWeight(e);
+                    if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
+                        target = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
+                    }
+                    else {
+                        target = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
                     }
                 }
-                Directions.add(strToInsert);
-                start=MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
+                else {
+                    String strToInsert = "Walk " + distanceVal + " from "  + " ft toward " + target;
+                    Directions.add(strToInsert);
+                    distanceVal = 0;
+                    currentStreet = MainActivity.eInfo.get(e.getId()).street;
+                    distanceVal+=MainActivity.g.getEdgeWeight(e);
+                    if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
+                        source = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
+                        target = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
+                        start = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id;
+                    }
+                    else {
+                        source = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).name;
+                        target = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
+                        start = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
+                    }
+                }
+                if (target.equals(MainActivity.vInfo.get(shortestInput).name)) {
+                    String strToInsert = "Walk " + distanceVal + " from " + source + " ft toward " + target;
+                    if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
+
+                        if (MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
+                            strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
+                        }
+                    }
+                    Directions.add(strToInsert);
+
+                }
+                if (source.equals(MainActivity.vInfo.get(shortestInput).name)) {
+                    String strToInsert = "Walk " + distanceVal + " from " + target + " ft toward " + source;
+                    if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
+
+                        if (MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
+                            strToInsert = strToInsert + " and find " + MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).name + "s inside.";
+                        }
+                    }
+                    Directions.add(strToInsert);
+                }
             }
         }
 /* testing purposes
