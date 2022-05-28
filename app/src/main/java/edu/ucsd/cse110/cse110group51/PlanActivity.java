@@ -49,7 +49,7 @@ public class PlanActivity extends AppCompatActivity {
 
         if (!input.isEmpty()) {
             Intent intent = new Intent(this, NextActivity.class);
-            //intent.putExtra("Key", planCalculate.getDestination());
+            intent.putExtra("Key", destination);
             Bundle args = new Bundle();
             args.putSerializable("ArrayList", (Serializable) input);
             intent.putExtra("BUNDLE", args);

@@ -22,8 +22,9 @@ public class NextActivity extends AppCompatActivity {
         PlanCalculate planCalculate = new PlanCalculate();
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
+        String source = intent.getStringExtra("Key");
         stringArrList = (ArrayList<String>) args.getSerializable("ArrayList");
-        List<String> Display = planCalculate.extracted(MainActivity.UserCoord, stringArrList);
+        List<String> Display = planCalculate.extracted(MainActivity.vInfo.get(source).coords, stringArrList);
         destination = planCalculate.getDestination();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
@@ -45,7 +46,7 @@ public class NextActivity extends AppCompatActivity {
         }
         if (!input.isEmpty()) {
             Intent intent = new Intent(this, NextActivity.class);
-            //intent.putExtra("Key", planCalculate.getDestination());
+            intent.putExtra("Key", destination);
             Bundle args = new Bundle();
             args.putSerializable("ArrayList", (Serializable) input);
             intent.putExtra("BUNDLE", args);

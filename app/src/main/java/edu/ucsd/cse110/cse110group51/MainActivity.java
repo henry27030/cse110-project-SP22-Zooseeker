@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //testing
         UserCoord = Coord.of(32.74708169, -117.1628942); //midpoint between flamingo and capuchin, IdentifiedEdgeWeight id = capuchin_to_hippo_monkey
+        //UserCoord = Coord.of(MainActivity.vInfo.get("flamingo").coords.lat, MainActivity.vInfo.get("flamingo").coords.lng);
 
         /*
         ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
