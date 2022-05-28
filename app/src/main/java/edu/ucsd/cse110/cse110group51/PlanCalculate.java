@@ -189,7 +189,7 @@ public class PlanCalculate {
                     }
                 }
                 else {
-                    String strToInsert = "Walk " + distanceVal + " from " + source + " ft toward " + target;
+                    String strToInsert = "Walk " + distanceVal + " ft from " + source + " toward " + target;
                     Directions.add(strToInsert);
                     distanceVal = 0;
                     currentStreet = MainActivity.eInfo.get(e.getId()).street;
@@ -206,7 +206,7 @@ public class PlanCalculate {
                     }
                 }
                 if (target.equals(MainActivity.vInfo.get(shortestInput).name)) {
-                    String strToInsert = "Walk " + distanceVal + " from " + source + " ft toward " + target;
+                    String strToInsert = "Walk " + distanceVal + " ft from " + source + " toward " + target;
                     if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
 
                         if (MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
@@ -217,7 +217,7 @@ public class PlanCalculate {
 
                 }
                 if (source.equals(MainActivity.vInfo.get(shortestInput).name)) {
-                    String strToInsert = "Walk " + distanceVal + " from " + target + " ft toward " + source;
+                    String strToInsert = "Walk " + distanceVal + " ft from " + target + " toward " + source;
                     if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
 
                         if (MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id.equals(MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id)) {
