@@ -16,6 +16,7 @@ public class PlanCalculate {
     String source = null;
     String target = null;
     double distanceVal = 0;
+    double totalDistance = 0;
 
     public PlanCalculate() {
     }
@@ -119,6 +120,7 @@ public class PlanCalculate {
 
         //add a string of directions to Directions String array
         for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
+            totalDistance+=MainActivity.g.getEdgeWeight(e);
             if (!MainActivity.briefDirections) {
                 if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
                     String strToInsert = "Walk "

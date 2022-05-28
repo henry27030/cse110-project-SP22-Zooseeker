@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public class NextActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 Display); //extracted returns an ArrayList
         directionsView.setAdapter(arrayAdapter);
+
+        TextView text = (TextView)findViewById(R.id.TotalDistance);
+        text.setText("Path length: " + String.valueOf(planCalculate.totalDistance) + " ft.");
     }
 
     public void NextNextButton(View view) {
