@@ -83,5 +83,19 @@ public class NextActivity extends AppCompatActivity {
     }
 
     public void NextDescriptionToggle(View view) {
+        MainActivity.briefDirections=!MainActivity.briefDirections;
+        PlanCalculate planCalculate = new PlanCalculate();
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        String source = intent.getStringExtra("Key");
+        stringArrList = (ArrayList<String>) args.getSerializable("ArrayList");
+        List<String> Display = planCalculate.extracted(MainActivity.vInfo.get(source).coords, stringArrList);
+        this.directionsView = this.findViewById(R.id.next_directions_view);
+        arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                Display); //extracted returns an ArrayList
+        directionsView.setAdapter(arrayAdapter);
+
     }
 }
