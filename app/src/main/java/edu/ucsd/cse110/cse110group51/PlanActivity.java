@@ -73,5 +73,16 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void PlanDescriptionToggle(View view) {
+        MainActivity.briefDirections=!MainActivity.briefDirections;
+        PlanCalculate planCalculate = new PlanCalculate();
+        List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
+        //destination = getIntent().getStringExtra("Key");
+        setContentView(R.layout.activity_plan);
+        this.directionsView = this.findViewById(R.id.directions_view);
+        arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                Display); //extracted returns an ArrayList
+        directionsView.setAdapter(arrayAdapter);
     }
 }
