@@ -186,7 +186,7 @@ public class PlanCalculate {
                     }
                 }
                 else {
-                    String strToInsert = "Walk " + distanceVal + " from "  + " ft toward " + target;
+                    String strToInsert = "Walk " + distanceVal + " from " + source + " ft toward " + target;
                     Directions.add(strToInsert);
                     distanceVal = 0;
                     currentStreet = MainActivity.eInfo.get(e.getId()).street;
