@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private TextView List_btn;
 
-    public static String start = "entrance_exit_gate";
+    //public static String start = "entrance_exit_gate";
     public static ArrayList<String> exhibitList = new ArrayList<String>();
     public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
     public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     public static Map<String , Pair<Double, Double>> edgeSlopeBInfo;
 
     //UserNode for testing
-    //public static Coord UserCoord;
+    public static Coord UserCoord;
 
     //public static ArrayList<String> Directions = new ArrayList<String>();
     // 1. Load the graph...
@@ -62,14 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //testing
-        //UserCoord = new Coord(vInfo.get("flamingo").lat, vInfo.get("flamingo").lng);
-        //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        int Num = intent.getIntExtra("num", 0);
+        //Intent intent = getIntent();
+        //int Num = intent.getIntExtra("num", 0);
         //this.List_btn =this.findViewById(R.id.list_btn);
         //List_btn.setText("List("+Num+")");
 
@@ -113,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //vInfo.get(Nodes).coords = new LatLng(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
-                vInfo.get(Nodes).coords.of(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
+                vInfo.get(Nodes).coords = Coord.of(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
             }
 
             if (!vInfo.get(Nodes).kind.equals(vInfo.get(Nodes).kind.EXHIBIT)) {
@@ -167,7 +164,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-/*
+        //testing
+        UserCoord = Coord.of(32.74708169, -117.1628942); //midpoint between flamingo and capuchin, IdentifiedEdgeWeight id = capuchin_to_hippo_monkey
+
+        /*
         ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
         userInfo.id = "User";
         userInfo.name = "User";

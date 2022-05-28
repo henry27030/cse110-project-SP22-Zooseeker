@@ -19,7 +19,7 @@ public class PlanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PlanCalculate planCalculate = new PlanCalculate();
-        List<String> Display = planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
+        List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
         //destination = getIntent().getStringExtra("Key");
         destination = planCalculate.getDestination();
         super.onCreate(savedInstanceState);

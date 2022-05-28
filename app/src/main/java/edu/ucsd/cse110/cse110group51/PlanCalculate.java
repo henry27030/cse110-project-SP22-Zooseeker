@@ -1,7 +1,6 @@
 package edu.ucsd.cse110.cse110group51;
 
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.alg.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +8,9 @@ import java.util.Set;
 
 public class PlanCalculate {
     String destination;
+    IdentifiedWeightedEdge identifiedEdge;
+    IdentifiedWeightedEdge newEdge1;
+    IdentifiedWeightedEdge newEdge2;
 
     public PlanCalculate() {
     }
@@ -19,8 +21,51 @@ public class PlanCalculate {
     }
 
     // extracted returns an ArrayList<String> of directions
-    public List<String> extracted(String start, ArrayList<String> exhibits) {
+    public List<String> extracted(Coord coordinate, ArrayList<String> exhibits) {
+        String start = null;
+        Set<String> keys=MainActivity.vInfo.keySet();
+
+        for (String Nodes: keys) {
+            //if (coordinate.equals(Coord.of(MainActivity.vInfo.get(Nodes).coords.lat, (MainActivity.vInfo.get(Nodes).coords.lng)))) {
+            if (coordinate.equals(MainActivity.vInfo.get(Nodes).coords)) {
+                start = MainActivity.vInfo.get(Nodes).id;
+            }
+        }
+        //testing
+        if (start==null) {
+            //time to add in the edges and such
+            //adding User to vInfo
+            identifiedEdge = SlopeMath.edgeUserIsOn(coordinate);
+            ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
+            userInfo.id = "User";
+            userInfo.name = "User";
+            userInfo.kind = ZooData.VertexInfo.Kind.EXHIBIT;
+            MainActivity.vInfo.put("User", userInfo);
+            MainActivity.g.addVertex("User");
+
+            IdentifiedWeightedEdge edgeToRemove;
+
+            String Source = MainActivity.g.getEdgeSource(identifiedEdge);
+            String Target = MainActivity.g.getEdgeTarget(identifiedEdge);
+            edgeToRemove=MainActivity.g.removeEdge(Source, Target);
+            newEdge1= (IdentifiedWeightedEdge) edgeToRemove.clone();
+            newEdge2= (IdentifiedWeightedEdge) edgeToRemove.clone();
+            MainActivity.g.addEdge("User", Target, newEdge1);
+            MainActivity.g.addEdge(Source, "User", newEdge2);
+
+            //get distance between the User and Target
+            double fromUserToTarget = SlopeMath.returnDistance(coordinate, MainActivity.vInfo.get(Target).coords);
+            double fromSourceToUser = MainActivity.g.getEdgeWeight(identifiedEdge) - fromUserToTarget;
+            MainActivity.g.getEdgeWeight(identifiedEdge);
+            MainActivity.g.setEdgeWeight(newEdge1, fromUserToTarget);
+            MainActivity.g.setEdgeWeight(newEdge2, fromSourceToUser);
+
+            start = "User";
+        }//
+
         ArrayList<String> Directions = new ArrayList<String>();
+        //Directions.add(identifiedEdge.getId());//testing
+
         //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
         ArrayList<String> exhibitListInFunc = new ArrayList<String>();
         for (String exhibit : exhibits) {
@@ -124,9 +169,15 @@ public class PlanCalculate {
 
  */
 
-
-
-
+        //reverse changes if made
+        if (identifiedEdge != null) {
+            String source = MainActivity.g.getEdgeSource(newEdge2);
+            String target = MainActivity.g.getEdgeTarget(newEdge1);
+            MainActivity.vInfo.remove("User");
+            MainActivity.g.removeEdge(newEdge1);
+            MainActivity.g.removeEdge(newEdge2);
+            MainActivity.g.addEdge(source, target, identifiedEdge);
+        }
         return Directions;
     }
 }

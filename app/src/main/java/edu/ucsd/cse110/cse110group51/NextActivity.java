@@ -23,7 +23,7 @@ public class NextActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
         stringArrList = (ArrayList<String>) args.getSerializable("ArrayList");
-        List<String> Display = planCalculate.extracted(MainActivity.start, stringArrList);
+        List<String> Display = planCalculate.extracted(MainActivity.UserCoord, stringArrList);
         destination = planCalculate.getDestination();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
