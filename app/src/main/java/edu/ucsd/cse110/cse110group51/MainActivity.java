@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         //int Num = intent.getIntExtra("num", 0);
         //this.List_btn =this.findViewById(R.id.list_btn);
         //List_btn.setText("List("+Num+")");
-        briefDirections = true; //initialize it to false
+        briefDirections = false; //initialize it to false
 
 
         //initialize viewModel and exhibitlist

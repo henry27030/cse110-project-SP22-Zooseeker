@@ -7,19 +7,36 @@
     tools:context=".PlanActivity">
 
 
+    <Button
+        android:id="@+id/PlanDescriptionToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="10dp"
+        android:text="Description Toggle"
+        android:onClick="PlanDescriptionToggle"
+        app:layout_constraintBottom_toTopOf="@+id/directions_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.984" />
+
     <ListView
         android:id="@+id/directions_view"
-        android:layout_width="318dp"
-        android:layout_height="553dp"
+        android:layout_width="330dp"
+        android:layout_height="419dp"
         android:layout_marginStart="46dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="47dp"
         android:layout_marginBottom="128dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/plan_back_button"

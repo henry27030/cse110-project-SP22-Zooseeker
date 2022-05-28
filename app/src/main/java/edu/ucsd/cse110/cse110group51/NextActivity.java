@@ -81,4 +81,7 @@ public class NextActivity extends AppCompatActivity {
     public void NextBackButton(View view) {
         finish();
     }
+
+    public void NextDescriptionToggle(View view) {
+    }
 }

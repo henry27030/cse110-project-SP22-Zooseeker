@@ -71,4 +71,7 @@ public class PlanActivity extends AppCompatActivity {
  */
 
     }
+
+    public void PlanDescriptionToggle(View view) {
+    }
 }
