@@ -32,7 +32,7 @@ public class MockingActivity extends AppCompatActivity {
             double xCoor = Double.parseDouble(xCoorText.getText().toString());
             double yCoor = Double.parseDouble(yCoorText.getText().toString());
             MainActivity.UserCoord = Coord.of(xCoor, yCoor);
-            //MainActivity.sp.
+            //Store user location
             MainActivity.sp = getSharedPreferences("PrefFile", MODE_PRIVATE);
             SharedPreferences.Editor editor = MainActivity.sp.edit();
             editor.putLong("Xcoor", Double.doubleToRawLongBits(MainActivity.UserCoord.lat));

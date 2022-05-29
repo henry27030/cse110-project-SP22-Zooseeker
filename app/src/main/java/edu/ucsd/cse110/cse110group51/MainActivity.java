@@ -181,11 +181,7 @@ public class MainActivity extends AppCompatActivity {
         //testing
         //UserCoord = Coord.of(32.74708169, -117.1628942); //midpoint between flamingo and capuchin, IdentifiedEdgeWeight id = capuchin_to_hippo_monkey
 
-        /*SharedPreferences sp =
-                getSharedPreferences("MyPrefs",
-                        Context.MODE_PRIVATE);*/
-        //SharedPreferences.Editor editor;
-        //SharedPreferences.Editor editor = sp.edit();
+
         sp = getSharedPreferences("PrefFile", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -195,9 +191,6 @@ public class MainActivity extends AppCompatActivity {
             UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("Xcoor", Double.doubleToLongBits(0))),
                     Double.longBitsToDouble(sp.getLong("Ycoor", Double.doubleToLongBits(0))));
         }
-
-        //editor.putLong("Xcoor", Double.doubleToRawLongBits(UserCoord.lat));
-        //editor.putLong("Ycoor", Double.doubleToRawLongBits(UserCoord.lng));
 
         /*
         ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
