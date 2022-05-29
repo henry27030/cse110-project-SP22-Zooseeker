@@ -36,19 +36,6 @@ public class SearchBarTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
-    private TodoDatabase db;
-
-    @Before
-    public void createDb() {
-        Context context = ApplicationProvider.getApplicationContext();
-        db = TodoDatabase.getSingleton(context);
-    }
-
-    @After
-    public void closeDb() throws IOException {
-        db.close();
-    }
-
     @Test
     public void searchFilterTest() {
 
