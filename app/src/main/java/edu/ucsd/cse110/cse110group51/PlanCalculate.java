@@ -99,6 +99,15 @@ public class PlanCalculate {
                     return Directions;
                 }
             }
+
+            // in the case that two exhibits are in the same group
+            if (MainActivity.vInfo.get(start).group_id!=null && MainActivity.vInfo.get(input).group_id!=null) {
+                if (MainActivity.vInfo.get(start).group_id.equals(MainActivity.vInfo.get(input).group_id)) {
+                    Directions.add(MainActivity.vInfo.get(input).name + " is also within " + MainActivity.vInfo.get(MainActivity.vInfo.get(start).group_id).name);
+                    destination = input;
+                    return Directions;
+                }
+            }
             // in the special case that an exhibit is within a group
             if (MainActivity.vInfo.get(input).group_id !=null) {
                 input=MainActivity.vInfo.get(MainActivity.vInfo.get(input).group_id).id;
