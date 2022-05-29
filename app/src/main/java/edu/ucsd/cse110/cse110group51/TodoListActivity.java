@@ -10,9 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TodoListActivity extends AppCompatActivity {
     //Exposed for testing purposes later...
     public RecyclerView recyclerView;
@@ -37,7 +34,7 @@ public class TodoListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        this.newTodoText = this.findViewById(R.id.new_todo_text);
+        this.newTodoText = this.findViewById(R.id.x_coor);
         this.addTodoButton = this.findViewById(R.id.add_todo_btn);
 
         addTodoButton.setOnClickListener(this::onAddTodoClicked);

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setCoor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MockingActivity">
@@ -11,11 +12,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
-        android:layout_marginTop="626dp"
+        android:layout_marginTop="125dp"
         android:layout_marginEnd="164dp"
-        android:text="Back"
         android:onClick="onMockBackClicked"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Mock" />
+
+    <EditText
+        android:id="@+id/x_coor"
+        android:layout_width="214dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="96dp"
+        android:hint="Enter x coordinate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421" />
+
+    <EditText
+        android:id="@+id/y_coor"
+        android:layout_width="214dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="101dp"
+        android:hint="Enter y coordinate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/x_coor" />
+
+    <Button
+        android:id="@+id/Mock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="105dp"
+        android:text="Mock User Location"
+        android:onClick="onMockClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/y_coor" />
 </androidx.constraintlayout.widget.ConstraintLayout>

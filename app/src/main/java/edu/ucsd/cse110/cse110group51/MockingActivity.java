@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class MockingActivity extends AppCompatActivity {
+
+    private EditText xCoorText;
+    private EditText yCoorText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +18,15 @@ public class MockingActivity extends AppCompatActivity {
     }
 
     public void onMockBackClicked(View view) {
+        finish();
+    }
+
+    public void onMockClicked(View view) {
+        this.xCoorText = this.findViewById(R.id.x_coor);
+        this.yCoorText = this.findViewById(R.id.y_coor);
+        double xCoor   = Double.parseDouble(xCoorText.getText().toString());
+        double yCoor   = Double.parseDouble(yCoorText.getText().toString());
+        MainActivity.UserCoord = Coord.of(xCoor, yCoor);
         finish();
     }
 }

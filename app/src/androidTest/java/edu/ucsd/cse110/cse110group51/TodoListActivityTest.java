@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.lifecycle.Lifecycle;
@@ -61,7 +60,7 @@ public class TodoListActivityTest {
         scenario.onActivity(activity -> {
             List<TodoListItem> beforeTodoList = todoListItemDao.getAll();
 
-            EditText newTodoText = activity.findViewById(R.id.new_todo_text);
+            EditText newTodoText = activity.findViewById(R.id.x_coor);
             Button addTodoButton = activity.findViewById(R.id.add_todo_btn);
 
             newTodoText.setText(newText);
