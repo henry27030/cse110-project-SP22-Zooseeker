@@ -22,7 +22,6 @@ public class PlanActivity extends AppCompatActivity {
         if (!MainActivity.exhibitList.isEmpty()) {
             PlanCalculate planCalculate = new PlanCalculate();
             Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
-            //destination = getIntent().getStringExtra("Key");
             destination = planCalculate.getDestination();
         }
         else {
@@ -100,10 +99,16 @@ public class PlanActivity extends AppCompatActivity {
         }
     }
 
-    public void PlanPreviousPreview(View view) {
-    }
-
     public void PlanPrevious(View view) {
+        if (!MainActivity.previousExhibits.isEmpty()) {
+            Intent intent = new Intent(this, PreviousActivity.class);
+            Bundle args = new Bundle();
+            ArrayList<String> input = new ArrayList<String>();
+            input.add(MainActivity.previousExhibits.peek());
+            args.putSerializable("ArrayList", (Serializable) input);
+            intent.putExtra("BUNDLE", args);
+            startActivity(intent);
+        }
     }
 
     public void PlanSkip(View view) {
