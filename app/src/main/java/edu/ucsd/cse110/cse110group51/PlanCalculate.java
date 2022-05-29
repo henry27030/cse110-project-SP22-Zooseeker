@@ -89,6 +89,16 @@ public class PlanCalculate {
             currentLength = 0;
             String input = exhibitListInFunc.get(i);
 
+            // in the case that User is already at one of the chosen exhibits
+            if (MainActivity.vInfo.get(start).id!=null) {
+                if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(input).id)) {
+                    Directions.add("User is currently at a chosen exhibit: " +
+                            MainActivity.vInfo.get(input).name +
+                            ". Please select NEXT to obtain the directions to the next exhibit.");
+                    destination = input;
+                    return Directions;
+                }
+            }
             // in the special case that an exhibit is within a group
             if (MainActivity.vInfo.get(input).group_id !=null) {
                 input=MainActivity.vInfo.get(MainActivity.vInfo.get(input).group_id).id;
@@ -120,6 +130,16 @@ public class PlanCalculate {
 
         // save our intended exhibit to visit using this path in destination
         destination = exhibitListInFunc.get(shortestExhibit);
+/*
+        if (MainActivity.vInfo.get(start).id!=null) {
+            if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(shortestInput).id)) {
+                Directions.add("User is currently at a chosen destination: " +
+                        MainActivity.vInfo.get(shortestInput).name +
+                        ". Please select NEXT to obtain the directions to the next exhibit");
+            }
+        }
+
+ */
 
         //add a string of directions to Directions String array
         for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {

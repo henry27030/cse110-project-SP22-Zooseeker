@@ -8,14 +8,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todo_items"
-        android:layout_width="403dp"
-        android:layout_height="570dp"
+        android:layout_width="410dp"
+        android:layout_height="456dp"
         android:layout_marginTop="8dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.099"
-        tools:layout_editor_absoluteX="4dp" />
+        tools:layout_editor_absoluteX="-3dp" />
 
     <Button
         android:id="@+id/add_todo_btn"

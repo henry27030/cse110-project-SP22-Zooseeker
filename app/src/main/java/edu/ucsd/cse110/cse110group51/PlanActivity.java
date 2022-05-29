@@ -48,12 +48,36 @@ public class PlanActivity extends AppCompatActivity {
         //planCalculate.extracted(MainActivity.start, input);
 
         if (!input.isEmpty()) {
-            Intent intent = new Intent(this, NextActivity.class);
-            intent.putExtra("Key", destination);
-            Bundle args = new Bundle();
-            args.putSerializable("ArrayList", (Serializable) input);
-            intent.putExtra("BUNDLE", args);
-            startActivity(intent);
+
+            // in the case that User is at one of the chosen exhibits.
+            if (MainActivity.UserCoord.equals(MainActivity.vInfo.get(destination).coords)) {
+                MainActivity.exhibitList.remove(destination);
+                for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
+                    if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
+                        MainActivity.viewModel.deleteTodo(MainActivity.viewModel.getCurrentItems().get(i));
+                        break;
+                    }
+                }
+                PlanCalculate planCalculate = new PlanCalculate();
+                List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
+                destination = planCalculate.getDestination();
+                this.directionsView = this.findViewById(R.id.directions_view);
+                arrayAdapter = new ArrayAdapter<String>(
+                        this,
+                        android.R.layout.simple_list_item_1,
+                        Display); //extracted returns an ArrayList
+                directionsView.setAdapter(arrayAdapter);
+            }
+
+            // in the case that User is not at one of the chosen exhibits.
+            else {
+                Intent intent = new Intent(this, NextActivity.class);
+                intent.putExtra("Key", destination);
+                Bundle args = new Bundle();
+                args.putSerializable("ArrayList", (Serializable) input);
+                intent.putExtra("BUNDLE", args);
+                startActivity(intent);
+            }
         }
         /*
         MainActivity.Directions.add(MainActivity.exhibitList.get(0));
