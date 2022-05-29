@@ -13,20 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import org.jgrapht.alg.util.Pair;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.alg.util.Pair;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -187,9 +181,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (!sp.contains("Xcoor")||!sp.contains("Ycoor")) {
             UserCoord = Coord.of(MainActivity.vInfo.get("flamingo").coords.lat, MainActivity.vInfo.get("flamingo").coords.lng);
+            Log.v("flamingo location",
+                    String.valueOf(MainActivity.vInfo.get("flamingo").coords.lat) + ", "+ String.valueOf(MainActivity.vInfo.get("flamingo").coords.lng));
         }else{
-            UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("Xcoor", Double.doubleToLongBits(0))),
-                    Double.longBitsToDouble(sp.getLong("Ycoor", Double.doubleToLongBits(0))));
+            UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("Ycoor", Double.doubleToLongBits(0))),
+                    Double.longBitsToDouble(sp.getLong("Xcoor", Double.doubleToLongBits(0))));
         }
 
         /*
