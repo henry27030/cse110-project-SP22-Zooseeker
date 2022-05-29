@@ -30,7 +30,7 @@ public class TodoListItem {
 
     // 2.Constructor matching fields above.
     TodoListItem(String text, int order) {
-    //TodoListItem(String text, boolean completed, int order) {
+        //TodoListItem(String text, boolean completed, int order) {
         this.text=text;
         this.order=order;
     }

@@ -70,7 +70,7 @@ public class ExhibitAdapter extends RecyclerView.Adapter<ExhibitAdapter.ViewHold
 //            Log.v("ViewHolder", exhibitName);
             if(MainActivity.exhibitList.contains(exhibitName) &&
                     this.checkBox.getVisibility() == View.VISIBLE){
-                 this.checkBox.setChecked(true);
+                this.checkBox.setChecked(true);
 
             }else if(!MainActivity.exhibitList.contains(exhibitName) &&
                     this.checkBox.getVisibility() == View.VISIBLE){

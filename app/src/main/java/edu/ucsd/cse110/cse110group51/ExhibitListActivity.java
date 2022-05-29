@@ -18,7 +18,7 @@ public class ExhibitListActivity extends AppCompatActivity {
 
     public RecyclerView recyclerView;
 
-//    private TodoListViewModel viewModel;
+    //    private TodoListViewModel viewModel;
     private EditText newTodoText;
     private Button addTodoButton;
 

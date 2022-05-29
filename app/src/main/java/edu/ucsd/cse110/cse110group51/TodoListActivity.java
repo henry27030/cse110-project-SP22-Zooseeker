@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.Stack;
 
 public class TodoListActivity extends AppCompatActivity {
@@ -61,11 +60,10 @@ public class TodoListActivity extends AppCompatActivity {
     public void onPlanDisplayClicked(View view) {
         //PlanCalculate planCalculate = new PlanCalculate();
         //planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
-
         //if (MainActivity.exhibitList.size()>0) {
-            Intent intent = new Intent(this, PlanActivity.class);
-            //intent.putExtra("Key", planCalculate.getDestination());
-            startActivity(intent);
+        Intent intent = new Intent(this, PlanActivity.class);
+        //intent.putExtra("Key", planCalculate.getDestination());
+        startActivity(intent);
         //}
     }
 
@@ -73,7 +71,6 @@ public class TodoListActivity extends AppCompatActivity {
     public void onMockLocationClicked(View view) {
         Intent intent = new Intent (this, MockingActivity.class);
         startActivity(intent);
-
     }
 
     public void ListClear(View view) {
