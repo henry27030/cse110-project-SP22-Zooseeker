@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +23,10 @@ import com.google.android.gms.maps.model.LatLng;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +39,8 @@ import java.util.Stack;
 //
 
 public class MainActivity extends AppCompatActivity {
+    public static SharedPreferences sp;
+
     private ListView listView;
     private TextView List_btn;
 
@@ -173,7 +180,24 @@ public class MainActivity extends AppCompatActivity {
         });
         //testing
         //UserCoord = Coord.of(32.74708169, -117.1628942); //midpoint between flamingo and capuchin, IdentifiedEdgeWeight id = capuchin_to_hippo_monkey
-        UserCoord = Coord.of(MainActivity.vInfo.get("flamingo").coords.lat, MainActivity.vInfo.get("flamingo").coords.lng);
+
+        /*SharedPreferences sp =
+                getSharedPreferences("MyPrefs",
+                        Context.MODE_PRIVATE);*/
+        //SharedPreferences.Editor editor;
+        //SharedPreferences.Editor editor = sp.edit();
+        sp = getSharedPreferences("PrefFile", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        if (!sp.contains("Xcoor")||!sp.contains("Ycoor")) {
+            UserCoord = Coord.of(MainActivity.vInfo.get("flamingo").coords.lat, MainActivity.vInfo.get("flamingo").coords.lng);
+        }else{
+            UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("Xcoor", Double.doubleToLongBits(0))),
+                    Double.longBitsToDouble(sp.getLong("Ycoor", Double.doubleToLongBits(0))));
+        }
+
+        //editor.putLong("Xcoor", Double.doubleToRawLongBits(UserCoord.lat));
+        //editor.putLong("Ycoor", Double.doubleToRawLongBits(UserCoord.lng));
 
         /*
         ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
