@@ -68,6 +68,8 @@ public class PlanCalculate {
 
             start = "User";
         }//
+        String compare1 = start;
+        String compare2 = null;
 
         ArrayList<String> Directions = new ArrayList<String>();
         //Directions.add(identifiedEdge.getId());//testing
@@ -88,26 +90,33 @@ public class PlanCalculate {
         for (int i = 0; i < exhibitListInFunc.size(); i++) {
             currentLength = 0;
             String input = exhibitListInFunc.get(i);
-
-            // in the case that User is already at one of the chosen exhibits
-            if (MainActivity.vInfo.get(start).id!=null) {
-                if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(input).id)) {
-                    Directions.add("User is currently at a chosen exhibit: " +
-                            MainActivity.vInfo.get(input).name +
-                            ". Please select NEXT to obtain the directions to the next exhibit.");
-                    destination = input;
-                    return Directions;
-                }
-            }
+            compare2 = input;
 
             // in the case that two exhibits are in the same group
-            if (MainActivity.vInfo.get(start).group_id!=null && MainActivity.vInfo.get(input).group_id!=null) {
-                if (MainActivity.vInfo.get(start).group_id.equals(MainActivity.vInfo.get(input).group_id)) {
-                    Directions.add(MainActivity.vInfo.get(input).name + " is also within " + MainActivity.vInfo.get(MainActivity.vInfo.get(start).group_id).name);
-                    destination = input;
+            if (MainActivity.vInfo.get(compare2).group_id!=null) {
+                if (MainActivity.vInfo.get(compare1).id.equals(MainActivity.vInfo.get(compare2).group_id)) {
+                    Directions.add(MainActivity.vInfo.get(compare2).name + " is also within this exhibit." );
+                    destination = compare2;
                     return Directions;
                 }
+                if (MainActivity.vInfo.get(compare1).group_id!=null) {
+                    if (MainActivity.vInfo.get(compare1).group_id.equals(MainActivity.vInfo.get(compare2).group_id)) {
+                        Directions.add(MainActivity.vInfo.get(compare2).name + " is also within this exhibit.");
+                        destination = compare2;
+                        return Directions;
+                    }
+                }
             }
+            //in the case that User is already at one of the chosen exhibits
+                if (MainActivity.vInfo.get(start).id!=null) {
+                    if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(input).id)) {
+                        Directions.add("User is currently at a chosen exhibit: " +
+                                MainActivity.vInfo.get(input).name +
+                                ". Please select NEXT to obtain the directions to the next exhibit.");
+                        destination = input;
+                        return Directions;
+                    }
+                }
             // in the special case that an exhibit is within a group
             if (MainActivity.vInfo.get(input).group_id !=null) {
                 input=MainActivity.vInfo.get(MainActivity.vInfo.get(input).group_id).id;
