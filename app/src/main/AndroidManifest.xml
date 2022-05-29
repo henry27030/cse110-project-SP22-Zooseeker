@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE110Group51">
         <activity
+            android:name=".PreviousActivity"
+            android:exported="false" />
+        <activity
             android:name=".MockingActivity"
             android:exported="false" />
         <activity

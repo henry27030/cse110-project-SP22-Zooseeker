@@ -18,10 +18,16 @@ public class PlanActivity extends AppCompatActivity {
     private String destination;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        PlanCalculate planCalculate = new PlanCalculate();
-        List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
-        //destination = getIntent().getStringExtra("Key");
-        destination = planCalculate.getDestination();
+        List<String> Display = null;
+        if (!MainActivity.exhibitList.isEmpty()) {
+            PlanCalculate planCalculate = new PlanCalculate();
+            Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
+            //destination = getIntent().getStringExtra("Key");
+            destination = planCalculate.getDestination();
+        }
+        else {
+            Display = new ArrayList<String>();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
         this.directionsView = this.findViewById(R.id.directions_view);
@@ -44,13 +50,11 @@ public class PlanActivity extends AppCompatActivity {
                 input.add(string);
             }
         }
-        //PlanCalculate planCalculate = new PlanCalculate();
-        //planCalculate.extracted(MainActivity.start, input);
-
         if (!input.isEmpty()) {
 
             // in the case that User is at one of the chosen exhibits.
             if (MainActivity.UserCoord.equals(MainActivity.vInfo.get(destination).coords)) {
+                MainActivity.previousExhibits.push(destination);
                 MainActivity.exhibitList.remove(destination);
                 for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
                     if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
@@ -79,34 +83,51 @@ public class PlanActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
-        /*
-        MainActivity.Directions.add(MainActivity.exhibitList.get(0));
-        MainActivity.Directions.add(destination);
-
-         */
-/*
-
-        PlanCalculate planCalculate = new PlanCalculate();
-        planCalculate.extracted(destination, input);
-
-
-        arrayAdapter.notifyDataSetChanged();
-
- */
-
     }
 
     public void PlanDescriptionToggle(View view) {
-        MainActivity.briefDirections=!MainActivity.briefDirections;
-        PlanCalculate planCalculate = new PlanCalculate();
-        List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
-        //destination = getIntent().getStringExtra("Key");
-        setContentView(R.layout.activity_plan);
-        this.directionsView = this.findViewById(R.id.directions_view);
-        arrayAdapter = new ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_1,
-                Display); //extracted returns an ArrayList
-        directionsView.setAdapter(arrayAdapter);
+        if (!MainActivity.exhibitList.isEmpty()) {
+            MainActivity.briefDirections = !MainActivity.briefDirections;
+            PlanCalculate planCalculate = new PlanCalculate();
+            List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
+            setContentView(R.layout.activity_plan);
+            this.directionsView = this.findViewById(R.id.directions_view);
+            arrayAdapter = new ArrayAdapter<String>(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    Display); //extracted returns an ArrayList
+            directionsView.setAdapter(arrayAdapter);
+        }
+    }
+
+    public void PlanPreviousPreview(View view) {
+    }
+
+    public void PlanPrevious(View view) {
+    }
+
+    public void PlanSkip(View view) {
+        MainActivity.exhibitList.remove(destination);
+        for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
+            if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
+                MainActivity.viewModel.deleteTodo(MainActivity.viewModel.getCurrentItems().get(i));
+                break;
+            }
+        }
+        if (MainActivity.exhibitList.isEmpty()) {
+            finish();
+        }
+        else {
+            PlanCalculate planCalculate = new PlanCalculate();
+            List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
+            destination = planCalculate.getDestination();
+            setContentView(R.layout.activity_plan);
+            this.directionsView = this.findViewById(R.id.directions_view);
+            arrayAdapter = new ArrayAdapter<String>(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    Display); //extracted returns an ArrayList
+            directionsView.setAdapter(arrayAdapter);
+        }
     }
 }

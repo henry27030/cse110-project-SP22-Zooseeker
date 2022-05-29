@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 //import androidx.appcompat.widget.SearchView;
 //
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     //public static String start = "entrance_exit_gate";
     public static ArrayList<String> exhibitList = new ArrayList<String>();
+
+    public static Stack<String> previousExhibits = new Stack<String>(); // saves previous exhibits
     public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
     public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
 
