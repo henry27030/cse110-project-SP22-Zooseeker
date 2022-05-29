@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.io.Serializable;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanActivity extends AppCompatActivity {
+    private Button ShowHideMock;
     private ListView directionsView;
     private ArrayAdapter<String> arrayAdapter;
     private String destination;
@@ -134,5 +137,16 @@ public class PlanActivity extends AppCompatActivity {
                     Display); //extracted returns an ArrayList
             directionsView.setAdapter(arrayAdapter);
         }
+    }
+
+    public void Mock_Location_plan(View view) {
+        ShowHideMock = findViewById(R.id.show_mock);
+        Intent intent = new Intent (this, MockingActivity.class);
+        startActivity(intent);
+        /*if(ShowHideMock.getText().toString()=="Mock Location"){
+            ShowHideMock.setText("End Mock");
+
+        }*/
+        //this.
     }
 }

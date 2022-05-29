@@ -93,4 +93,21 @@
         app:layout_constraintEnd_toStartOf="@+id/plan_next_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/directions_view" />
+
+    <Button
+        android:id="@+id/show_mock"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="32dp"
+        android:text="Mock Location"
+        android:onClick="Mock_Location_plan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/plan_back_button"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toEndOf="@+id/PlanPrevious"
+        app:layout_constraintTop_toBottomOf="@+id/plan_next_button"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
