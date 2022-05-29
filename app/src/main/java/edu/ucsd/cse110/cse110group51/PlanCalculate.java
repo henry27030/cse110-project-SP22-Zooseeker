@@ -70,6 +70,7 @@ public class PlanCalculate {
         }//
 
         ArrayList<String> Directions = new ArrayList<String>();
+
         //Directions.add(identifiedEdge.getId());//testing
 
         //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
