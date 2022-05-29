@@ -33,24 +33,26 @@
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="162dp"
         android:onClick="onBackClicked"
         android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todo_items" />
+        app:layout_constraintTop_toBottomOf="@+id/plan_display" />
 
     <Button
         android:id="@+id/plan_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="134dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="41dp"
         android:onClick="onPlanDisplayClicked"
         android:text="Plan Display"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_btn"
+        app:layout_constraintStart_toEndOf="@+id/mock_location"
         app:layout_constraintTop_toBottomOf="@+id/todo_items" />
 
     <EditText
@@ -65,4 +67,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.952"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/mock_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="30dp"
+        android:onClick="onMockLocationClicked"
+        android:text="Mock Location"
+        app:layout_constraintEnd_toStartOf="@+id/plan_display"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todo_items"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

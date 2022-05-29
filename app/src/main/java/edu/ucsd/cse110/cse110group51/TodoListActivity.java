@@ -65,4 +65,10 @@ public class TodoListActivity extends AppCompatActivity {
         //intent.putExtra("Key", planCalculate.getDestination());
         startActivity(intent);
     }
+
+    //Mock User Location
+    public void onMockLocationClicked(View view) {
+        Intent intent = new Intent (this, MockingActivity.class);
+        startActivity(intent);
+    }
 }
