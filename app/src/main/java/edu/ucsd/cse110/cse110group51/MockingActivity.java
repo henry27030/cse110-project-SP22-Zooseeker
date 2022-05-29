@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,7 +19,8 @@ public class MockingActivity extends AppCompatActivity {
     }
 
     public void onMockBackClicked(View view) {
-        finish();
+        Intent intent = new Intent (this, TodoListActivity.class);
+        startActivity(intent);
     }
 
     public void onMockClicked(View view) {
