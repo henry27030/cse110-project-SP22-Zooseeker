@@ -138,15 +138,4 @@ public class PlanActivity extends AppCompatActivity {
             directionsView.setAdapter(arrayAdapter);
         }
     }
-
-    public void Mock_Location_plan(View view) {
-        ShowHideMock = findViewById(R.id.show_mock);
-        Intent intent = new Intent (this, MockingActivity.class);
-        startActivity(intent);
-        /*if(ShowHideMock.getText().toString()=="Mock Location"){
-            ShowHideMock.setText("End Mock");
-
-        }*/
-        //this.
-    }
 }
