@@ -18,7 +18,10 @@
         android:text="Categories"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_view" />
+        app:layout_constraintTop_toBottomOf="@+id/list_view"
+        android:visibility="gone"
+
+        />
 
     <Button
         android:id="@+id/plan_btn"
@@ -29,7 +32,11 @@
         android:onClick="onPlanButtonClicked"
         android:text="Plan"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_view"
+
+        />
 
     <ListView
         android:id="@+id/list_view"
