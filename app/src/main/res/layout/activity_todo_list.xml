@@ -9,14 +9,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todo_items"
         android:layout_width="410dp"
-        android:layout_height="456dp"
+        android:layout_height="426dp"
         android:layout_marginTop="8dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.099"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp" />
 
     <Button
         android:id="@+id/add_todo_btn"
@@ -98,14 +98,14 @@
         android:id="@+id/read_user_loc"
         android:layout_width="203dp"
         android:layout_height="48dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="104dp"
-        android:layout_marginBottom="52dp"
         android:onClick="ReadUserLocation"
         android:text="Read User Location"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_btn"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,13 +74,13 @@ public class TodoListActivity extends AppCompatActivity {
     }
 
     public void onPlanDisplayClicked(View view) {
-        //PlanCalculate planCalculate = new PlanCalculate();
-        //planCalculate.extracted(MainActivity.start, MainActivity.exhibitList);
-        //if (MainActivity.exhibitList.size()>0) {
-        Intent intent = new Intent(this, PlanActivity.class);
-        //intent.putExtra("Key", planCalculate.getDestination());
-        startActivity(intent);
-        //}
+        if (MainActivity.UserCoord!=null) {
+            IdentifiedWeightedEdge edgeOfUser = SlopeMath.edgeUserIsOn(MainActivity.UserCoord);
+            if (SlopeMath.edgeChecker(edgeOfUser, MainActivity.UserCoord)) {
+                Intent intent = new Intent(this, PlanActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 
     //Mock User Location

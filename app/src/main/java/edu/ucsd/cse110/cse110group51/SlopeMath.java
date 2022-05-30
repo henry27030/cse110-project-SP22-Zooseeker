@@ -97,4 +97,20 @@ public class SlopeMath {
         return result;
     }
 
+    // returns true if User is within an edge
+    public static boolean edgeChecker (IdentifiedWeightedEdge edge, Coord coords) {
+        double totalEdgeWeight = MainActivity.g.getEdgeWeight(edge);
+        String Src = MainActivity.g.getEdgeSource(edge);
+        String Tgt = MainActivity.g.getEdgeTarget(edge);
+        if (totalEdgeWeight<returnDistance(coords, MainActivity.vInfo.get(Src).coords)) {
+            return false;
+        }
+        else if (totalEdgeWeight<returnDistance(coords, MainActivity.vInfo.get(Tgt).coords)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
 }
