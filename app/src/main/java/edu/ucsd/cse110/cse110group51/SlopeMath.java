@@ -77,6 +77,8 @@ public class SlopeMath {
     // check if user location lies in San Diego Zoo Area
     public static boolean WithinZooArea(Coord userCoord){
         // cheat san diego zoo as a rectangle, check if userCoord is within the area
+        // taking hint from
+        // https://www.emanueleferonato.com/2012/03/09/algorithm-to-determine-if-a-point-is-inside-a-square-with-mathematics-no-hit-test-involved/
         Coord a = Coord.of(32.739048, -117.155923);   // leftTop
         Coord b = Coord.of(32.739588, -117.143942);  // rightTop
         Coord c = Coord.of(32.733047, -117.146365);  // rightBottom
