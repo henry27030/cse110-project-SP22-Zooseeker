@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sp.edit();
 
         if (!sp.contains("lat")||!sp.contains("lng")) {
-            UserCoord = Coord.of(MainActivity.vInfo.get("flamingo").coords.lat, MainActivity.vInfo.get("flamingo").coords.lng);
+            UserCoord = Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng);
         }else{
             UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("lat", Double.doubleToLongBits(0))),
                     Double.longBitsToDouble(sp.getLong("lng", Double.doubleToLongBits(0))));
