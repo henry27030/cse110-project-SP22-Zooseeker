@@ -117,7 +117,7 @@ public class TodoListActivity extends AppCompatActivity {
 
                     } else {
                         // set to entrance coordinate if User is not in the zoo
-                        MainActivity.UserCoord = Coord.of(32.73459618734685, -117.14936);
+                        MainActivity.UserCoord = Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng);//32.73459618734685, -117.14936
                         Log.d("user is not in the zoo, should be entrance location: ",
                                 MainActivity.UserCoord.toString());
                     }
