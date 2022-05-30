@@ -185,11 +185,11 @@ public class MainActivity extends AppCompatActivity {
         sp = getSharedPreferences("PrefFile", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
-        if (!sp.contains("Xcoor")||!sp.contains("Ycoor")) {
+        if (!sp.contains("lat")||!sp.contains("lng")) {
             UserCoord = Coord.of(MainActivity.vInfo.get("flamingo").coords.lat, MainActivity.vInfo.get("flamingo").coords.lng);
         }else{
-            UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("Xcoor", Double.doubleToLongBits(0))),
-                    Double.longBitsToDouble(sp.getLong("Ycoor", Double.doubleToLongBits(0))));
+            UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("lat", Double.doubleToLongBits(0))),
+                    Double.longBitsToDouble(sp.getLong("lng", Double.doubleToLongBits(0))));
         }
 
         /*
