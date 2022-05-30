@@ -13,20 +13,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import org.jgrapht.alg.util.Pair;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.alg.util.Pair;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     //UserNode for testing
     public static Coord UserCoord;
+    public static boolean UserCoordLiveUpdateEnabled = false;
 
     //public static ArrayList<String> Directions = new ArrayList<String>();
     // 1. Load the graph...

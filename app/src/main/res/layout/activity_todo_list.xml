@@ -34,9 +34,8 @@
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="80dp"
         android:onClick="onBackClicked"
         android:text="Back"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,4 +93,19 @@
         app:layout_constraintEnd_toStartOf="@+id/back_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mock_location" />
+
+    <Button
+        android:id="@+id/read_user_loc"
+        android:layout_width="203dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="52dp"
+        android:onClick="ReadUserLocation"
+        android:text="Read User Location"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_btn"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

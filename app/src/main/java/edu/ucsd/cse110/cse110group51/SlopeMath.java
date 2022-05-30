@@ -3,8 +3,6 @@ package edu.ucsd.cse110.cse110group51;
 import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 
-import androidx.annotation.NonNull;
-
 import org.jgrapht.alg.util.Pair;
 
 import java.util.Set;
@@ -75,4 +73,26 @@ public class SlopeMath {
 
         return Math.ceil(d_ft);
     }
+
+    // check if user location lies in San Diego Zoo Area
+    public static boolean WithinZooArea(Coord userCoord){
+        // cheat san diego zoo as a rectangle, check if userCoord is within the area
+        Coord a = Coord.of(32.739048, -117.155923);   // leftTop
+        Coord b = Coord.of(32.739588, -117.143942);  // rightTop
+        Coord c = Coord.of(32.733047, -117.146365);  // rightBottom
+        Coord d = Coord.of(32.733163, -117.154897);   // leftBottom
+        Coord p = MainActivity.UserCoord;
+
+        if (triangleArea(a,b,p)>0 || triangleArea(b,c,p)>0 || triangleArea(c,d,p)>0 || triangleArea(d,a,p)>0) {
+            return false;
+        }
+        return true;
+
+    }
+    public static double triangleArea(Coord a, Coord b, Coord c) {
+        // (C.x*B.y-B.x*C.y)-(C.x*A.y-A.x*C.y)+(B.x*A.y-A.x*B.y)
+        double result = (c.lng*b.lat-b.lng*c.lat)-(c.lng*a.lat-a.lng*c.lat)+(b.lng*a.lat-a.lng*b.lat);
+        return result;
+    }
+
 }

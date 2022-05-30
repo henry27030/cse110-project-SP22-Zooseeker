@@ -1,12 +1,11 @@
 package edu.ucsd.cse110.cse110group51;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MockingActivity extends AppCompatActivity {
 
@@ -28,6 +27,7 @@ public class MockingActivity extends AppCompatActivity {
     public void onMockClicked(View view) {
         this.LatText = this.findViewById(R.id.lat);
         this.LngText = this.findViewById(R.id.lng);
+        MainActivity.UserCoordLiveUpdateEnabled = false;
         //Check if coordinates are filled
         if(LatText.getText().toString().trim().length() != 0 & LngText.getText().toString().trim().length() != 0) {
             double lat = Double.parseDouble(LatText.getText().toString());
