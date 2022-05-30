@@ -20,8 +20,9 @@ public class MockingActivity extends AppCompatActivity {
     }
 
     public void onMockBackClicked(View view) {
-        Intent intent = new Intent (this, TodoListActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent (this, TodoListActivity.class);
+        //startActivity(intent);
+        finish();
     }
 
     public void onMockClicked(View view) {
