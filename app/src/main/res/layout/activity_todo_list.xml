@@ -15,7 +15,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.099"
-        tools:layout_editor_absoluteX="-3dp" />
+        tools:layout_editor_absoluteX="-3dp"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/add_todo_btn"
@@ -39,7 +40,6 @@
         android:onClick="onBackClicked"
         android:text="Back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/plan_display" />
 
     <Button
