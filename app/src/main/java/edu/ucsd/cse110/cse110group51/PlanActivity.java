@@ -1,14 +1,15 @@
 package edu.ucsd.cse110.cse110group51;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class PlanActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 Display); //extracted returns an ArrayList
         directionsView.setAdapter(arrayAdapter);
+        Log.v("count", String.valueOf(directionsView.getAdapter().getCount()));
     }
 
     public void PlanBackButton(View view) {
@@ -48,6 +50,8 @@ public class PlanActivity extends AppCompatActivity {
     // of directions to the next exhibit based on the User's coordinates.
     public void PlanNextButton(View view) {
         ArrayList<String> input = new ArrayList<String>();
+//        Log.v("planNextButton", String.join(",", MainActivity.exhibitList));
+//        Log.v("planNextButton size", String.valueOf(MainActivity.exhibitList.size()));
         for (String string :MainActivity.exhibitList) {
             if (!string.equals(destination)){
                 input.add(string);
