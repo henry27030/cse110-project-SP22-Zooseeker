@@ -64,6 +64,59 @@ public class PreviousOptionTest {
                                 6),
                         isDisplayed()));
         materialButton2.perform(click());
+        ViewInteraction materialButton21 = onView(
+                allOf(withId(R.id.mock_location), withText("Mock Location"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                5),
+                        isDisplayed()));
+        materialButton21.perform(click());
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.lat),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatEditText.perform(replaceText("32.73459618734685"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.lng),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        appCompatEditText2.perform(replaceText("-117.14936"), closeSoftKeyboard());
+
+        ViewInteraction materialButton20 = onView(
+                allOf(withId(R.id.Mock), withText("Mock User Location"),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                3),
+                        isDisplayed()));
+        materialButton20.perform(click());
+
+        ViewInteraction materialButton17 = onView(
+                allOf(withId(R.id.mock_back), withText("Back"),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        materialButton17.perform(click());
 
         ViewInteraction materialButton3 = onView(
                 allOf(withId(R.id.back_btn), withText("Back"),

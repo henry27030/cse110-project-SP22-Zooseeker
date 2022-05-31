@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public static Map<String , Pair<Double, Double>> edgeSlopeBInfo; // save (String edge, (slope, b)) for each edge
 
     // UserCoordinates and directions for user
-    public static boolean briefDirections = false; // boolean for determining brief/descriptive directions
+    public static boolean briefDirections;// = false; // boolean for determining brief/descriptive directions
     public static Coord UserCoord; // saves User's coordinates
     public static boolean UserCoordLiveUpdateEnabled = false; // when true, periodically refresh User's live location
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        briefDirections = false;
 
         // initialize viewModel and exhibitList
         viewModel = new ViewModelProvider(this)
