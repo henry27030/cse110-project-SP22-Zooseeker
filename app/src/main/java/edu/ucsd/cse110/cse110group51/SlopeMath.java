@@ -7,6 +7,8 @@ import org.jgrapht.alg.util.Pair;
 
 import java.util.Set;
 
+// this class is used to compare User and exhibit as well as
+// include math functions used in calculating paths
 public class SlopeMath {
 
     // returning slope and b from y=mx+b in the form of a pair<slope, b>
@@ -15,10 +17,7 @@ public class SlopeMath {
         double sourceLng = MainActivity.vInfo.get(source).lng;
         double targetLat = MainActivity.vInfo.get(target).lat;
         double targetLng = MainActivity.vInfo.get(target).lng;
-        /*
-        double slope = 5;
-        double b = 5;
-        */
+
         double d_lat = (targetLat - sourceLat);
         double d_lng = (targetLng - sourceLng);
         double d_ft_v = d_lat * 363843.57; //this decimal is conversion factor
@@ -61,7 +60,7 @@ public class SlopeMath {
         return returnValue;
     }
 
-    // use distance formula with coordinate conversions
+    // use distance formula with coordinate conversions to return distance
     public static double returnDistance (Coord coord1, Coord coord2) {
         double d_lat = abs(coord1.lat - coord2.lat);
         double d_lng = abs(coord1.lng - coord2.lng);
@@ -97,7 +96,7 @@ public class SlopeMath {
         return result;
     }
 
-    // returns true if User is within an edge
+    // returns true if User is within a valid edge of the graph
     public static boolean edgeChecker (IdentifiedWeightedEdge edge, Coord coords) {
         double totalEdgeWeight = MainActivity.g.getEdgeWeight(edge);
         String Src = MainActivity.g.getEdgeSource(edge);

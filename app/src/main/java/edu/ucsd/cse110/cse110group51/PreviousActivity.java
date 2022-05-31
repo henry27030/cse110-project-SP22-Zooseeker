@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+// this function describes the layout of looking at the previous exhibit
 public class PreviousActivity extends AppCompatActivity {
     private ListView directionsView;
     private ArrayAdapter<String> arrayAdapter;
@@ -40,6 +41,7 @@ public class PreviousActivity extends AppCompatActivity {
         text.setText("Path length: " + String.valueOf(planCalculate.totalDistance) + " ft.");
     }
 
+    // switch to view the directions brief/descriptive
     public void PreviousDescriptionToggle(View view) {
         MainActivity.briefDirections = !MainActivity.briefDirections;
         PlanCalculate planCalculate = new PlanCalculate();

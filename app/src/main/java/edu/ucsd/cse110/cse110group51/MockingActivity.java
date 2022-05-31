@@ -19,8 +19,6 @@ public class MockingActivity extends AppCompatActivity {
     }
 
     public void onMockBackClicked(View view) {
-        //Intent intent = new Intent (this, TodoListActivity.class);
-        //startActivity(intent);
         finish();
     }
 
@@ -39,7 +37,6 @@ public class MockingActivity extends AppCompatActivity {
             editor.putLong("lat", Double.doubleToRawLongBits(MainActivity.UserCoord.lat));
             editor.putLong("lng", Double.doubleToRawLongBits(MainActivity.UserCoord.lng));
             editor.commit();
-            //latitude, latLng.longitude
         }
     }
 }

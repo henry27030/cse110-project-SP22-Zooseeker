@@ -39,8 +39,10 @@ public class TodoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
 
-//        viewModel = new ViewModelProvider(this)
-//                .get(TodoListViewModel.class);
+/*
+    viewModel = new ViewModelProvider(this)
+    .get(TodoListViewModel.class);
+*/
 
         adapter.setHasStableIds(true);
         adapter.setOnDeleteClickedHandler(MainActivity.viewModel::deleteTodo);
@@ -54,7 +56,6 @@ public class TodoListActivity extends AppCompatActivity {
         this.addTodoButton = this.findViewById(R.id.add_todo_btn);
 
         addTodoButton.setOnClickListener(this::onAddTodoClicked);
-
     }
 
     void onAddTodoClicked(View view) {
@@ -63,16 +64,12 @@ public class TodoListActivity extends AppCompatActivity {
         MainActivity.viewModel.createTodo(text);
     }
 
+    //Back Button
     public void onBackClicked(View view) {
-        /*
-        Intent intent = new Intent(TodoListActivity.this, MainActivity.class);
-        intent.putExtra("num", adapter.getItemCount());
-        startActivity(intent);
-
-         */
         finish();
     }
 
+    //Display the planned exhibits location
     public void onPlanDisplayClicked(View view) {
         if (MainActivity.UserCoord!=null) {
             IdentifiedWeightedEdge edgeOfUser = SlopeMath.edgeUserIsOn(MainActivity.UserCoord);
@@ -89,6 +86,7 @@ public class TodoListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Clear button that clears a list of plans and their locations
     public void ListClear(View view) {
         while (MainActivity.exhibitList.size() != 0) {
             MainActivity.exhibitList.remove(0);
@@ -97,6 +95,7 @@ public class TodoListActivity extends AppCompatActivity {
         MainActivity.previousExhibits = new Stack<String>();
     }
 
+    //Prompt user for permission to access their location
     public void ReadUserLocation(View view) {
         // check location permissions
         if (permissionChecker.ensurePermissions()) return;
@@ -130,13 +129,12 @@ public class TodoListActivity extends AppCompatActivity {
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                         PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
+            //   TODO: Consider calling
+            //   ActivityCompat#requestPermissions
+            //   here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+            //   int[] grantResults) to handle the case where the user grants the permission.
+            //   See the documentation for ActivityCompat#requestPermissions for more details.
             return;
         }
         locationManager.requestLocationUpdates(provider, 0, 0f, locationListener);

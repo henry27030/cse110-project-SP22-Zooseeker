@@ -40,7 +40,7 @@ public class NextActivity extends AppCompatActivity {
         TextView text = (TextView)findViewById(R.id.TotalDistance);
         text.setText("Path length: " + String.valueOf(planCalculate.totalDistance) + " ft.");
     }
-
+    // previewing the next exhibit
     public void NextNextButton(View view) {
         ArrayList<String> input = new ArrayList<String>();
         for (String string :stringArrList) {
@@ -57,20 +57,8 @@ public class NextActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
+    // in the case of a skip, take out the next exhibit from the exhibitList
     public void NextSkipButton(View view) {
-/*
-        ArrayList<String> input = new ArrayList<String>();
-        for (String string: MainActivity.exhibitList) {
-            if (!string.equals(destination)){
-                input.add(string);
-            }
-        }
-        MainActivity.exhibitList=input;
-
- */
-
-
         MainActivity.exhibitList.remove(destination);
         for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
             if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
@@ -80,12 +68,12 @@ public class NextActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, TodoListActivity.class);
         startActivity(intent);
-        //finish();
     }
     public void NextBackButton(View view) {
         finish();
     }
 
+    // switch to view the directions brief/descriptive
     public void NextDescriptionToggle(View view) {
         MainActivity.briefDirections=!MainActivity.briefDirections;
         PlanCalculate planCalculate = new PlanCalculate();

@@ -11,7 +11,6 @@ public class PlanCalculate {
     IdentifiedWeightedEdge identifiedEdge;
     IdentifiedWeightedEdge newEdge1;
     IdentifiedWeightedEdge newEdge2;
-    //
     String currentStreet = null;
     String source = null;
     String target = null;
@@ -30,6 +29,8 @@ public class PlanCalculate {
     public List<String> extracted(Coord coordinate, ArrayList<String> exhibits) {
         String start = null;
         Set<String> keys=MainActivity.vInfo.keySet();
+        // Directions to return
+        ArrayList<String> Directions = new ArrayList<String>();
 
         for (String Nodes: keys) {
             //if (coordinate.equals(Coord.of(MainActivity.vInfo.get(Nodes).coords.lat, (MainActivity.vInfo.get(Nodes).coords.lng)))) {
@@ -37,9 +38,10 @@ public class PlanCalculate {
                 start = MainActivity.vInfo.get(Nodes).id;
             }
         }
-        //testing
+
+        // in the case that start's coords are not that of a node's
+        // create a user node and two edges from the User node's location to replace the edge it is on
         if (start==null) {
-            //time to add in the edges and such
             //adding User to vInfo
             identifiedEdge = SlopeMath.edgeUserIsOn(coordinate);
             ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
@@ -67,14 +69,13 @@ public class PlanCalculate {
             MainActivity.g.setEdgeWeight(newEdge2, fromSourceToUser);
 
             start = "User";
-        }//
+        }
+
         String compare1 = start;
         String compare2 = null;
 
-        ArrayList<String> Directions = new ArrayList<String>();
-        //Directions.add(identifiedEdge.getId());//testing
 
-        //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
+        // use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
         ArrayList<String> exhibitListInFunc = new ArrayList<String>();
         for (String exhibit : exhibits) {
             exhibitListInFunc.add(exhibit);
@@ -108,15 +109,15 @@ public class PlanCalculate {
                 }
             }
             //in the case that User is already at one of the chosen exhibits
-                if (MainActivity.vInfo.get(start).id!=null) {
-                    if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(input).id)) {
-                        Directions.add("User is currently at a chosen exhibit: " +
-                                MainActivity.vInfo.get(input).name +
-                                ". Please select NEXT to obtain the directions to the next exhibit.");
-                        destination = input;
-                        return Directions;
-                    }
+            if (MainActivity.vInfo.get(start).id!=null) {
+                if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(input).id)) {
+                    Directions.add("User is currently at a chosen exhibit: " +
+                            MainActivity.vInfo.get(input).name +
+                            ". Please select NEXT to obtain the directions to the next exhibit.");
+                    destination = input;
+                    return Directions;
                 }
+            }
             // in the special case that an exhibit is within a group
             if (MainActivity.vInfo.get(input).group_id !=null) {
                 input=MainActivity.vInfo.get(MainActivity.vInfo.get(input).group_id).id;
@@ -124,9 +125,7 @@ public class PlanCalculate {
             if (MainActivity.vInfo.get(start).group_id !=null) {
                 start=MainActivity.vInfo.get(MainActivity.vInfo.get(start).group_id).id;
             }
-            // add UserNode into vInfo
-            // add two edges with weights in the MainActivity.g
-            // find the shortest path between start and input, which is either an exhibit or a group of exhibits
+            //use Dijkstra's to find exhibit with shortest path
             MainActivity.path = DijkstraShortestPath.findPathBetween(MainActivity.g, start, input);
             for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
                 currentLength += MainActivity.g.getEdgeWeight(e);
@@ -137,7 +136,7 @@ public class PlanCalculate {
             }
         }
 
-        // save the shortest distance exhibit from start in shortestInput
+        // save the shortest distance exhibit from start in shortestInput and see if it belongs to a group
         String shortestInput = exhibitListInFunc.get(shortestExhibit);
         if (MainActivity.vInfo.get(shortestInput).group_id !=null) {
             shortestInput=MainActivity.vInfo.get(MainActivity.vInfo.get(shortestInput).group_id).id;
@@ -148,21 +147,13 @@ public class PlanCalculate {
 
         // save our intended exhibit to visit using this path in destination
         destination = exhibitListInFunc.get(shortestExhibit);
-/*
-        if (MainActivity.vInfo.get(start).id!=null) {
-            if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(shortestInput).id)) {
-                Directions.add("User is currently at a chosen destination: " +
-                        MainActivity.vInfo.get(shortestInput).name +
-                        ". Please select NEXT to obtain the directions to the next exhibit");
-            }
-        }
-
- */
 
         //add a string of directions to Directions String array
         for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
             totalDistance+=MainActivity.g.getEdgeWeight(e);
+            //briefDirections are disabled
             if (!MainActivity.briefDirections) {
+                // in the case that User starts at the target of an edge
                 if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
                     String strToInsert = "Walk "
                             +
@@ -182,7 +173,9 @@ public class PlanCalculate {
                     }
                     Directions.add(strToInsert);
                     start = MainActivity.vInfo.get(MainActivity.g.getEdgeSource(e).toString()).id;
-                } else {
+                }
+                // in the case that User starts normally: User starts at the source of an edge
+                else {
                     String strToInsert = "Walk "
                             +
                             MainActivity.g.getEdgeWeight(e) +
@@ -202,7 +195,9 @@ public class PlanCalculate {
                     start = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
                 }
             }
+            //briefDirections are enabled
             else if (MainActivity.briefDirections) {
+                // reads in the first set of directions
                 if (currentStreet==null) {
                     currentStreet = MainActivity.eInfo.get(e.getId()).street;
                     distanceVal+=MainActivity.g.getEdgeWeight(e);
@@ -217,6 +212,7 @@ public class PlanCalculate {
                         start = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
                     }
                 }
+                // in the case that the street is repeated in a message, don't output it
                 else if (currentStreet.equals(MainActivity.eInfo.get(e.getId()).street)) {
                     distanceVal+=MainActivity.g.getEdgeWeight(e);
                     if (MainActivity.vInfo.get(start).name.equals(MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name)) {
@@ -226,6 +222,7 @@ public class PlanCalculate {
                         target = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).name;
                     }
                 }
+                // in the case that street isn't repeated but doesn't match the previous message's street
                 else {
                     String strToInsert = "Walk " + distanceVal + " ft from " + source + " toward " + target;
                     Directions.add(strToInsert);
@@ -243,6 +240,8 @@ public class PlanCalculate {
                         start = MainActivity.vInfo.get(MainActivity.g.getEdgeTarget(e).toString()).id;
                     }
                 }
+                // in the case that User starts at the target of an edge
+                // output the message accordingly
                 if (target.equals(MainActivity.vInfo.get(shortestInput).name)) {
                     String strToInsert = "Walk " + distanceVal + " ft from " + source + " toward " + target;
                     if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
@@ -254,6 +253,8 @@ public class PlanCalculate {
                     Directions.add(strToInsert);
 
                 }
+                // in the case that User starts normally: User starts at the source of an edge
+                // output the message accordingly
                 if (source.equals(MainActivity.vInfo.get(shortestInput).name)) {
                     String strToInsert = "Walk " + distanceVal + " ft from " + target + " toward " + source;
                     if (MainActivity.vInfo.get(exhibitListInFunc.get(shortestExhibit)).group_id != null) {
@@ -266,23 +267,7 @@ public class PlanCalculate {
                 }
             }
         }
-/* testing purposes
-//exactly 26 "TESTTEST" which means that exactly 26 edges as required with the correct pair
-        if (MainActivity.edgeSlopeBInfo.size()==26) {
-            Set<String> EdgeKeys = MainActivity.eInfo.keySet();
-            double a = 5;
-            double b = 5;
-            Pair<Double, Double> returnValue = new Pair<Double, Double> (a,b);
-            for (String Edge: EdgeKeys) {
-                if (MainActivity.edgeSlopeBInfo.get(Edge).equals(returnValue)) {
-                    Directions.add("TESTTEST");
-                }
-            }
-        }
-
- */
-
-        //reverse changes if made
+        //reverse changes to nodes and edges if made
         if (identifiedEdge != null) {
             String source = MainActivity.g.getEdgeSource(newEdge2);
             String target = MainActivity.g.getEdgeTarget(newEdge1);
