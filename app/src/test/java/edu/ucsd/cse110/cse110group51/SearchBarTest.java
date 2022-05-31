@@ -36,6 +36,19 @@ public class SearchBarTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
 
+    private TodoDatabase db;
+
+    @Before
+    public void createDb() {
+        Context context = ApplicationProvider.getApplicationContext();
+        db = TodoDatabase.getSingleton(context);
+    }
+
+    @After
+    public void closeDb() throws IOException {
+        db.close();
+    }
+
     @Test
     public void searchFilterTest() {
 
@@ -47,7 +60,7 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("lions", true);
+            searchView.setQuery("crocodile", true);
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);
@@ -64,7 +77,7 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("lions", true);
+            searchView.setQuery("ko", true);
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);
