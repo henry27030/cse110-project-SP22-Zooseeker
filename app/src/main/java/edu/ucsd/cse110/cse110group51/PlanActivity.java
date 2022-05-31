@@ -43,8 +43,10 @@ public class PlanActivity extends AppCompatActivity {
         finish();
     }
 
-    public void PlanNextButton(View view) {
 
+    // The button either shows a preview of the next exhibit or shifts the main set
+    // of directions to the next exhibit based on the User's coordinates.
+    public void PlanNextButton(View view) {
         ArrayList<String> input = new ArrayList<String>();
         for (String string :MainActivity.exhibitList) {
             if (!string.equals(destination)){
@@ -52,8 +54,7 @@ public class PlanActivity extends AppCompatActivity {
             }
         }
         if (!input.isEmpty()) {
-
-            // in the case that User is at one of the chosen exhibits.
+            // in the special case that User is at one of the chosen exhibits.
             if (MainActivity.UserCoord.equals(MainActivity.vInfo.get(destination).coords)) {
                 MainActivity.previousExhibits.push(destination);
                 MainActivity.exhibitList.remove(destination);
@@ -73,7 +74,6 @@ public class PlanActivity extends AppCompatActivity {
                         Display); //extracted returns an ArrayList
                 directionsView.setAdapter(arrayAdapter);
             }
-
             // in the case that User is not at one of the chosen exhibits.
             else {
                 Intent intent = new Intent(this, NextActivity.class);
@@ -86,6 +86,8 @@ public class PlanActivity extends AppCompatActivity {
         }
     }
 
+    // This button uses arrayAdapter to change
+    // the format of directions shown to the User
     public void PlanDescriptionToggle(View view) {
         if (!MainActivity.exhibitList.isEmpty()) {
             MainActivity.briefDirections = !MainActivity.briefDirections;
@@ -101,6 +103,8 @@ public class PlanActivity extends AppCompatActivity {
         }
     }
 
+    // This button shifts to a layout that displays the previous exhibit to the user
+    // that is from the stack of previousExhibits
     public void PlanPrevious(View view) {
         if (!MainActivity.previousExhibits.isEmpty()) {
             Intent intent = new Intent(this, PreviousActivity.class);
@@ -113,7 +117,10 @@ public class PlanActivity extends AppCompatActivity {
         }
     }
 
+    // button either skips and deletes the exhibit from our list of exhibits to visit
+    // or does nothing based on the number of exhibits in our list of exhibits
     public void PlanSkip(View view) {
+        // remove the next exhibit from the exhibitList
         MainActivity.exhibitList.remove(destination);
         for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
             if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
@@ -121,9 +128,13 @@ public class PlanActivity extends AppCompatActivity {
                 break;
             }
         }
+
+        // do not skip in an empty exhibitList
         if (MainActivity.exhibitList.isEmpty()) {
             finish();
         }
+
+        // shows display of next exhibit
         else {
             PlanCalculate planCalculate = new PlanCalculate();
             List<String> Display = planCalculate.extracted(MainActivity.UserCoord, MainActivity.exhibitList);
