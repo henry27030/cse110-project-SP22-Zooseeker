@@ -9,6 +9,7 @@ import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -36,14 +37,14 @@ import org.junit.runner.RunWith;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class deleteTest {
+public class SBST_for_iteration_1_MS2 {
 
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void deleteTest() {
+    public void Next_Previous_Refresh_RePlan() {
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.plan_btn), withText("Plan"),
                         childAtPosition(
@@ -186,7 +187,57 @@ public class deleteTest {
                         isDisplayed()));
         materialButton7.perform(click());
 
+        ViewInteraction appCompatImageView = onView(
+                allOf(withClassName(is("androidx.appcompat.widget.AppCompatImageView")), withContentDescription("Search"),
+                        childAtPosition(
+                                allOf(withClassName(is("android.widget.LinearLayout")),
+                                        childAtPosition(
+                                                withId(R.id.action_search),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageView.perform(click());
+
+        ViewInteraction searchAutoComplete = onView(
+                allOf(withClassName(is("android.widget.SearchView$SearchAutoComplete")),
+                        childAtPosition(
+                                allOf(withClassName(is("android.widget.LinearLayout")),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.LinearLayout")),
+                                                1)),
+                                0),
+                        isDisplayed()));
+        searchAutoComplete.perform(replaceText("crocodile"), closeSoftKeyboard());
+
+        DataInteraction materialTextView2 = onData(anything())
+                .inAdapterView(allOf(withId(R.id.list_view),
+                        childAtPosition(
+                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                2)))
+                .atPosition(0);
+        materialTextView2.perform(click());
+
+        ViewInteraction materialCheckBox5 = onView(
+                allOf(withId(R.id.completed),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.exhibit_list_items),
+                                        0),
+                                1),
+                        isDisplayed()));
+        materialCheckBox5.perform(click());
+
         ViewInteraction materialButton8 = onView(
+                allOf(withId(R.id.finish_btn), withText("Back"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        materialButton8.perform(click());
+
+        ViewInteraction materialButton9 = onView(
                 allOf(withId(R.id.plan_btn), withText("Plan"),
                         childAtPosition(
                                 childAtPosition(
@@ -194,27 +245,40 @@ public class deleteTest {
                                         0),
                                 1),
                         isDisplayed()));
-        materialButton8.perform(click());
-
-        ViewInteraction materialButton9 = onView(
-                allOf(withId(R.id.plan_display), withText("Plan Display"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
         materialButton9.perform(click());
 
         ViewInteraction textView = onView(
-                allOf(withId(android.R.id.text1), withText("Walk 1200.0 ft along Orangutan Trail from Treetops Way / Orangutan Trail to Siamangs"),
-                        withParent(allOf(withId(R.id.directions_view),
-                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                allOf(withId(R.id.todo_item_text), withText("koi"),
+                        withParent(withParent(withId(R.id.todo_items))),
                         isDisplayed()));
-        textView.check(matches(withText("Walk 1200.0 ft along Orangutan Trail from Treetops Way / Orangutan Trail to Siamangs")));
+        textView.check(matches(withText("koi")));
+
+        ViewInteraction textView3 = onView(
+                allOf(withId(R.id.todo_item_text), withText("dove"),
+                        withParent(withParent(withId(R.id.todo_items))),
+                        isDisplayed()));
+        textView3.check(matches(withText("dove")));
+
+        ViewInteraction textView4 = onView(
+                allOf(withId(R.id.todo_item_text), withText("orangutan"),
+                        withParent(withParent(withId(R.id.todo_items))),
+                        isDisplayed()));
+        textView4.check(matches(withText("orangutan")));
+
+        ViewInteraction textView5 = onView(
+                allOf(withId(R.id.todo_item_text), withText("siamang"),
+                        withParent(withParent(withId(R.id.todo_items))),
+                        isDisplayed()));
+        textView5.check(matches(withText("siamang")));
+
+        ViewInteraction textView6 = onView(
+                allOf(withId(R.id.todo_item_text), withText("crocodile"),
+                        withParent(withParent(withId(R.id.todo_items))),
+                        isDisplayed()));
+        textView6.check(matches(withText("crocodile")));
 
         ViewInteraction materialButton10 = onView(
-                allOf(withId(R.id.plan_next_button), withText("Next"),
+                allOf(withId(R.id.plan_display), withText("Plan Display"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -223,14 +287,31 @@ public class deleteTest {
                         isDisplayed()));
         materialButton10.perform(click());
 
-        ViewInteraction textView2 = onView(
+        ViewInteraction textView7 = onView(
+                allOf(withId(android.R.id.text1), withText("Walk 1200.0 ft along Orangutan Trail from Treetops Way / Orangutan Trail to Siamangs"),
+                        withParent(allOf(withId(R.id.directions_view),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        textView7.check(matches(withText("Walk 1200.0 ft along Orangutan Trail from Treetops Way / Orangutan Trail to Siamangs")));
+
+        ViewInteraction materialButton11 = onView(
+                allOf(withId(R.id.plan_next_button), withText("Next"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        materialButton11.perform(click());
+
+        ViewInteraction textView8 = onView(
                 allOf(withId(android.R.id.text1), withText("Walk 1100.0 ft along Orangutan Trail from Siamangs to Orangutans"),
                         withParent(allOf(withId(R.id.next_directions_view),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        textView2.check(matches(withText("Walk 1100.0 ft along Orangutan Trail from Siamangs to Orangutans")));
+        textView8.check(matches(withText("Walk 1100.0 ft along Orangutan Trail from Siamangs to Orangutans")));
 
-        ViewInteraction materialButton11 = onView(
+        ViewInteraction materialButton12 = onView(
                 allOf(withId(R.id.next_next_button), withText("Next"),
                         childAtPosition(
                                 childAtPosition(
@@ -238,16 +319,16 @@ public class deleteTest {
                                         0),
                                 2),
                         isDisplayed()));
-        materialButton11.perform(click());
+        materialButton12.perform(click());
 
-        ViewInteraction textView3 = onView(
+        ViewInteraction textView9 = onView(
                 allOf(withId(android.R.id.text1), withText("Walk 1300.0 ft along Aviary Trail from Parker Aviary to Owens Aviary and find Emerald Doves inside."),
                         withParent(allOf(withId(R.id.next_directions_view),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        textView3.check(matches(withText("Walk 1300.0 ft along Aviary Trail from Parker Aviary to Owens Aviary and find Emerald Doves inside.")));
+        textView9.check(matches(withText("Walk 1300.0 ft along Aviary Trail from Parker Aviary to Owens Aviary and find Emerald Doves inside.")));
 
-        ViewInteraction materialButton12 = onView(
+        ViewInteraction materialButton13 = onView(
                 allOf(withId(R.id.next_back_button), withText("Previous"),
                         childAtPosition(
                                 childAtPosition(
@@ -255,20 +336,10 @@ public class deleteTest {
                                         0),
                                 1),
                         isDisplayed()));
-        materialButton12.perform(click());
-
-        ViewInteraction materialButton13 = onView(
-                allOf(withId(R.id.button), withText("Skip"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                3),
-                        isDisplayed()));
         materialButton13.perform(click());
 
         ViewInteraction materialButton14 = onView(
-                allOf(withId(R.id.plan_display), withText("Plan Display"),
+                allOf(withId(R.id.button), withText("Skip"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -277,15 +348,42 @@ public class deleteTest {
                         isDisplayed()));
         materialButton14.perform(click());
 
-        ViewInteraction textView4 = onView(
-                allOf(withId(android.R.id.text1), withText("Walk 1200.0 ft along Orangutan Trail from Treetops Way / Orangutan Trail to Siamangs"),
-                        withParent(allOf(withId(R.id.directions_view),
-                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+        ViewInteraction textView10 = onView(
+                allOf(withId(R.id.todo_item_text), withText("koi"),
+                        withParent(withParent(withId(R.id.todo_items))),
                         isDisplayed()));
-        textView4.check(matches(withText("Walk 1200.0 ft along Orangutan Trail from Treetops Way / Orangutan Trail to Siamangs")));
+        textView10.check(matches(withText("koi")));
+
+        ViewInteraction textView11 = onView(
+                allOf(withId(R.id.todo_item_text), withText("dove"),
+                        withParent(withParent(withId(R.id.todo_items))),
+                        isDisplayed()));
+        textView11.check(matches(withText("dove")));
+
+        ViewInteraction textView12 = onView(
+                allOf(withId(R.id.todo_item_text), withText("siamang"),
+                        withParent(withParent(withId(R.id.todo_items))),
+                        isDisplayed()));
+        textView12.check(matches(withText("siamang")));
+
+        ViewInteraction textView13 = onView(
+                allOf(withId(R.id.todo_item_text), withText("crocodile"),
+                        withParent(withParent(withId(R.id.todo_items))),
+                        isDisplayed()));
+        textView13.check(matches(withText("crocodile")));
+
+        ViewInteraction materialTextView3 = onView(
+                allOf(withId(R.id.delete_btn), withText("X"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.todo_items),
+                                        2),
+                                2),
+                        isDisplayed()));
+        materialTextView3.perform(click());
 
         ViewInteraction materialButton15 = onView(
-                allOf(withId(R.id.plan_next_button), withText("Next"),
+                allOf(withId(R.id.plan_display), withText("Plan Display"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -294,12 +392,137 @@ public class deleteTest {
                         isDisplayed()));
         materialButton15.perform(click());
 
-        ViewInteraction textView5 = onView(
-                allOf(withId(android.R.id.text1), withText("Walk 1300.0 ft along Aviary Trail from Parker Aviary to Owens Aviary and find Emerald Doves inside."),
+        ViewInteraction textView14 = onView(
+                allOf(withId(android.R.id.text1), withText("Walk 2200.0 ft along Terrace Lagoon Loop from Front Street / Terrace Lagoon Loop (South) to Koi Fish"),
+                        withParent(allOf(withId(R.id.directions_view),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        textView14.check(matches(withText("Walk 2200.0 ft along Terrace Lagoon Loop from Front Street / Terrace Lagoon Loop (South) to Koi Fish")));
+
+        ViewInteraction materialButton16 = onView(
+                allOf(withId(R.id.plan_next_button), withText("Next"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        materialButton16.perform(click());
+
+        ViewInteraction textView15 = onView(
+                allOf(withId(android.R.id.text1), withText("Walk 1100.0 ft along Hippo Trail from Hippos to Crocodiles"),
                         withParent(allOf(withId(R.id.next_directions_view),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        textView5.check(matches(withText("Walk 1300.0 ft along Aviary Trail from Parker Aviary to Owens Aviary and find Emerald Doves inside.")));
+        textView15.check(matches(withText("Walk 1100.0 ft along Hippo Trail from Hippos to Crocodiles")));
+
+        ViewInteraction materialButton17 = onView(
+                allOf(withId(R.id.next_back_button), withText("Previous"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        materialButton17.perform(click());
+
+        ViewInteraction materialButton18 = onView(
+                allOf(withId(R.id.plan_back_button), withText("Back"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        materialButton18.perform(click());
+
+        ViewInteraction materialButton19 = onView(
+                allOf(withId(R.id.mock_location), withText("Mock Location"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                5),
+                        isDisplayed()));
+        materialButton19.perform(click());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.lat),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatEditText3.perform(replaceText("32.72109826903826"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.lng),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                2),
+                        isDisplayed()));
+        appCompatEditText4.perform(replaceText("-117.15952052282296"), closeSoftKeyboard());
+
+        ViewInteraction materialButton20 = onView(
+                allOf(withId(R.id.Mock), withText("Mock User Location"),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                3),
+                        isDisplayed()));
+        materialButton20.perform(click());
+
+        ViewInteraction materialButton21 = onView(
+                allOf(withId(R.id.mock_back), withText("Back"),
+                        childAtPosition(
+                                allOf(withId(R.id.setCoor),
+                                        childAtPosition(
+                                                withId(android.R.id.content),
+                                                0)),
+                                0),
+                        isDisplayed()));
+        materialButton21.perform(click());
+
+        ViewInteraction materialButton22 = onView(
+                allOf(withId(R.id.plan_display), withText("Plan Display"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        materialButton22.perform(click());
+
+        ViewInteraction textView16 = onView(
+                allOf(withId(android.R.id.text1), withText("User is currently at a chosen exhibit: Koi Fish. Please select NEXT to obtain the directions to the next exhibit."),
+                        withParent(allOf(withId(R.id.directions_view),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        textView16.check(matches(withText("User is currently at a chosen exhibit: Koi Fish. Please select NEXT to obtain the directions to the next exhibit.")));
+
+        ViewInteraction materialButton23 = onView(
+                allOf(withId(R.id.plan_next_button), withText("Next"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        materialButton23.perform(click());
+
+        ViewInteraction textView17 = onView(
+                allOf(withId(android.R.id.text1), withText("Walk 1100.0 ft along Hippo Trail from Hippos to Crocodiles"),
+                        withParent(allOf(withId(R.id.directions_view),
+                                withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
+                        isDisplayed()));
+        textView17.check(matches(withText("Walk 1100.0 ft along Hippo Trail from Hippos to Crocodiles")));
     }
 
     private static Matcher<View> childAtPosition(

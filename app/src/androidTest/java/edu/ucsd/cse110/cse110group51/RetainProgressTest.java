@@ -252,12 +252,12 @@ public class RetainProgressTest {
                         isDisplayed()));
         materialButton4.perform(click());
 
-        ViewInteraction textView2 = onView(
+        ViewInteraction textView22 = onView(
                 allOf(withId(android.R.id.text1), withText("Walk 1100.0 ft along Hippo Trail from Hippos to Crocodiles"),
                         withParent(allOf(withId(R.id.directions_view),
                                 withParent(IsInstanceOf.<View>instanceOf(android.view.ViewGroup.class)))),
                         isDisplayed()));
-        textView2.check(matches(withText("Walk 1100.0 ft along Hippo Trail from Hippos to Crocodiles")));
+        textView22.check(matches(withText("Walk 1100.0 ft along Hippo Trail from Hippos to Crocodiles")));
     }
 
     private static Matcher<View> childAtPosition(
