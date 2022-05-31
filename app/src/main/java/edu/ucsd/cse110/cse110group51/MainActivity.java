@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,35 +19,39 @@ import androidx.lifecycle.ViewModelProvider;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.jgrapht.alg.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-//import androidx.appcompat.widget.SearchView;
-//
-//
+import java.util.Stack;
 
 public class MainActivity extends AppCompatActivity {
-    private ListView listView;
-    private TextView List_btn;
 
-    public static String start = "entrance_exit_gate";
-    public static ArrayList<String> exhibitList = new ArrayList<String>();
-    public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-    public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
-    public static ArrayList<String> Directions = new ArrayList<String>();
+    public static SharedPreferences sp; // Used for saving UserCoord after exiting app
+    private ListView listView;
+    private ArrayAdapter<String> arrayAdapter;
+
+    // data structures to store exhibits and their information
+    public static ArrayList<String> exhibitList = new ArrayList<String>(); // stores list of exhibits to visit
+    public static Stack<String> previousExhibits = new Stack<String>(); // saves previous exhibits
+    public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>(); // (Node id, array of node tags)
+    public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>(); // saves tags to display in dropdown list
+    public static Map<String , Pair<Double, Double>> edgeSlopeBInfo; // save (String edge, (slope, b)) for each edge
+
+    // UserCoordinates and directions for user
+    public static boolean briefDirections;// = false; // boolean for determining brief/descriptive directions
+    public static Coord UserCoord; // saves User's coordinates
+    public static boolean UserCoordLiveUpdateEnabled = false; // when true, periodically refresh User's live location
+
     // 1. Load the graph...
     public static Graph<String, IdentifiedWeightedEdge> g;
     public static GraphPath<String, IdentifiedWeightedEdge> path;
-
     // 2. Load the information about our nodes and edges...
     public static Map<String, ZooData.VertexInfo> vInfo;
     public static Map<String, ZooData.EdgeInfo> eInfo;
-    private ArrayAdapter<String> arrayAdapter;
-
     // ViewModel
     public static TodoListViewModel viewModel;
 
@@ -54,55 +59,53 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        briefDirections = false;
 
-        Intent intent = getIntent();
-        int Num = intent.getIntExtra("num", 0);
-        //this.List_btn =this.findViewById(R.id.list_btn);
-        //List_btn.setText("List("+Num+")");
-
-        // initialize viewModel and exhibitlist
+        // initialize viewModel and exhibitList
         viewModel = new ViewModelProvider(this)
                 .get(TodoListViewModel.class);
         List<TodoListItem> list = viewModel.getCurrentItems();
         Log.v("TodolistItemsSize", String.valueOf(list.size()));
-        for(TodoListItem item : list){
-            if(!MainActivity.exhibitList.contains(item.text)){
+        for (TodoListItem item : list) {
+            if (!MainActivity.exhibitList.contains(item.text)) {
                 MainActivity.exhibitList.add(item.text);
             }
-//            Log.v("GetTodoListItem:", String.join(",", item.text));
         }
 
+        // initialize the graph, edges, and vertices
         Context context = getApplication().getApplicationContext();
 
         // 1. Load the graph...
-        g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
-        //GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
+        g = ZooData.loadZooGraphJSON(context, "zoo_graph.json");
 
         // 2. Load the information about our nodes and edges...
-        vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
-        eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
-
+        vInfo = ZooData.loadVertexInfoJSON(context, "exhibit_info.json");
+        eInfo = ZooData.loadEdgeInfoJSON(context, "trail_info.json");
+        edgeSlopeBInfo = new HashMap<String, Pair<Double, Double>>();
         this.listView = this.findViewById(R.id.list_view);
 
         //Display onto searchbar tags as keys to value of Nodes
-        ArrayList<String> arr = new ArrayList<String>();
-        Set<String> keys=vInfo.keySet();
-        for (String Nodes: keys) {
-            /*
-            if(Nodes.equals("entrance_exit_gate") || Nodes.equals("entrance_plaza")){
-                continue;
+        Set<String> keys = vInfo.keySet();
+        for (String Nodes : keys) {
+            // initializing LatLng coords for each node
+            if (vInfo.get(Nodes).coords == null) {
+
+                if (vInfo.get(Nodes).lat == 0 && vInfo.get(Nodes).lng == 0) {
+                    vInfo.get(Nodes).lat = vInfo.get(vInfo.get(Nodes).group_id).lat;
+                    vInfo.get(Nodes).lng = vInfo.get(vInfo.get(Nodes).group_id).lng;
+                }
+
+                vInfo.get(Nodes).coords = Coord.of(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
             }
 
-             */
             if (!vInfo.get(Nodes).kind.equals(vInfo.get(Nodes).kind.EXHIBIT)) {
                 continue;
             }
-            for (String tag:vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
+            for (String tag : vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
                 if (map.containsKey(tag) && !map.get(tag).contains(Nodes)) {
                     map.get(tag).add(Nodes);
-                }
-                else{
-                    if(!arrayOfTagToDisplay.contains(tag)){
+                } else {
+                    if (!arrayOfTagToDisplay.contains(tag)) {
                         arrayOfTagToDisplay.add(tag);
                     }
                     ArrayList<String> tagNodes = new ArrayList<String>();
@@ -111,6 +114,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        // Initialize edgeSlopeBInfo to hold all edge IDs and their respective slopes
+        Set<String> EdgeKeys = eInfo.keySet();
+        for (String Edge : EdgeKeys) {
+            Set<IdentifiedWeightedEdge> edgeList;
+            IdentifiedWeightedEdge edgeToIdentify;
+            String Source;
+            String Target;
+            edgeList = g.edgeSet();
+            for (IdentifiedWeightedEdge Edges : edgeList) {
+                if (Edges.getId().equals(Edge)) {
+                    edgeToIdentify = Edges;
+                    Source = g.getEdgeSource(edgeToIdentify);
+                    Target = g.getEdgeTarget(edgeToIdentify);
+                    edgeSlopeBInfo.put(Edge, SlopeMath.returnSlopeB(Source, Target));
+                }
+            }
+        }
+
         arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -122,15 +144,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Intent intent = new Intent(MainActivity.this, ExhibitListActivity.class);
-//                intent.putExtra("position", position);
                 intent.putExtra("category", arrayAdapter.getItem(position));
-//                Log.v("The category name:", arrayAdapter.getItem(position));
                 startActivity(intent);
             }
         });
+
+        //Initialize UserCoord information/persistence
+        sp = getSharedPreferences("PrefFile", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        if (!sp.contains("lat")||!sp.contains("lng")) {
+            UserCoord = Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng);
+        }else{
+            UserCoord = Coord.of(Double.longBitsToDouble(sp.getLong("lat", Double.doubleToLongBits(0))),
+                    Double.longBitsToDouble(sp.getLong("lng", Double.doubleToLongBits(0))));
+        }
+
     }
 
-
+    // this method is used to set the Search Bar search function
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -155,15 +187,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     public void onCategoryClicked(View view) {
-
     }
 
-    public void onMemberClicked(View view) {
-
-    }
-    //this method
+    //this method is used to transition to the TodoListActivity which contains
+    //the list of exhibits that user selected and other buttons
     public void onPlanButtonClicked(View view) {
         SearchView searchView = findViewById(R.id.action_search);
         searchView.setQuery("", true);

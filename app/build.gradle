@@ -22,8 +22,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     testOptions {
         unitTests{
@@ -47,6 +47,14 @@ dependencies {
     implementation "org.jgrapht:jgrapht-core:$jgrapht_version"
     implementation "org.jgrapht:jgrapht-io:$jgrapht_version"
     //
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'//ADDED
+    implementation 'com.google.android.material:material:1.6.0' //ADDED
+    def guava_version = "31.1-android"
+
+    // Guava: extended standard library for Java by Google.
+    //   - Streams: extra utilities for working with streams.
+    implementation "com.google.guava:guava:$guava_version"
+    //
 
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "androidx.room:room-runtime:$room_version"
@@ -59,8 +67,8 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.android.support.test:runner:0.5'
 
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    //androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    //androidTestImplementation 'com.android.support.test:runner:1.0.2'
     testImplementation 'androidx.test.ext:junit:1.1.3'
     testImplementation 'org.robolectric:robolectric:4.7.3'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

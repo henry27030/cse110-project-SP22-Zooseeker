@@ -8,17 +8,17 @@
 
     <ListView
         android:id="@+id/next_directions_view"
-        android:layout_width="318dp"
-        android:layout_height="553dp"
+        android:layout_width="322dp"
+        android:layout_height="437dp"
         android:layout_marginStart="46dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="47dp"
         android:layout_marginBottom="128dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"></ListView>
 
     <Button
         android:id="@+id/next_back_button"
@@ -54,5 +54,33 @@
         android:text="Skip"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/next_directions_view" />
+
+    <TextView
+        android:id="@+id/TotalDistance"
+        android:layout_width="335dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="46dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/next_back_button" />
+
+    <Button
+        android:id="@+id/NextDescriptionToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="262dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="10dp"
+        android:text="Description Toggle"
+        android:onClick="NextDescriptionToggle"
+        app:layout_constraintBottom_toTopOf="@+id/next_directions_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.687" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

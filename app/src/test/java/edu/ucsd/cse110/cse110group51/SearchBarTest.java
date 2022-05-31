@@ -60,7 +60,7 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("lions", true);
+            searchView.setQuery("crocodile", true);
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);
@@ -77,7 +77,7 @@ public class SearchBarTest {
             ListView listView = activity.findViewById(R.id.list_view);
 //          MenuItem menuItem = activity.findViewById(R.id.action_search);
             SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("lions", true);
+            searchView.setQuery("ko", true);
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);

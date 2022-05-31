@@ -8,14 +8,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todo_items"
-        android:layout_width="403dp"
-        android:layout_height="570dp"
+        android:layout_width="410dp"
+        android:layout_height="426dp"
         android:layout_marginTop="8dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.099"
-        tools:layout_editor_absoluteX="4dp" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp" />
 
     <Button
         android:id="@+id/add_todo_btn"
@@ -33,28 +34,28 @@
         android:id="@+id/back_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="80dp"
         android:onClick="onBackClicked"
         android:text="Back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todo_items" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plan_display" />
 
     <Button
         android:id="@+id/plan_display"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="134dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="41dp"
         android:onClick="onPlanDisplayClicked"
         android:text="Plan Display"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/back_btn"
+        app:layout_constraintStart_toEndOf="@+id/mock_location"
         app:layout_constraintTop_toBottomOf="@+id/todo_items" />
 
     <EditText
-        android:id="@+id/new_todo_text"
+        android:id="@+id/x_coor"
         android:layout_width="214dp"
         android:layout_height="39dp"
         android:hint="Enter a todo here ..."
@@ -65,4 +66,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.952"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/mock_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="30dp"
+        android:onClick="onMockLocationClicked"
+        android:text="Mock Location"
+        app:layout_constraintEnd_toStartOf="@+id/plan_display"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todo_items"
+        />
+
+    <Button
+        android:id="@+id/Clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
+        android:onClick="ListClear"
+        android:text="Clear"
+        app:layout_constraintEnd_toStartOf="@+id/back_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mock_location" />
+
+    <Button
+        android:id="@+id/read_user_loc"
+        android:layout_width="203dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="104dp"
+        android:onClick="ReadUserLocation"
+        android:text="Read User Location"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_btn"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

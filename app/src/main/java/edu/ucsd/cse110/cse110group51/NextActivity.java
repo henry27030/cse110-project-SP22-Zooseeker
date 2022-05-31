@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ public class NextActivity extends AppCompatActivity {
         PlanCalculate planCalculate = new PlanCalculate();
         Intent intent = getIntent();
         Bundle args = intent.getBundleExtra("BUNDLE");
+        String source = intent.getStringExtra("Key");
         stringArrList = (ArrayList<String>) args.getSerializable("ArrayList");
-        List<String> Display = planCalculate.extracted(MainActivity.start, stringArrList);
+        List<String> Display = planCalculate.extracted(MainActivity.vInfo.get(source).coords, stringArrList);
         destination = planCalculate.getDestination();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_next);
@@ -34,8 +36,11 @@ public class NextActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 Display); //extracted returns an ArrayList
         directionsView.setAdapter(arrayAdapter);
-    }
 
+        TextView text = (TextView)findViewById(R.id.TotalDistance);
+        text.setText("Path length: " + String.valueOf(planCalculate.totalDistance) + " ft.");
+    }
+    // previewing the next exhibit
     public void NextNextButton(View view) {
         ArrayList<String> input = new ArrayList<String>();
         for (String string :stringArrList) {
@@ -45,25 +50,15 @@ public class NextActivity extends AppCompatActivity {
         }
         if (!input.isEmpty()) {
             Intent intent = new Intent(this, NextActivity.class);
-            //intent.putExtra("Key", planCalculate.getDestination());
+            intent.putExtra("Key", destination);
             Bundle args = new Bundle();
             args.putSerializable("ArrayList", (Serializable) input);
             intent.putExtra("BUNDLE", args);
             startActivity(intent);
         }
     }
-
+    // in the case of a skip, take out the next exhibit from the exhibitList
     public void NextSkipButton(View view) {
-        /*
-        ArrayList<String> input = new ArrayList<String>();
-        for (String string: MainActivity.exhibitList) {
-            if (!string.equals(destination)){
-                input.add(string);
-            }
-        }
-        MainActivity.exhibitList=input;
-
-         */
         MainActivity.exhibitList.remove(destination);
         for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
             if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
@@ -71,9 +66,28 @@ public class NextActivity extends AppCompatActivity {
                 break;
             }
         }
-        finish();
+        Intent intent = new Intent(this, TodoListActivity.class);
+        startActivity(intent);
     }
     public void NextBackButton(View view) {
         finish();
+    }
+
+    // switch to view the directions brief/descriptive
+    public void NextDescriptionToggle(View view) {
+        MainActivity.briefDirections=!MainActivity.briefDirections;
+        PlanCalculate planCalculate = new PlanCalculate();
+        Intent intent = getIntent();
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        String source = intent.getStringExtra("Key");
+        stringArrList = (ArrayList<String>) args.getSerializable("ArrayList");
+        List<String> Display = planCalculate.extracted(MainActivity.vInfo.get(source).coords, stringArrList);
+        this.directionsView = this.findViewById(R.id.next_directions_view);
+        arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                Display); //extracted returns an ArrayList
+        directionsView.setAdapter(arrayAdapter);
+
     }
 }

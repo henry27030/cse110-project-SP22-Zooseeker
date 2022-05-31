@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PreviousActivity">
+    <ListView
+        android:id="@+id/previous_directions_view"
+        android:layout_width="330dp"
+        android:layout_height="419dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="128dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/PreviousTotalDistance"
+        android:layout_width="335dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="34dp"
+        android:text=""
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/previous_directions_view" />
+
+    <Button
+        android:id="@+id/PreviousDescriptionToggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="PreviousDescriptionToggle"
+        android:text="Description Toggle"
+        app:layout_constraintBottom_toTopOf="@+id/previous_directions_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/PreviousBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="275dp"
+        android:text="Back"
+        android:onClick="PreviousBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PreviousTotalDistance" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,41 +18,33 @@
         android:text="Categories"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/member_btn"
-        app:layout_constraintTop_toBottomOf="@+id/list_view" />
+        app:layout_constraintTop_toBottomOf="@+id/list_view"
+        android:visibility="gone"
 
-    <Button
-        android:id="@+id/member_btn"
-        android:layout_width="119dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="onMemberClicked"
-        android:text="Members"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/category_btn"
-        app:layout_constraintStart_toEndOf="@+id/plan_btn" />
+        />
 
     <Button
         android:id="@+id/plan_btn"
         android:layout_width="87dp"
         android:layout_height="52dp"
         android:layout_marginStart="27dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:onClick="onPlanButtonClicked"
         android:text="Plan"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/member_btn"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_view"
+
+        />
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/category_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +56,8 @@
         android:layout_height="34dp"
         android:text="Button"
         android:visibility="gone"
-        tools:layout_editor_absoluteY="681dp" />
+        tools:layout_editor_absoluteY="681dp"
+        tools:ignore="MissingConstraints" />
 
     android:id="@+id/ShowList"
         android:layout_width="216dp"

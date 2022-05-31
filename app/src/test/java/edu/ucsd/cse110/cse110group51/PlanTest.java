@@ -51,7 +51,6 @@ public class PlanTest {
 
         scenario.onActivity(activity -> {
             ListView listView = activity.findViewById(R.id.directions_view);
-//            assertNull(listView);
             assertEquals(listView.getAdapter().getCount(), 0);
         });
     }
@@ -59,38 +58,19 @@ public class PlanTest {
     @Test
     public void SinglePlanTest() {
         //Graph<String, IdentifiedWeightedEdge> g;
-        AtomicReference<GraphPath<String, IdentifiedWeightedEdge>> path = null;
+        //AtomicReference<GraphPath<String, IdentifiedWeightedEdge>> path = null;
         ActivityScenario<PlanActivity> scenario = scenarioRule.getScenario();
 
         scenario.moveToState(Lifecycle.State.CREATED);
+        MainActivity.exhibitList.add("Koi Fish");
+        //MainActivity.exhibitList.add("Flamingos");
+        //MainActivity.exhibitList.add("Capuchin Monkeys");
 
         scenario.onActivity(activity -> {
-            //Context context = getApplication().getApplicationContext();
+            ListView listView = activity.findViewById(R.id.directions_view);
+            assertEquals(listView.getAdapter().getCount(), 0);
 
-            // 1. Load the graph...
-            //g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
-            //GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
-
-            // 2. Load the information about our nodes and edges...
-            //vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
-            //eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
-            ArrayAdapter<String> arrayAdapter = null;
-            int count = 0;
-            ListView directionsView = activity.findViewById(R.id.directions_view);
-            //directionsView.getAdapter();
-            MainActivity.exhibitList.add("lions");
-            ArrayList<String> Directions = new ArrayList<String>();
-            ArrayList<String> exhibitListInFunc = new ArrayList<String>();
-            exhibitListInFunc.add("lions");
-            String start = "entrance_exit_gate";
-            int ShortestPath = 0;
-            //path.set(DijkstraShortestPath.findPathBetween(MainActivity.g, start, "lions"));
-            //MainActivity.Directions = Directions;
-
-            //arrayAdapter = new ArrayAdapter<String>;
-            //directionsView.setAdapter(arrayAdapter);
-
-            assertEquals(directionsView.getAdapter().getCount(), count);
+            //assertEquals(directionsView.getAdapter().getCount(), count);
         });
     }
 }

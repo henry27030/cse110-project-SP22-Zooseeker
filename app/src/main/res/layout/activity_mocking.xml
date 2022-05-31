@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setCoor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MockingActivity">
+
+    <Button
+        android:id="@+id/mock_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="98dp"
+        android:onClick="onMockBackClicked"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Mock" />
+
+    <EditText
+        android:id="@+id/lat"
+        android:layout_width="214dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="89dp"
+        android:hint="Enter latitude"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/lng"
+        android:layout_width="214dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="31dp"
+        android:hint="Enter longitude"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lat" />
+
+    <Button
+        android:id="@+id/Mock"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="35dp"
+        android:onClick="onMockClicked"
+        android:text="Mock User Location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lng" />
+</androidx.constraintlayout.widget.ConstraintLayout>
