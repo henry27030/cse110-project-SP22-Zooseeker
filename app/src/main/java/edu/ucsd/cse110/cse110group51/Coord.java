@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.common.base.Objects;
 
+//Coord class used from Piazza post that helps to set and comapre Coords for exhibits and User
 public class Coord {
     public Coord(double lat, double lng) {
         this.lat = lat;

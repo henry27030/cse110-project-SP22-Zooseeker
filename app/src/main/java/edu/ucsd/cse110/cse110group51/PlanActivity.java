@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanActivity extends AppCompatActivity {
-    private Button ShowHideMock;
     private ListView directionsView;
     private ArrayAdapter<String> arrayAdapter;
     private String destination;

@@ -28,42 +28,30 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-//import androidx.appcompat.widget.SearchView;
-//
-//
-
 public class MainActivity extends AppCompatActivity {
-    public static SharedPreferences sp;
 
+    public static SharedPreferences sp; // Used for saving UserCoord after exiting app
     private ListView listView;
-    private TextView List_btn;
+    private ArrayAdapter<String> arrayAdapter;
 
-    //public static String start = "entrance_exit_gate";
-    public static ArrayList<String> exhibitList = new ArrayList<String>();
-
+    // data structures to store exhibits and their information
+    public static ArrayList<String> exhibitList = new ArrayList<String>(); // stores list of exhibits to visit
     public static Stack<String> previousExhibits = new Stack<String>(); // saves previous exhibits
-    public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-    public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>();
+    public static Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>(); // (Node id, array of node tags)
+    public static ArrayList<String> arrayOfTagToDisplay = new ArrayList<String>(); // saves tags to display in dropdown list
+    public static Map<String , Pair<Double, Double>> edgeSlopeBInfo; // save (String edge, (slope, b)) for each edge
 
-    // boolean for determining brief/descriptive directions
-    public static boolean briefDirections;
-    // save (String edge, (slope, b)) for each edge
-    public static Map<String , Pair<Double, Double>> edgeSlopeBInfo;
+    // UserCoordinates and directions for user
+    public static boolean briefDirections = false; // boolean for determining brief/descriptive directions
+    public static Coord UserCoord; // saves User's coordinates
+    public static boolean UserCoordLiveUpdateEnabled = false; // when true, periodically refresh User's live location
 
-    //UserNode for testing
-    public static Coord UserCoord;
-    public static boolean UserCoordLiveUpdateEnabled = false;
-
-    //public static ArrayList<String> Directions = new ArrayList<String>();
     // 1. Load the graph...
     public static Graph<String, IdentifiedWeightedEdge> g;
     public static GraphPath<String, IdentifiedWeightedEdge> path;
-
     // 2. Load the information about our nodes and edges...
     public static Map<String, ZooData.VertexInfo> vInfo;
     public static Map<String, ZooData.EdgeInfo> eInfo;
-    private ArrayAdapter<String> arrayAdapter;
-
     // ViewModel
     public static TodoListViewModel viewModel;
 
@@ -72,44 +60,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Intent intent = getIntent();
-        //int Num = intent.getIntExtra("num", 0);
-        //this.List_btn =this.findViewById(R.id.list_btn);
-        //List_btn.setText("List("+Num+")");
-        briefDirections = false; //initialize it to false
 
-
-        //initialize viewModel and exhibitlist
+        // initialize viewModel and exhibitList
         viewModel = new ViewModelProvider(this)
                 .get(TodoListViewModel.class);
         List<TodoListItem> list = viewModel.getCurrentItems();
         Log.v("TodolistItemsSize", String.valueOf(list.size()));
-        for(TodoListItem item : list){
-            if(!MainActivity.exhibitList.contains(item.text)){
+        for (TodoListItem item : list) {
+            if (!MainActivity.exhibitList.contains(item.text)) {
                 MainActivity.exhibitList.add(item.text);
             }
-//            Log.v("GetTodoListItem:", String.join(",", item.text));
         }
 
+        // initialize the graph, edges, and vertices
         Context context = getApplication().getApplicationContext();
 
         // 1. Load the graph...
-        //g = ZooData.loadZooGraphJSON(context, "sample_zoo_graph.json");
         g = ZooData.loadZooGraphJSON(context, "zoo_graph.json");
-        //GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
 
         // 2. Load the information about our nodes and edges...
-        //vInfo = ZooData.loadVertexInfoJSON(context, "sample_node_info.json");
         vInfo = ZooData.loadVertexInfoJSON(context, "exhibit_info.json");
-        //eInfo = ZooData.loadEdgeInfoJSON(context, "sample_edge_info.json");
         eInfo = ZooData.loadEdgeInfoJSON(context, "trail_info.json");
-        edgeSlopeBInfo = new HashMap<String , Pair<Double, Double>>();
+        edgeSlopeBInfo = new HashMap<String, Pair<Double, Double>>();
         this.listView = this.findViewById(R.id.list_view);
 
         //Display onto searchbar tags as keys to value of Nodes
-        //ArrayList<String> arr = new ArrayList<String>();
-        Set<String> keys=vInfo.keySet();
-        for (String Nodes: keys) {
+        Set<String> keys = vInfo.keySet();
+        for (String Nodes : keys) {
             // initializing LatLng coords for each node
             if (vInfo.get(Nodes).coords == null) {
 
@@ -118,19 +95,17 @@ public class MainActivity extends AppCompatActivity {
                     vInfo.get(Nodes).lng = vInfo.get(vInfo.get(Nodes).group_id).lng;
                 }
 
-                //vInfo.get(Nodes).coords = new LatLng(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
                 vInfo.get(Nodes).coords = Coord.of(vInfo.get(Nodes).lat, vInfo.get(Nodes).lng);
             }
 
             if (!vInfo.get(Nodes).kind.equals(vInfo.get(Nodes).kind.EXHIBIT)) {
                 continue;
             }
-            for (String tag:vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
+            for (String tag : vInfo.get(Nodes).tags) { //vInfo.get(Nodes) returns VertexInfo, .tags has array
                 if (map.containsKey(tag) && !map.get(tag).contains(Nodes)) {
                     map.get(tag).add(Nodes);
-                }
-                else{
-                    if(!arrayOfTagToDisplay.contains(tag)){
+                } else {
+                    if (!arrayOfTagToDisplay.contains(tag)) {
                         arrayOfTagToDisplay.add(tag);
                     }
                     ArrayList<String> tagNodes = new ArrayList<String>();
@@ -139,15 +114,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
+        // Initialize edgeSlopeBInfo to hold all edge IDs and their respective slopes
         Set<String> EdgeKeys = eInfo.keySet();
-        for (String Edge: EdgeKeys) {
+        for (String Edge : EdgeKeys) {
             Set<IdentifiedWeightedEdge> edgeList;
             IdentifiedWeightedEdge edgeToIdentify;
             String Source;
             String Target;
             edgeList = g.edgeSet();
-            for (IdentifiedWeightedEdge Edges: edgeList) {
-                //if (Edges.getId().equals(eInfo.get(Edge).id)) {
+            for (IdentifiedWeightedEdge Edges : edgeList) {
                 if (Edges.getId().equals(Edge)) {
                     edgeToIdentify = Edges;
                     Source = g.getEdgeSource(edgeToIdentify);
@@ -156,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+
         arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -167,16 +144,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Intent intent = new Intent(MainActivity.this, ExhibitListActivity.class);
-//                intent.putExtra("position", position);
                 intent.putExtra("category", arrayAdapter.getItem(position));
-//                Log.v("The category name:", arrayAdapter.getItem(position));
                 startActivity(intent);
             }
         });
-        //testing
-        //UserCoord = Coord.of(32.74708169, -117.1628942); //midpoint between flamingo and capuchin, IdentifiedEdgeWeight id = capuchin_to_hippo_monkey
 
-
+        //Initialize UserCoord information/persistence
         sp = getSharedPreferences("PrefFile", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -187,36 +160,9 @@ public class MainActivity extends AppCompatActivity {
                     Double.longBitsToDouble(sp.getLong("lng", Double.doubleToLongBits(0))));
         }
 
-        /*
-        ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
-        userInfo.id = "User";
-        userInfo.name = "User";
-        userInfo.kind = ZooData.VertexInfo.Kind.EXHIBIT;
-        vInfo.put("User", userInfo);
-
-        ZooData.EdgeInfo userInfo2 = new ZooData.EdgeInfo();
-        userInfo2.id = "User";
-        userInfo2.street="test street";
-        eInfo.put("User", userInfo2);
-        g.addVertex("User");
-
-        IdentifiedWeightedEdge tester;
-        IdentifiedWeightedEdge newEdge1 = new IdentifiedWeightedEdge();
-        IdentifiedWeightedEdge newEdge2 = new IdentifiedWeightedEdge();
-
-        tester=g.removeEdge("flamingo", "capuchin");
-        newEdge1= (IdentifiedWeightedEdge) tester.clone();
-        newEdge2= (IdentifiedWeightedEdge) tester.clone();
-        g.addEdge("flamingo", "User", newEdge1);
-        g.addEdge("User", "capuchin", newEdge2);
-        g.setEdgeWeight("flamingo", "User", 100);
-        g.setEdgeWeight("User", "capuchin", 100);
-
- */
-
     }
 
-
+    // this method is used to set the Search Bar search function
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -241,15 +187,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
     public void onCategoryClicked(View view) {
-
     }
 
-    public void onMemberClicked(View view) {
-
-    }
-    //this method
+    //this method is used to transition to the TodoListActivity which contains
+    //the list of exhibits that user selected and other buttons
     public void onPlanButtonClicked(View view) {
         SearchView searchView = findViewById(R.id.action_search);
         searchView.setQuery("", true);

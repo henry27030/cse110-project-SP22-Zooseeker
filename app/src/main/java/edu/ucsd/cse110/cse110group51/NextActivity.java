@@ -59,18 +59,6 @@ public class NextActivity extends AppCompatActivity {
     }
 
     public void NextSkipButton(View view) {
-/*
-        ArrayList<String> input = new ArrayList<String>();
-        for (String string: MainActivity.exhibitList) {
-            if (!string.equals(destination)){
-                input.add(string);
-            }
-        }
-        MainActivity.exhibitList=input;
-
- */
-
-
         MainActivity.exhibitList.remove(destination);
         for(int i = 0; i < MainActivity.viewModel.getCurrentItems().size(); i++){
             if(MainActivity.viewModel.getCurrentItems().get(i).text.equals(destination)){
@@ -80,7 +68,6 @@ public class NextActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(this, TodoListActivity.class);
         startActivity(intent);
-        //finish();
     }
     public void NextBackButton(View view) {
         finish();

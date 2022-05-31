@@ -11,7 +11,6 @@ public class PlanCalculate {
     IdentifiedWeightedEdge identifiedEdge;
     IdentifiedWeightedEdge newEdge1;
     IdentifiedWeightedEdge newEdge2;
-    //
     String currentStreet = null;
     String source = null;
     String target = null;
@@ -39,7 +38,6 @@ public class PlanCalculate {
         }
         //testing
         if (start==null) {
-            //time to add in the edges and such
             //adding User to vInfo
             identifiedEdge = SlopeMath.edgeUserIsOn(coordinate);
             ZooData.VertexInfo userInfo = new ZooData.VertexInfo();
@@ -72,7 +70,6 @@ public class PlanCalculate {
         String compare2 = null;
 
         ArrayList<String> Directions = new ArrayList<String>();
-        //Directions.add(identifiedEdge.getId());//testing
 
         //use exhibitListInFunc as an ArrayList to add and remove without changing exhibitList
         ArrayList<String> exhibitListInFunc = new ArrayList<String>();
@@ -148,16 +145,6 @@ public class PlanCalculate {
 
         // save our intended exhibit to visit using this path in destination
         destination = exhibitListInFunc.get(shortestExhibit);
-/*
-        if (MainActivity.vInfo.get(start).id!=null) {
-            if (MainActivity.vInfo.get(start).id.equals(MainActivity.vInfo.get(shortestInput).id)) {
-                Directions.add("User is currently at a chosen destination: " +
-                        MainActivity.vInfo.get(shortestInput).name +
-                        ". Please select NEXT to obtain the directions to the next exhibit");
-            }
-        }
-
- */
 
         //add a string of directions to Directions String array
         for (IdentifiedWeightedEdge e : MainActivity.path.getEdgeList()) {
@@ -266,21 +253,6 @@ public class PlanCalculate {
                 }
             }
         }
-/* testing purposes
-//exactly 26 "TESTTEST" which means that exactly 26 edges as required with the correct pair
-        if (MainActivity.edgeSlopeBInfo.size()==26) {
-            Set<String> EdgeKeys = MainActivity.eInfo.keySet();
-            double a = 5;
-            double b = 5;
-            Pair<Double, Double> returnValue = new Pair<Double, Double> (a,b);
-            for (String Edge: EdgeKeys) {
-                if (MainActivity.edgeSlopeBInfo.get(Edge).equals(returnValue)) {
-                    Directions.add("TESTTEST");
-                }
-            }
-        }
-
- */
 
         //reverse changes if made
         if (identifiedEdge != null) {
