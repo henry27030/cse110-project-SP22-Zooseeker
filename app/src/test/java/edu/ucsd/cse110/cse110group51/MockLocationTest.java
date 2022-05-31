@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import static org.junit.Assert.assertEquals;
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.content.Context;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -24,6 +25,8 @@ import java.io.IOException;
 public class MockLocationTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
+    @Rule
+    public InstantTaskExecutorRule execRule = new InstantTaskExecutorRule();
 
     private TodoDatabase db;
 
