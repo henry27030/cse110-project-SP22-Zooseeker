@@ -50,4 +50,18 @@ public class MockLocationTest {
             assertEquals(MainActivity.UserCoord,Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng));
         });
     }
+
+    @Test
+    public void MockLocationTest() {
+        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
+        scenario.moveToState(Lifecycle.State.CREATED);
+
+        scenario.onActivity(activity -> {
+            assertEquals(MainActivity.UserCoord,Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng));
+            MainActivity.UserCoord = Coord.of(MainActivity.vInfo.get("siamang").coords.lat, MainActivity.vInfo.get("siamang").coords.lng);
+            assertEquals(MainActivity.UserCoord,Coord.of(MainActivity.vInfo.get("siamang").coords.lat, MainActivity.vInfo.get("siamang").coords.lng));
+            assertEquals(MainActivity.UserCoord,Coord.of(32.735851415117665, -117.16289416740442));
+            MainActivity.UserCoord = Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng);
+        });
+    }
 }
