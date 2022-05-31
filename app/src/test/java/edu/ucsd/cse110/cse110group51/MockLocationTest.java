@@ -39,10 +39,9 @@ public class MockLocationTest {
     }
 
     @Test
-    public void searchFilterTest() {
+    public void MockLocationTest() {
 
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
-
         scenario.moveToState(Lifecycle.State.CREATED);
 
         scenario.onActivity(activity -> {
@@ -53,6 +52,7 @@ public class MockLocationTest {
 
             int count = listView.getAdapter().getCount();
             assertEquals(1, count);
+
         });
     }
 }
