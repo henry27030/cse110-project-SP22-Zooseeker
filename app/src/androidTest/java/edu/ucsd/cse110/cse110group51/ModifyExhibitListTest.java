@@ -44,6 +44,37 @@ public class ModifyExhibitListTest {
 
     @Test
     public void AddAndDeleteExhibitTest() {
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.plan_btn), withText("Plan"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        materialButton.perform(click());
+
+        ViewInteraction materialButton2 = onView(
+                allOf(withId(R.id.Clear), withText("Clear"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                6),
+                        isDisplayed()));
+        materialButton2.perform(click());
+
+        ViewInteraction materialButton3 = onView(
+                allOf(withId(R.id.back_btn), withText("Back"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        materialButton3.perform(click());
+
+
         DataInteraction materialTextView = onData(anything())
                 .inAdapterView(allOf(withId(R.id.list_view),
                         childAtPosition(
@@ -62,7 +93,7 @@ public class ModifyExhibitListTest {
                         isDisplayed()));
         materialCheckBox.perform(click());
 
-        ViewInteraction materialButton = onView(
+        ViewInteraction materialButton4 = onView(
                 allOf(withId(R.id.finish_btn), withText("Back"),
                         childAtPosition(
                                 childAtPosition(
@@ -70,7 +101,7 @@ public class ModifyExhibitListTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialButton.perform(click());
+        materialButton4.perform(click());
 
         DataInteraction materialTextView2 = onData(anything())
                 .inAdapterView(allOf(withId(R.id.list_view),
@@ -90,7 +121,7 @@ public class ModifyExhibitListTest {
                         isDisplayed()));
         materialCheckBox2.perform(click());
 
-        ViewInteraction materialButton2 = onView(
+        ViewInteraction materialButton5 = onView(
                 allOf(withId(R.id.finish_btn), withText("Back"),
                         childAtPosition(
                                 childAtPosition(
@@ -98,7 +129,7 @@ public class ModifyExhibitListTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialButton2.perform(click());
+        materialButton5.perform(click());
 
         ViewInteraction appCompatImageView = onView(
                 allOf(withClassName(is("androidx.appcompat.widget.AppCompatImageView")), withContentDescription("Search"),
@@ -140,7 +171,7 @@ public class ModifyExhibitListTest {
                         isDisplayed()));
         materialCheckBox3.perform(click());
 
-        ViewInteraction materialButton3 = onView(
+        ViewInteraction materialButton6 = onView(
                 allOf(withId(R.id.finish_btn), withText("Back"),
                         childAtPosition(
                                 childAtPosition(
@@ -148,9 +179,9 @@ public class ModifyExhibitListTest {
                                         0),
                                 0),
                         isDisplayed()));
-        materialButton3.perform(click());
+        materialButton6.perform(click());
 
-        ViewInteraction materialButton4 = onView(
+        ViewInteraction materialButton7 = onView(
                 allOf(withId(R.id.plan_btn), withText("Plan"),
                         childAtPosition(
                                 childAtPosition(
@@ -158,7 +189,7 @@ public class ModifyExhibitListTest {
                                         0),
                                 1),
                         isDisplayed()));
-        materialButton4.perform(click());
+        materialButton7.perform(click());
 
         ViewInteraction textView = onView(
                 allOf(withId(R.id.todo_item_text), withText("crocodile"),
