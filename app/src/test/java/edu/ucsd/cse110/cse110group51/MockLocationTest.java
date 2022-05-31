@@ -42,20 +42,12 @@ public class MockLocationTest {
     }
 
     @Test
-    public void MockLocationTest() {
-
+    public void InitialLocationTest() {
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
         scenario.moveToState(Lifecycle.State.CREATED);
 
         scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-//          MenuItem menuItem = activity.findViewById(R.id.action_search);
-            SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("crocodile", true);
-
-            int count = listView.getAdapter().getCount();
-            assertEquals(1, count);
-
+            assertEquals(MainActivity.UserCoord,Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng));
         });
     }
 }
