@@ -2,6 +2,7 @@ package edu.ucsd.cse110.cse110group51;
 
 import static org.junit.Assert.assertEquals;
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.content.Context;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -24,6 +25,8 @@ import java.io.IOException;
 public class MockLocationTest {
     @Rule
     public ActivityScenarioRule<MainActivity> scenarioRule = new ActivityScenarioRule<>(MainActivity.class);
+    @Rule
+    public InstantTaskExecutorRule execRule = new InstantTaskExecutorRule();
 
     private TodoDatabase db;
 
@@ -39,20 +42,26 @@ public class MockLocationTest {
     }
 
     @Test
-    public void MockLocationTest() {
-
+    public void InitialLocationTest() {
         ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
         scenario.moveToState(Lifecycle.State.CREATED);
 
         scenario.onActivity(activity -> {
-            ListView listView = activity.findViewById(R.id.list_view);
-//          MenuItem menuItem = activity.findViewById(R.id.action_search);
-            SearchView searchView = activity.findViewById(R.id.action_search);
-            searchView.setQuery("crocodile", true);
+            assertEquals(MainActivity.UserCoord,Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng));
+        });
+    }
 
-            int count = listView.getAdapter().getCount();
-            assertEquals(1, count);
+    @Test
+    public void MockLocationTest() {
+        ActivityScenario<MainActivity> scenario = scenarioRule.getScenario();
+        scenario.moveToState(Lifecycle.State.CREATED);
 
+        scenario.onActivity(activity -> {
+            assertEquals(MainActivity.UserCoord,Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng));
+            MainActivity.UserCoord = Coord.of(MainActivity.vInfo.get("siamang").coords.lat, MainActivity.vInfo.get("siamang").coords.lng);
+            assertEquals(MainActivity.UserCoord,Coord.of(MainActivity.vInfo.get("siamang").coords.lat, MainActivity.vInfo.get("siamang").coords.lng));
+            assertEquals(MainActivity.UserCoord,Coord.of(32.735851415117665, -117.16289416740442));
+            MainActivity.UserCoord = Coord.of(MainActivity.vInfo.get("entrance_exit_gate").coords.lat, MainActivity.vInfo.get("entrance_exit_gate").coords.lng);
         });
     }
 }
